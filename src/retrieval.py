@@ -42,5 +42,5 @@ def setup_hybrid_retrievers(chunks: list[Document]):
     vectorstore = Chroma.from_documents(chunks, embeddings)
     vector_retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
     
-    print("[INFO] Hybrid retrievers (BM25 & Vector) initialized successfully.")
+    print("[INFO] Hybrid retrievers initialized successfully.")
     return bm25_retriever, vector_retriever
