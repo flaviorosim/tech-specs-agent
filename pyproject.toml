@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tech-specs-agent"
+version = "0.1.0"
+description = "Agentic RAG system for technical hardware documentation"
+requires-python = ">=3.11"
+dependencies = [
+    "pymupdf>=1.26,<2.0",
+    "requests>=2.32,<3.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
