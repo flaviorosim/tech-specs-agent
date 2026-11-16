@@ -2,7 +2,36 @@
 from pathlib import Path
 
 import pymupdf
+import re
 
+def is_footer_table(table, page) -> bool:
+    """
+    Detect likely footer elements incorrectly classified
+    as tables.
+    """
+
+    markdown = table.to_markdown()
+
+    # Footer-like table must be near the bottom
+    near_bottom = (
+        table.bbox[1] > page.rect.height * 0.85
+    )
+
+    # Suspiciously small structure
+    single_row = table.row_count == 1
+
+    # Typical page number or ST document revision
+    footer_pattern = re.search(
+        r"\b\d+\s*/\s*\d+\b|DS\d+\s+Rev\s*\d+",
+        markdown,
+        re.IGNORECASE,
+    )
+
+    return (
+        near_bottom
+        and single_row
+        and footer_pattern is not None
+    )
 
 def extract_page(pdf_path: Path, page_number: int) -> dict:
     """
@@ -58,8 +87,11 @@ def extract_page(pdf_path: Path, page_number: int) -> dict:
 
         for index, table in enumerate(detected.tables):
 
+            if is_footer_table(table, page):
+                continue
+
             tables.append({
-                "table_id": index + 1,
+                "table_id": len(tables) + 1,
                 "bbox": [
                     round(value, 2)
                     for value in table.bbox
