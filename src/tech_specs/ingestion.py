@@ -1,5 +1,6 @@
 
 from pathlib import Path
+from tech_specs.structure import build_page_elements
 
 import pymupdf
 import re
@@ -82,7 +83,7 @@ def extract_page(pdf_path: Path, page_number: int) -> dict:
 
         # 3. Detect and extract tables
         tables = []
-
+        
         detected = page.find_tables()
 
         for index, table in enumerate(detected.tables):
@@ -123,7 +124,27 @@ def extract_page(pdf_path: Path, page_number: int) -> dict:
                         "font": span["font"],
                         "size": round(span["size"], 2),
                     })
+                    
+        # 5. Build structured elements            
+        elements = build_page_elements(
+            page=page,
+            document_name=pdf_path.stem,
+            page_number=page_number,
+            tables=tables,
+        )
+        
+        # Verify that extracted tables reached the elements list
+        structured_table_count = sum(
+            element["content_type"] == "table"
+            for element in elements
+        )
 
+        if structured_table_count != len(tables):
+            raise RuntimeError(
+                f"Table count mismatch: extracted={len(tables)}, "
+                f"structured={structured_table_count}"
+            )
+        
         return {
             "document": pdf_path.stem,
             "page": page_number,
@@ -132,4 +153,5 @@ def extract_page(pdf_path: Path, page_number: int) -> dict:
             "text_blocks": text_blocks,
             "tables": tables,
             "typography_sample": typography[:40],
+            "elements": elements,
         }
