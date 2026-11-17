@@ -152,6 +152,53 @@ python scripts/inspect_pdf.py attiny85 --page 10
 - `<document>_p<page>_raw.txt` — raw text extraction
 - `<document>_p<page>_sorted.txt` — position-sorted text extraction
 
+
+## Testing
+
+The project uses `pytest` for unit and regression testing.
+
+Install development dependencies:
+
+```bash
+python -m pip install -e ".[dev]"
+```
+
+Run all tests:
+
+```bash
+python -m pytest -v
+```
+
+Run only unit tests:
+
+```bash
+python -m pytest -m "not pdf"
+```
+
+Run PDF regression tests:
+
+```bash
+python -m pytest -m pdf -v
+```
+
+PDF regression tests use official datasheets stored in
+`data/raw/`. These files are not included in the repository
+and can be downloaded using:
+
+```bash
+python scripts/download_docs.py
+```
+
+The current regression tests cover:
+
+- STM32L432KC: timer table extraction and deduplication.
+- ATtiny85: SREG data preservation.
+- ATtiny85: general-purpose register address mappings.
+
+The tests focus on preventing known regressions. They do not
+yet provide a comprehensive evaluation of parsing accuracy.
+
+
 ## Known limitations
 
 - **Table extraction is not universally reliable.** Borderless tables, register maps, and diagrams may be incomplete or incorrectly structured.
