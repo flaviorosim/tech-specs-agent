@@ -145,3 +145,60 @@ def test_attiny_register_addresses(pdf_path):
             and description in content
             for content in contents
         ), f"Missing register mapping: {register}"
+
+
+def test_stm32_section_assignment(pdf_path):
+    result = extract_page(
+        pdf_path("stm32l432kc"),
+        page_number=38,
+    )
+
+    timer_tables = [
+        element for element in result["elements"]
+        if element["content_type"] == "table"
+        and "TIM2" in element["content"]
+    ]
+
+    assert len(timer_tables) == 1
+
+    assert timer_tables[0]["section"] == (
+        "3.21 Timers and watchdogs"
+    )
+
+
+def test_attiny_sreg_section_assignment(pdf_path):
+    result = extract_page(
+        pdf_path("attiny85"),
+        page_number=9,
+    )
+
+    assert all(
+        element["section"] == (
+            "4.4.1 SREG – AVR Status Register"
+        )
+        for element in result["elements"]
+    )
+
+
+def test_attiny_multiple_sections(pdf_path):
+    result = extract_page(
+        pdf_path("attiny85"),
+        page_number=10,
+    )
+
+    elements = result["elements"]
+
+    register_elements = [
+        element for element in elements
+        if "R26" in element["content"]
+    ]
+
+    assert register_elements
+    assert register_elements[0]["section"] == (
+        "4.5 General Purpose Register File"
+    )
+
+    assert result["last_section"] == {
+        "number": "4.5.1",
+        "title": "The X-register, Y-register, and Z-register",
+    }

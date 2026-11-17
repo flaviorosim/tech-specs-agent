@@ -1,6 +1,7 @@
 
 from pathlib import Path
 from tech_specs.structure import build_page_elements
+from tech_specs.sections import annotate_sections
 
 import pymupdf
 import re
@@ -33,8 +34,14 @@ def is_footer_table(table, page) -> bool:
         and single_row
         and footer_pattern is not None
     )
+    
+def extract_page(
+    pdf_path: Path,
+    page_number: int,
+    active_section: dict | None = None,
+) -> dict:
+    
 
-def extract_page(pdf_path: Path, page_number: int) -> dict:
     """
     Extract text, blocks, tables and typography metadata
     from a PDF page.
@@ -133,7 +140,14 @@ def extract_page(pdf_path: Path, page_number: int) -> dict:
             tables=tables,
         )
         
-        # Verify that extracted tables reached the elements list
+        
+        # 6. Detect and annotate sections
+        elements, last_section = annotate_sections(
+             elements=elements,
+            active_section=active_section,
+        )
+        
+        # 7. Verify that extracted tables reached the elements list
         structured_table_count = sum(
             element["content_type"] == "table"
             for element in elements
@@ -154,4 +168,5 @@ def extract_page(pdf_path: Path, page_number: int) -> dict:
             "tables": tables,
             "typography_sample": typography[:40],
             "elements": elements,
+            "last_section": last_section,
         }
