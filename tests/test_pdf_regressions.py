@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 
 from tech_specs.ingestion import extract_page
-
+from tech_specs.chunking import chunk_page_elements
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 RAW_DIR = ROOT_DIR / "data" / "raw"
@@ -202,3 +202,32 @@ def test_attiny_multiple_sections(pdf_path):
         "number": "4.5.1",
         "title": "The X-register, Y-register, and Z-register",
     }
+
+
+def test_stm32_timer_chunk(pdf_path):
+    result = extract_page(
+        pdf_path("stm32l432kc"),
+        page_number=38,
+    )
+
+    chunks = chunk_page_elements(result["elements"])
+
+    timer_chunks = [
+        chunk for chunk in chunks
+        if chunk["content_type"] == "table"
+        and "TIM2" in chunk["content"]
+    ]
+
+    assert len(timer_chunks) == 1
+
+    chunk = timer_chunks[0]
+
+    assert "TIM1" in chunk["content"]
+    assert "TIM15" in chunk["content"]
+    assert "Table 9. Timer feature comparison" in chunk["content"]
+
+    assert chunk["section"] == (
+        "3.21 Timers and watchdogs"
+    )
+
+    assert len(chunk["element_ids"]) >= 2
