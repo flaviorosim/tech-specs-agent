@@ -1,0 +1,35 @@
+[
+  {
+    "id": "q_tim2_resolution",
+    "query": "TIM2 counter resolution",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": ["stm32l432kc_p038_c004"]
+  },
+  {
+    "id": "q_r26_address",
+    "query": "R26 0x1A X-register Low Byte",
+    "document": "attiny85",
+    "relevant_chunk_ids": ["attiny85_p010_c001"]
+  },
+  {
+    "id": "q_complementary_outputs",
+    "query": "Which timers have complementary outputs?",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": [
+      "stm32l432kc_p038_c004",
+      "stm32l432kc_p039_c002"
+    ]
+  },
+  {
+    "id": "q_sreg",
+    "query": "SREG 0x3F status register",
+    "document": "attiny85",
+    "relevant_chunk_ids": ["attiny85_p009_c003"]
+  },
+  {
+    "id": "q_rng",
+    "query": "32-bit random number generator RNG",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": ["stm32l432kc_p038_c002"]
+  }
+]
