@@ -24,6 +24,10 @@ retrieval = [
     "rank-bm25>=0.2.2,<1",
 ]
 
+vectors = [
+    "qdrant-client>=1.15,<2",
+    "fastembed>=0.7,<1",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
