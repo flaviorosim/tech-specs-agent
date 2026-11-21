@@ -29,6 +29,10 @@ vectors = [
     "fastembed>=0.7,<1",
 ]
 
+agent = [
+    "langgraph>=1.2,<2",
+]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
