@@ -1,0 +1,553 @@
+{
+  "schema_version": 1,
+  "purpose": "new benchmark question drafting; NOT relevance judgments",
+  "corpus_sha256": "bd771e4321426d49a0242c5512b95383e87d5b3ab1ea23050dd78649120e683f",
+  "seed": 2026,
+  "target_per_document": 30,
+  "counts_by_document": {
+    "attiny85": 30,
+    "stm32l432kc": 30
+  },
+  "candidates": [
+    {
+      "candidate_id": "SRC001",
+      "chunk_id": "attiny85_p021_c007",
+      "document": "attiny85",
+      "page": 21,
+      "section": "5.5.4 EECR – EEPROM Control Register",
+      "content_type": "table",
+      "content": "Table 5-1.\nEEPROM Mode Bits\n\n|EEPM1|EEPM0|Programming<br>Time|Operation|\n|---|---|---|---|\n|0|0|3.4 ms|Erase and Write in one operation (Atomic Operation)|\n|0|1|1.8 ms|Erase Only|\n|1|0|1.8 ms|Write Only|\n|1|1|–|Reserved for future use|"
+    },
+    {
+      "candidate_id": "SRC002",
+      "chunk_id": "attiny85_p028_c004",
+      "document": "attiny85",
+      "page": 28,
+      "section": "6.2.3 Calibrated Internal Oscillator",
+      "content_type": "table",
+      "content": "Table 6-8.\nStart-up Times for Internal Calibrated RC Oscillator Clock (in ATtiny15 Mode)\n\n|SUT[1:0]|Start-up Time<br>from Power-down|Additional Delay from<br>Reset (V = 5.0V)<br>CC|Recommended Usage|\n|---|---|---|---|\n|00|6 CK|14CK + 64 ms||\n|01|6 CK|14CK + 64 ms||\n|10|6 CK|14CK + 4 ms||\n|11|1 CK|14CK(1)||"
+    },
+    {
+      "candidate_id": "SRC003",
+      "chunk_id": "attiny85_p029_c002",
+      "document": "attiny85",
+      "page": 29,
+      "section": "6.2.5 Low-Frequency Crystal Oscillator",
+      "content_type": "text",
+      "content": "6.2.5\nLow-Frequency Crystal Oscillator\nTo use a 32.768 kHz watch crystal as the clock source for the device, the Low-frequency Crystal Oscillator must be\nselected by setting CKSEL fuses to ‘0110’. The crystal should be connected as shown in Figure 6-5. To find suit-\nable load capacitance for a 32.768 kHz crysal, please consult the manufacturer’s datasheet.\n\nWhen this oscillator is selected, start-up times are determined by the SUT fuses as shown in Table 6-10."
+    },
+    {
+      "candidate_id": "SRC004",
+      "chunk_id": "attiny85_p029_c008",
+      "document": "attiny85",
+      "page": 29,
+      "section": "6.2.6 Crystal Oscillator / Ceramic Resonator",
+      "content_type": "text",
+      "content": "C2\n\nXTAL2\n\nC1\n\nXTAL1\n\nGND\n\nC1 and C2 should always be equal for both crystals and resonators. The optimal value of the capacitors depends\non the crystal or resonator in use, the amount of stray capacitance, and the electromagnetic noise of the environ-"
+    },
+    {
+      "candidate_id": "SRC005",
+      "chunk_id": "attiny85_p036_c004",
+      "document": "attiny85",
+      "page": 36,
+      "section": "7.4.1 Analog to Digital Converter",
+      "content_type": "text",
+      "content": "7.4.1\nAnalog to Digital Converter\nIf enabled, the ADC will be enabled in all sleep modes. To save power, the ADC should be disabled before entering\nany sleep mode. When the ADC is turned off and on again, the next conversion will be an extended conversion.\nRefer to “Analog to Digital Converter” on page 122 for details on ADC operation."
+    },
+    {
+      "candidate_id": "SRC006",
+      "chunk_id": "attiny85_p036_c006",
+      "document": "attiny85",
+      "page": 36,
+      "section": "7.4.3 Brown-out Detector",
+      "content_type": "text",
+      "content": "7.4.3\nBrown-out Detector\nIf the Brown-out Detector is not needed in the application, this module should be turned off. If the Brown-out Detec-\ntor is enabled by the BODLEVEL Fuses, it will be enabled in all sleep modes, and hence, always consume power.\nIn the deeper sleep modes, this will contribute significantly to the total current consumption. See “Brown-out Detec-\ntion” on page 41 and “Software BOD Disable” on page 35 for details on how to configure the Brown-out Detector."
+    },
+    {
+      "candidate_id": "SRC007",
+      "chunk_id": "attiny85_p043_c002",
+      "document": "attiny85",
+      "page": 43,
+      "section": "8.4 Watchdog Timer",
+      "content_type": "table",
+      "content": "Table 8-1.\nWDT Configuration as a Function of the Fuse Settings of WDTON\n\n|WDTON|Safety<br>Level|WDT Initial<br>State|How to Disable the<br>WDT|How to Change Time-<br>out|\n|---|---|---|---|---|\n|Unprogrammed|1|Disabled|Timed sequence|No limitations|\n|Programmed|2|Enabled|Always enabled|Timed sequence|"
+    },
+    {
+      "candidate_id": "SRC008",
+      "chunk_id": "attiny85_p053_c004",
+      "document": "attiny85",
+      "page": 53,
+      "section": "10.1 Introduction",
+      "content_type": "text",
+      "content": "Using the I/O port as General Digital I/O is described in “Ports as General Digital I/O” on page 53. Most port pins\nare multiplexed with alternate functions for the peripheral features on the device. How each alternate function inter-\nferes with the port pin is described in “Alternate Port Functions” on page 57. Refer to the individual module sections\nfor a full description of the alternate functions.\n\nNote that enabling the alternate function of some of the port pins does not affect the use of the other pins in the port\nas general digital I/O."
+    },
+    {
+      "candidate_id": "SRC009",
+      "chunk_id": "attiny85_p059_c003",
+      "document": "attiny85",
+      "page": 59,
+      "section": "10.3 Alternate Port Functions",
+      "content_type": "text",
+      "content": "The following subsections shortly describe the alternate functions for each port, and relate the overriding signals to\nthe alternate function. Refer to the alternate function description for further details."
+    },
+    {
+      "candidate_id": "SRC010",
+      "chunk_id": "attiny85_p063_c003",
+      "document": "attiny85",
+      "page": 63,
+      "section": "10.3.1 Alternate Functions of Port B",
+      "content_type": "table",
+      "content": "Table 10-5.\nOverriding Signals for Alternate Functions in PB[2:0]\n\n|Signal<br>Name|PB2/SCK/ADC1/T0/<br>USCK/SCL/INT0/PCINT2|PB1/MISO/DO/AIN1/<br>OC1A/OC0B/PCINT1|PB0/MOSI/DI/SDA/AIN0/AR<br>EF/OC1A/OC0A/<br>PCINT0|\n|---|---|---|---|\n|PUOE|USI_TWO_WIRE|0|USI_TWO_WIRE|\n|PUOV|0|0|0|\n|DDOE|USI_TWO_WIRE|0|USI_TWO_WIRE|\n|DDOV|(USI_SCL_HOLD +<br>PORTB2) • DDB2|0|(SDA + PORTB0) • DDB0|\n|PVOE|USI_TWO_WIRE • DDB2|OC0B Enable + OC1A<br>Enable +<br>USI_THREE_WIRE|OC0A Enable + OC1A<br>Enable + (USI_TWO_WIRE<br>• DDB0)|\n|PVOV|0|OC0B + OC1A + DO|OC0A + OC1A|\n|PTOE|USITC|0|0|\n|DIEOE|PCINT2 • PCIE + ADC1D +<br>USISIE|PCINT1 • PCIE + AIN1D|PCINT0 • PCIE + AIN0D +<br>USISIE|\n|DIEOV|ADC1D|AIN1D|AIN0D|\n|DI|T0/USCK/SCL/INT0/<br>PCINT2 Input|PCINT1 Input|DI/SDA/PCINT0 Input|\n|AIO|ADC1 Input|Analog Comparator<br>Negative Input|Analog Comparator Positive<br>Input|"
+    },
+    {
+      "candidate_id": "SRC011",
+      "chunk_id": "attiny85_p065_c004",
+      "document": "attiny85",
+      "page": 65,
+      "section": "11.2.1 Registers",
+      "content_type": "text",
+      "content": "11.2.1\nRegisters\nThe Timer/Counter (TCNT0) and Output Compare Registers (OCR0A and OCR0B) are 8-bit registers. Interrupt\nrequest (abbreviated to Int.Req. in the figure) signals are all visible in the Timer Interrupt Flag Register (TIFR). All"
+    },
+    {
+      "candidate_id": "SRC012",
+      "chunk_id": "attiny85_p072_c003",
+      "document": "attiny85",
+      "page": 72,
+      "section": "11.7.2 Clear Timer on Compare Match (CTC) Mode",
+      "content_type": "text",
+      "content": "11.7.2\nClear Timer on Compare Match (CTC) Mode\nIn Clear Timer on Compare or CTC mode (WGM0[2:0] = 2), the OCR0A Register is used to manipulate the counter\nresolution. In CTC mode the counter is cleared to zero when the counter value (TCNT0) matches the OCR0A. The\nOCR0A defines the top value for the counter, hence also its resolution. This mode allows greater control of the\nCompare Match output frequency. It also simplifies the operation of counting external events.\n\nThe timing diagram for the CTC mode is shown in Figure 11-7. The counter value (TCNT0) increases until a Com-\npare Match occurs between TCNT0 and OCR0A, and then counter (TCNT0) is cleared.\n\nFigure 11-7.\nCTC Mode, Timing Diagram\n\nOCnx Interrupt Flag Set\n\nTCNTn\n\nOCn\n(Toggle)\n\n(COMnx[1:0] = 1)"
+    },
+    {
+      "candidate_id": "SRC013",
+      "chunk_id": "attiny85_p089_c005",
+      "document": "attiny85",
+      "page": 89,
+      "section": "12.3.1 TCCR1 – Timer/Counter1 Control Register",
+      "content_type": "text",
+      "content": "In Normal mode, the COM1A1 and COM1A0 control bits determine the output pin actions that affect pin PB1\n(OC1A) as described in Table 12-4. Note that OC1A is not connected in normal mode."
+    },
+    {
+      "candidate_id": "SRC014",
+      "chunk_id": "attiny85_p106_c006",
+      "document": "attiny85",
+      "page": 106,
+      "section": "14.1.1 DTPS1 – Timer/Counter1 Dead Time Prescaler Register 1",
+      "content_type": "table",
+      "content": "Table 14-1.\nDivision factors of the Dead Time prescaler\n\n|DTPS11|DTPS10|Prescaler divides the T/C1 clock by|\n|---|---|---|\n|0|0|1x (no division)|\n|0|1|2x|\n|1|0|4x|\n|1|1|8x|"
+    },
+    {
+      "candidate_id": "SRC015",
+      "chunk_id": "attiny85_p109_c017",
+      "document": "attiny85",
+      "page": 109,
+      "section": "15.3.1 Three-wire Mode",
+      "content_type": "text",
+      "content": "USCK\n\nPORTxn\n\nMASTER\n\nFigure 15-2 shows two USI units operating in three-wire mode, one as Master and one as Slave. The two USI Data\nRegisters are interconnected in such way that after eight USCK clocks, the data in each register has been inter-\nchanged. The same clock also increments the USI’s 4-bit counter. The Counter Overflow (interrupt) Flag, or\nUSIOIF, can therefore be used to determine when a transfer is completed. The clock is generated by the Master\ndevice software by toggling the USCK pin via the PORTB register or by writing a one to bit USITC bit in USICR."
+    },
+    {
+      "candidate_id": "SRC016",
+      "chunk_id": "attiny85_p113_c003",
+      "document": "attiny85",
+      "page": 113,
+      "section": "15.3.4 Two-wire Mode",
+      "content_type": "text",
+      "content": "Referring to the timing diagram (Figure 15-5), a bus transfer involves the following steps:\n\n1.\nThe start condition is generated by the master by forcing the SDA low line while keeping the SCL line high\n(A). SDA can be forced low either by writing a zero to bit 7 of the USI Data Register, or by setting the cor-\nresponding bit in the PORTB register to zero. Note that the Data Direction Register bit must be set to one\nfor the output to be enabled. The start detector logic of the slave device (see Figure 15-6 on page 114)\ndetects the start condition and sets the USISIF Flag. The flag can generate an interrupt if necessary.\n\n2.\nIn addition, the start detector will hold the SCL line low after the master has forced a negative edge on this\nline (B). This allows the slave to wake up from sleep or complete other tasks before setting up the USI\nData Register to receive the address. This is done by clearing the start condition flag and resetting the\ncounter.\n\n3.\nThe master set the first bit to be transferred and releases the SCL line (C). The slave samples the data\nand shifts it into the USI Data Register at the positive edge of the SCL clock."
+    },
+    {
+      "candidate_id": "SRC017",
+      "chunk_id": "attiny85_p116_c002",
+      "document": "attiny85",
+      "page": 116,
+      "section": "15.5.3 USISR – USI Status Register",
+      "content_type": "text",
+      "content": "• Bit 4 – USIDC: Data Output Collision\nThis bit is logical one when bit 7 in the USI Data Register differs from the physical pin value. The flag is only valid\nwhen two-wire mode is used. This signal is useful when implementing Two-wire bus master arbitration.\n\n• Bits 3:0 – USICNT[3:0]: Counter Value\nThese bits reflect the current 4-bit counter value. The 4-bit counter value can directly be read or written by the\nCPU.\n\nThe 4-bit counter increments by one for each clock generated either by the external clock edge detector, by a\nTimer/Counter0 Compare Match, or by software using USICLK or USITC strobe bits. The clock source depends on\nthe setting of the USICS[1:0] bits.\n\nFor external clock operation a special feature is added that allows the clock to be generated by writing to the\nUSITC strobe bit. This feature is enabled by choosing an external clock source (USICS1 = 1) and writing a one to\nthe USICLK bit.\n\nNote that even when no wire mode is selected (USIWM[1:0] = 0) the external clock input (USCK/SCL) can still be\nused by the counter."
+    },
+    {
+      "candidate_id": "SRC018",
+      "chunk_id": "attiny85_p127_c003",
+      "document": "attiny85",
+      "page": 127,
+      "section": "17.5 Prescaling and Conversion Timing",
+      "content_type": "text",
+      "content": "ADC Clock\n\nTrigger\nSource\n\nADATE\n\nADIF\n\nADCH\n\nand MSB of Result\n\nADCL\n\nof Result\n\nPrescaler\nReset\nSample &\nHold\n\nConversion\n\nComplete\nPrescaler\nReset\n\nMUX and REFS\nUpdate\n\nIn Free Running mode, a new conversion will be started immediately after the conversion completes, while ADSC\nremains high.\n\nFigure 17-7.\nADC Timing Diagram, Free Running Conversion\n\nOne Conversion\nNext Conversion\n\n11\n12\n13\n\n3\n4\n\nCycle Number\n1\n2\n\nADC Clock\n\nADSC\n\nADIF\n\nADCH\n\nSign and MSB of Result\n\nADCL\n\nLSB of Result\n\nSample & Hold\n\nConversion\n\nMUX and REFS\nUpdate\n\nComplete\n\nFor a summary of conversion times, see Table 17-1."
+    },
+    {
+      "candidate_id": "SRC019",
+      "chunk_id": "attiny85_p128_c003",
+      "document": "attiny85",
+      "page": 128,
+      "section": "17.6.1 ADC Input Channels",
+      "content_type": "text",
+      "content": "17.6.1\nADC Input Channels\nWhen changing channel selections, the user should observe the following guidelines to ensure that the correct\nchannel is selected:\n\nIn Single Conversion mode, always select the channel before starting the conversion. The channel selection may\nbe changed one ADC clock cycle after writing one to ADSC. However, the simplest method is to wait for the con-\nversion to complete before changing the channel selection.\n\nIn Free Running mode, always select the channel before starting the first conversion. The channel selection may\nbe changed one ADC clock cycle after writing one to ADSC. However, the simplest method is to wait for the first\nconversion to complete, and then change the channel selection. Since the next conversion has already started\nautomatically, the next result will reflect the previous channel selection. Subsequent conversions will reflect the\nnew channel selection."
+    },
+    {
+      "candidate_id": "SRC020",
+      "chunk_id": "attiny85_p140_c002",
+      "document": "attiny85",
+      "page": 140,
+      "section": "18.4 Software Break Points",
+      "content_type": "text",
+      "content": "18.4\nSoftware Break Points\ndebugWIRE supports Program memory Break Points by the AVR Break instruction. Setting a Break Point in AVR\nStudio® will insert a BREAK instruction in the Program memory. The instruction replaced by the BREAK instruction\nwill be stored. When program execution is continued, the stored instruction will be executed before continuing from\nthe Program memory. A break can be inserted manually by putting the BREAK instruction in the program.\n\nThe Flash must be re-programmed each time a Break Point is changed. This is automatically handled by AVR Stu-\ndio through the debugWIRE interface. The use of Break Points will therefore reduce the Flash Data retention.\nDevices used for debugging purposes should not be shipped to end customers."
+    },
+    {
+      "candidate_id": "SRC021",
+      "chunk_id": "attiny85_p149_c005",
+      "document": "attiny85",
+      "page": 149,
+      "section": "20.3 Device Signature Imprint Table",
+      "content_type": "table",
+      "content": "Table 20-6.\nContents of Device Signature Imprint Table.\n\n|Address|High Byte|\n|---|---|\n|0x00|Signature byte 0(1)|\n|0x01|Calibration data for internal oscillator at 8.0 MHz(2)|\n|0x02|Signature byte 1(1)|\n|0x03|Calibration data for internal oscillator at 6.4 MHz(2)|\n|0x04|Signature byte 2(1)|\n|0x05 ... 0x2A|Reserved for internal use|"
+    },
+    {
+      "candidate_id": "SRC022",
+      "chunk_id": "attiny85_p156_c005",
+      "document": "attiny85",
+      "page": 156,
+      "section": "20.7.3 Chip Erase",
+      "content_type": "text",
+      "content": "20.7.3\nChip Erase\nThe Chip Erase will erase the Flash and EEPROM(1) memories plus Lock bits. The Lock bits are not reset until the\nProgram memory has been completely erased. The Fuse bits are not changed. A Chip Erase must be performed\nbefore the Flash and/or EEPROM are re-programmed.\n\nNote:\n1. The EEPROM memory is preserved during Chip Erase if the EESAVE Fuse is programmed."
+    },
+    {
+      "candidate_id": "SRC023",
+      "chunk_id": "attiny85_p162_c002",
+      "document": "attiny85",
+      "page": 162,
+      "section": "21.2 DC Characteristics",
+      "content_type": "text",
+      "content": "Notes:\n1. Typical values at 25C.\n\n2. “Min” means the lowest value where the pin is guaranteed to be read as high.\n\n3. “Max” means the highest value where the pin is guaranteed to be read as low.\n\n4. Although each I/O port can sink more than the test conditions (10 mA at VCC = 5V, 5 mA at VCC = 3V) under steady state\nconditions (non-transient), the following must be observed:\n1] The sum of all IOL, for all ports, should not exceed 60 mA.\nIf IOL exceeds the test condition, VOL may exceed the related specification. Pins are not guaranteed to sink current greater\nthan the listed test condition.\n\n5. Although each I/O port can source more than the test conditions (10 mA at VCC = 5V, 5 mA at VCC = 3V) under steady state\nconditions (non-transient), the following must be observed:\n1] The sum of all IOH, for all ports, should not exceed 60 mA.\nIf IOH exceeds the test condition, VOH may exceed the related specification. Pins are not guaranteed to source current\ngreater than the listed test condition."
+    },
+    {
+      "candidate_id": "SRC024",
+      "chunk_id": "attiny85_p166_c006",
+      "document": "attiny85",
+      "page": 166,
+      "section": "21.6 Brown-Out Detection",
+      "content_type": "text",
+      "content": "Note:\n1. VBOT may be below nominal minimum operating voltage for some devices. For devices where this is the case, the\ndevice is tested down to VCC = VBOT during the production test. This guarantees that a Brown-out Reset will occur\nbefore VCC drops to a voltage where correct operation of the microcontroller is no longer guaranteed."
+    },
+    {
+      "candidate_id": "SRC025",
+      "chunk_id": "attiny85_p168_c001",
+      "document": "attiny85",
+      "page": 168,
+      "section": "21.7 ADC Characteristics",
+      "content_type": "table",
+      "content": "Table 21-9.\nADC Characteristics, Differential Channels (Unipolar Mode). TA = -40C to +85C\n\n|Symbol|Parameter|Condition|Min|Typ|Max|Units|\n|---|---|---|---|---|---|---|\n||Resolution|Gain = 1x|||10|Bits|\n||Resolution|Gain = 20x|||10|Bits|\n||Absolute accuracy<br>(Including INL, DNL, and<br>Quantization, Gain and Offset<br>Errors)|Gain = 1x<br>VREF = 4V, VCC = 5V<br>ADC clock = 50 - 200 kHz||10.0||LSB|\n||Absolute accuracy<br>(Including INL, DNL, and<br>Quantization, Gain and Offset<br>Errors)|Gain = 20x<br>VREF = 4V, VCC = 5V<br>ADC clock = 50 - 200 kHz||20.0||LSB|\n||Integral Non-Linearity (INL)<br>(Accuracy after Offset and<br>Gain Calibration)|Gain = 1x<br>VREF = 4V, VCC = 5V<br>ADC clock = 50 - 200 kHz||4.0||LSB|\n||Integral Non-Linearity (INL)<br>(Accuracy after Offset and<br>Gain Calibration)|Gain = 20x<br>VREF = 4V, VCC = 5V<br>ADC clock = 50 - 200 kHz||10.0||LSB|\n||Gain Error|Gain = 1x||10.0||LSB|\n||Gain Error|Gain = 20x||15.0||LSB|\n||Offset Error|Gain = 1x<br>VREF = 4V, VCC = 5V<br>ADC clock = 50 - 200 kHz||3.0||LSB|\n||Offset Error|Gain = 20x<br>VREF = 4V, VCC = 5V<br>ADC clock = 50 - 200 kHz||4.0||LSB|\n||Conversion Time|Free Running Conversion|70||280|µs|\n||Clock Frequency||50||200|kHz|\n|VIN|Input Voltage||GND||VCC|V|\n|VDIFF|Input Differential Voltage||||VREF/Gain|V|\n||Input Bandwidth|||4||kHz|\n|AREF|External Reference Voltage||2.0||VCC- 1.0|V|\n|VINT|Internal Voltage Reference||1.0|1.1|1.2|V|\n|VINT|Internal 2.56V Reference(1)|VCC > 3.0V|2.3|2.56|2.8|V|\n|RREF|Reference Input Resistance|||32||k|\n|RAIN|Analog Input Resistance|||100||M|\n||ADC Conversion Output||0||1023|LSB|"
+    },
+    {
+      "candidate_id": "SRC026",
+      "chunk_id": "attiny85_p185_c001",
+      "document": "attiny85",
+      "page": 185,
+      "section": "22.6 Pin Driver Strength",
+      "content_type": "text",
+      "content": "Figure 22-24. Reset Pin Output Voltage vs. Sink Current (VCC = 5V)\n\nRESET AS I/O PIN OUTPUT VOLTAGE vs. SINK CURRENT\n\nVCC = 5V\n\n1\n\n0.8\n\n0.6\n\nVOL (V)\n\n85 °C\n\n0.4\n\n0 °C\n\n-45 °C\n\n0.2\n\n0\n\n0\n0.5\n1\n1.5\n2\n2.5\n3\n\nIOL (mA)\n\nFigure 22-25. Reset Pin Output Voltage vs. Source Current (VCC = 3V)\n\nRESET AS I/O PIN OUTPUT VOLTAGE vs. SOURCE CURRENT\n\nVCC = 3V\n\n3.5\n\n3\n\n2.5\n\n2\n\nVOH (V)\n\n1.5\n\n-45 °C\n\n1\n\n25 °C\n85 °C\n\n0.5\n\n0\n\n0\n0.5\n1\n1.5\n2\n\nIOH (mA)"
+    },
+    {
+      "candidate_id": "SRC027",
+      "chunk_id": "attiny85_p197_c001",
+      "document": "attiny85",
+      "page": 197,
+      "section": "22.10 Current Consumption of Peripheral Units",
+      "content_type": "text",
+      "content": "Figure 22-48. Analog Comparator Current vs. VCC\n\nANALOG COMPARATOR CURRENT vs. VCC\n\n50\n\n45\n\n85 °C\n\n40\n\n25 °C\n\n-40 °C\n\n35\n\n30\n\nICC (uA)\n\n25\n\n20\n\n15\n\n10\n\n5\n\n0\n\n1,5\n2\n2,5\n3\n3,5\n4\n4,5\n5\n5,5\n\nVCC (V)\n\nFigure 22-49. Programming Current vs. VCC\n\nPROGRAMMING CURRENT vs. Vcc\n\nExt Clk\n\n12\n\n-40 °C\n\n10\n\n25 °C\n\n8\n\nICC (mA)\n\n6\n\n85 °C\n\n4\n\n2\n\n0\n\n1,5\n2\n2,5\n3\n3,5\n4\n4,5\n5\n5,5\n\nVCC (V)"
+    },
+    {
+      "candidate_id": "SRC028",
+      "chunk_id": "attiny85_p205_c003",
+      "document": "attiny85",
+      "page": 205,
+      "section": "25.2 ATtiny45",
+      "content_type": "text",
+      "content": "Notes:\n1. For speed vs. supply voltage, see section 21.3 “Speed” on page 163.\n\n2. All packages are Pb-free, halide-free and fully green and they comply with the European directive for Restriction of Hazard-\nous Substances (RoHS).\n\n3. Code indicators:\n\n– H: NiPdAu lead finish\n– U: matte tin\n– R: tape & reel\n\n4. These devices can also be supplied in wafer form. Please contact your local Atmel sales office for detailed ordering informa-\ntion and minimum quantities."
+    },
+    {
+      "candidate_id": "SRC029",
+      "chunk_id": "attiny85_p211_c004",
+      "document": "attiny85",
+      "page": 211,
+      "section": "26.5 20M1",
+      "content_type": "table",
+      "content": "|SYMBOL|MIN|NOM|MAX|NOTE|\n|---|---|---|---|---|\n|A|0.70|0.75|0.80||\n|A1|–|0.01|0.05||\n|A2|0.20 REF|0.20 REF|0.20 REF||\n|b|0.18|0.23|0.30||\n|D|4.00 BSC|4.00 BSC|4.00 BSC||\n|D2|2.45|2.60|2.75||\n|E|4.00 BSC|4.00 BSC|4.00 BSC||\n|E2|2.45|2.60|2.75||\n|e|0.50 BSC|0.50 BSC|0.50 BSC||\n|L|0.35|0.40|0.55||"
+    },
+    {
+      "candidate_id": "SRC030",
+      "chunk_id": "attiny85_p219_c001",
+      "document": "attiny85",
+      "page": 219,
+      "section": "28.8 Rev. 2586J-12/06",
+      "content_type": "text",
+      "content": "8.\nUpdated Table 6-1 on page 25, Table 6-13 on page 30 and Table 6-6 on page 27.\n9.\nUpdated “Calibrated Internal Oscillator” on page 27.\n10.\nUpdated Table 6-5 on page 26.\n11.\nUpdated “OSCCAL – Oscillator Calibration Register” on page 31.\n12.\nUpdated “CLKPR – Clock Prescale Register” on page 32.\n13.\nUpdated “Power-down Mode” on page 35.\n14.\nUpdated “Bit 0” in “PRR – Power Reduction Register” on page 38.\n15.\nAdded footnote to Table 8-3 on page 46.\n16.\nUpdated Table 10-5 on page 63.\n17.\nDeleted “Bits 7, 2” in “MCUCR – MCU Control Register” on page 64.\n18.\nUpdated and moved section “Timer/Counter0 Prescaler and Clock Sources”, now\nlocated on page 66.\n19.\nUpdated “Timer/Counter1 Initialization for Asynchronous Mode” on page 86.\n20.\nUpdated bit description in “PLLCSR – PLL Control and Status Register” on page 94\nand “PLLCSR – PLL Control and Status Register” on page 103.\n21.\nAdded recommended maximum frequency in“Prescaling and Conversion Timing” on\npage 125.\n22.\nUpdated Figure 17-8 on page 129 .\n23.\nUpdated “Temperature Measurement” on page 133.\n24.\nUpdated Table 17-3 on page 134.\n25.\nUpdated bit R/W descriptions in:\n“TIMSK – Timer/Counter Interrupt Mask Register” on page 81,\n“TIFR –"
+    },
+    {
+      "candidate_id": "SRC031",
+      "chunk_id": "stm32l432kc_p014_c003",
+      "document": "stm32l432kc",
+      "page": 14,
+      "section": "3.2 Adaptive real-time memory accelerator (ART Accelerator™)",
+      "content_type": "text",
+      "content": "3.2\nAdaptive real-time memory accelerator (ART Accelerator™)\n\nThe ART Accelerator™ is a memory accelerator which is optimized for STM32 industry-\nstandard Arm® Cortex®-M4 processors. It balances the inherent performance advantage of\nthe Arm® Cortex®-M4 over Flash memory technologies, which normally requires the\nprocessor to wait for the Flash memory at higher frequencies.\n\nTo release the processor near 100 DMIPS performance at 80MHz, the accelerator\nimplements an instruction prefetch queue and branch cache, which increases program\nexecution speed from the 64-bit Flash memory. Based on CoreMark benchmark, the\nperformance achieved thanks to the ART accelerator is equivalent to 0 wait state program\nexecution from Flash memory at a CPU frequency up to 80 MHz."
+    },
+    {
+      "candidate_id": "SRC032",
+      "chunk_id": "stm32l432kc_p016_c001",
+      "document": "stm32l432kc",
+      "page": 16,
+      "section": "3.4 Embedded Flash memory",
+      "content_type": "text",
+      "content": "The whole non-volatile memory embeds the error correction code (ECC) feature supporting:\n\n•\nsingle error detection and correction\n\n•\ndouble error detection.\n\n•\nThe address of the ECC fail can be read in the ECC register"
+    },
+    {
+      "candidate_id": "SRC033",
+      "chunk_id": "stm32l432kc_p017_c005",
+      "document": "stm32l432kc",
+      "page": 17,
+      "section": "3.9.1 Power supply schemes",
+      "content_type": "text",
+      "content": "3.9.1\nPower supply schemes\n\n•\nVDD = 1.71 to 3.6 V: external power supply for I/Os (VDDIO1), the internal regulator and\nthe system analog such as reset, power management and internal clocks. It is provided\nexternally through VDD pins.\n\n•\nVDDA = 1.62 V (ADCs/COMPs) / 1.8 (DAC/OPAMP) to 3.6 V: external analog power\nsupply for ADCs, DAC, OPAMPs, Comparators and Voltage reference buffer. The VDDA\nvoltage level is independent from the VDD voltage.\n\nNote:\nWhen the functions supplied by VDDA or VDDUSB are not used, these supplies should\npreferably be shorted to VDD.\n\nNote:\nIf these supplies are tied to ground, the I/Os supplied by these power supplies are not 5 V\ntolerant (refer to Table 18: Voltage characteristics).\n\nNote:\nVDDIOx is the I/Os general purpose digital functions supply. VDDIOx represents VDDIO1, with\nVDDIO1 = VDD.\n\n50"
+    },
+    {
+      "candidate_id": "SRC034",
+      "chunk_id": "stm32l432kc_p018_c001",
+      "document": "stm32l432kc",
+      "page": 18,
+      "section": "3.9.1 Power supply schemes",
+      "content_type": "text",
+      "content": "Figure 2. Power supply overview\n\nVDDA domain\n\nA/D converters\nComparators\nD/A converters\nOperational amplifiers\nVoltage reference buffer\n\nVDDA\n\nVSSA\n\nUSB transceivers\nVDDUSB"
+    },
+    {
+      "candidate_id": "SRC035",
+      "chunk_id": "stm32l432kc_p021_c002",
+      "document": "stm32l432kc",
+      "page": 21,
+      "section": "3.9.4 Low-power modes",
+      "content_type": "table",
+      "content": "|Mode|Regulator(1)|CPU|Flash|SRAM|Clocks|DMA & Peripherals(2)|Wakeup source|Consumption(3)|Wakeup time|\n|---|---|---|---|---|---|---|---|---|---|\n|Run|MR range 1|Yes|ON(4)|ON|Any|All|N/A|97 µA/MHz|N/A|\n|Run|MR range2|MR range2|MR range2|MR range2|MR range2|All except USB_FS, RNG|All except USB_FS, RNG|84 µA/MHz|84 µA/MHz|\n|LPRun|LPR|Yes|ON(4)|ON|Any<br>except<br>PLL|All except USB_FS, RNG|N/A|94 µA/MHz|to Range 1: 4 µs<br>to Range 2: 64 µs|\n|Sleep|MR range 1|No|ON(4)|ON(5)|Any|All|Any interrupt or<br>event|28 µA/MHz|6 cycles|\n|Sleep|MR range2|MR range2|MR range2|MR range2|MR range2|All except USB_FS, RNG|All except USB_FS, RNG|26 µA/MHz|26 µA/MHz|\n|LPSleep|LPR|No|ON(4)|ON(5)|Any<br>except<br>PLL|All except USB_FS, RNG|Any interrupt or<br>event|29 µA/MHz|6 cycles|\n|Stop 0|MR Range 1|No|OFF|ON|LSE<br>LSI|BOR, PVD, PVM<br>RTC, IWDG<br>COMPx (x=1,2)<br>DAC1<br>OPAMPx (x=1)<br>USARTx (x=1,2)(6)<br>LPUART1(6)<br>I2Cx (x=1,3)(7)<br>LPTIMx (x=1,2)<br>***<br>All other peripherals are<br>frozen.|Reset pin, all I/Os<br>BOR, PVD, PVM<br>RTC, IWDG<br>COMPx (x=1..2)<br>USARTx (x=1,2)(6)<br>LPUART1(6)<br>I2Cx (x=1,3)(7)<br>LPTIMx (x=1,2)<br>USB_FS(8)<br>SWPMI1(9)|108 µA|2.4 µs in SRAM<br>4.1 µs in Flash|\n|Stop 0|MR Range 2|MR Range 2|MR Range 2|MR Range 2|MR Range 2|MR Range 2|MR Range 2|108 µA|108 µA|"
+    },
+    {
+      "candidate_id": "SRC036",
+      "chunk_id": "stm32l432kc_p022_c002",
+      "document": "stm32l432kc",
+      "page": 22,
+      "section": "3.9.4 Low-power modes",
+      "content_type": "table",
+      "content": "|Mode|Regulator(1)|CPU|Flash|SRAM|Clocks|DMA & Peripherals(2)|Wakeup source|Consumption(3)|Wakeup time|\n|---|---|---|---|---|---|---|---|---|---|\n|Stop 1|LPR|No|Off|ON|LSE<br>LSI|BOR, PVD, PVM<br>RTC, IWDG<br>COMPx (x=1,2)<br>DAC1<br>OPAMPx (x=1)<br>USARTx (x=1,2)(6)<br>LPUART1(6)<br>I2Cx (x=1,3)(7)<br>LPTIMx (x=1,2)<br>***<br>All other peripherals are<br>frozen.|Reset pin, all I/Os<br>BOR, PVD, PVM<br>RTC, IWDG<br>COMPx (x=1..2)<br>USARTx (x=1,2)(6)<br>LPUART1(6)<br>I2Cx (x=1,3)(7)<br>LPTIMx (x=1,2)<br>USB_FS(8)<br>SWPMI1(9)|4.34 µA w/o RTC<br>4.63 µA w RTC|6.3 µs in SRAM<br>7.8 µs in Flash|\n|Stop 2|LPR|No|Off|ON|LSE<br>LSI|BOR, PVD, PVM<br>RTC, IWDG<br>COMPx (x=1..2)<br>I2C3(7)<br>LPUART1(6)<br>LPTIM1<br>***<br>All other peripherals are<br>frozen.|Reset pin, all I/Os<br>BOR, PVD, PVM<br>RTC, IWDG<br>COMPx (x=1..2)<br>I2C3(7)<br>LPUART1(6)<br>LPTIM1|1.3 µA w/o RTC<br>1.4 µA w/RTC|6.8 µs in SRAM<br>8.2 µs in Flash|"
+    },
+    {
+      "candidate_id": "SRC037",
+      "chunk_id": "stm32l432kc_p028_c005",
+      "document": "stm32l432kc",
+      "page": 28,
+      "section": "3.10 Interconnect matrix",
+      "content_type": "table",
+      "content": "Table 5. STM32L432xx peripherals interconnect matrix\n\n|Interconnect source|Interconnect<br>destination|Interconnect action|Run|Sleep|Low-power run|Low-power sleep|Stop 0 / Stop 1|Stop 2|\n|---|---|---|---|---|---|---|---|---|\n|TIMx|TIMx|Timers synchronization or chaining|Y|Y|Y|Y|-|-|\n|TIMx|ADCx<br>DAC1|Conversion triggers|Y|Y|Y|Y|-|-|\n|TIMx|DMA|Memory to memory transfer trigger|Y|Y|Y|Y|-|-|\n|TIMx|COMPx|Comparator output blanking|Y|Y|Y|Y|-|-|\n|TIM15/TIM16|IRTIM|Infrared interface output generation|Y|Y|Y|Y|-|-|"
+    },
+    {
+      "candidate_id": "SRC038",
+      "chunk_id": "stm32l432kc_p029_c002",
+      "document": "stm32l432kc",
+      "page": 29,
+      "section": "3.10 Interconnect matrix",
+      "content_type": "table",
+      "content": "Table 5. STM32L432xx peripherals interconnect matrix (continued)\n\n|Interconnect source|Interconnect<br>destination|Interconnect action|Run|Sleep|Low-power run|Low-power sleep|Stop 0 / Stop 1|Stop 2|\n|---|---|---|---|---|---|---|---|---|\n|COMPx|TIM1<br>TIM2|Timer input channel, trigger, break from<br>analog signals comparison|Y|Y|Y|Y|-|-|\n|COMPx|LPTIMERx|Low-power timer triggered by analog<br>signals comparison|Y|Y|Y|Y|Y|Y<br>(1)|\n|ADCx|TIM1|Timer triggered by analog watchdog|Y|Y|Y|Y|-|-|\n|RTC|TIM16|Timer input channel from RTC events|Y|Y|Y|Y|-|-|\n|RTC|LPTIMERx|Low-power timer triggered by RTC alarms<br>or tampers|Y|Y|Y|Y|Y|Y<br>(1)|\n|All clocks sources (internal<br>and external)|TIM2<br>TIM15, 16|Clock source used as input channel for<br>RC measurement and trimming|Y|Y|Y|Y|-|-|\n|USB|TIM2|Timer triggered by USB SOF|Y|Y|-|-|-|-|\n|CSS<br>CPU (hard fault)<br>RAM (parity error)<br>Flash memory (ECC error)<br>COMPx<br>PVD|TIM1<br>TIM15,16|Timer break|Y|Y|Y|Y|-|-|\n|GPIO|TIMx|External trigger|Y|Y|Y|Y|-|-|\n|GPIO|LPTIMERx|External trigger|Y|Y|Y|Y|Y|Y<br>(1)|\n|GPIO|ADCx<br>DAC1|Conversion external trigger|Y|Y|Y|Y|-|-|"
+    },
+    {
+      "candidate_id": "SRC039",
+      "chunk_id": "stm32l432kc_p032_c003",
+      "document": "stm32l432kc",
+      "page": 32,
+      "section": "3.11 Clocks and startup",
+      "content_type": "text",
+      "content": "SYSCLK\n\nPCLK1\n\nAPB1 PRESC\n\n/ 1,2,4,8,16\n\nto APB1 peripherals\n\nx1 or x2\n\nHSI\n16\n\nto TIMx\nx=2,6,7\n\nLSE\nHSI16\nSYSCLK\nto USARTx\n\nx=2..3\nto LPUART1\n\nHSI16\nSYSCLK\n\nMSI\n100 kHz\n\nto I2Cx\nx=1,2,3\n\nLSI\nLSE\nHSI16\n\nto LPTIMx\n\nx=1,2\n\nHSI16\n\nto SWPMI\n\nPCLK2\n\nPLL\n\nAPB2 PRESC\n\nto APB2 peripherals\n\nVCO FVCO\n\n/ 1,2,4,8,16\n\n/ P\n\n/ Q\n\nx1 or x2\n\nto TIMx\nx=1,15,16\n\n/ R\n\nto USART1\nLSE\nHSI16\nSYSCLK\n\nPLLSAI1\n\nVCO FVCO\n/ P\n\n/ Q\n\n/ R\n\nSYSCLK\n\nto ADC\n\nHSI RC\n48 MHz\n\nMSI\n\nCRS\n\n48 MHz clock to USB, RNG\n\nHSI16\n\nto SAI1\n\nSAI1_EXTCLK\n\nMSv39217V4"
+    },
+    {
+      "candidate_id": "SRC040",
+      "chunk_id": "stm32l432kc_p033_c002",
+      "document": "stm32l432kc",
+      "page": 33,
+      "section": "3.12 General-purpose inputs/outputs (GPIOs)",
+      "content_type": "text",
+      "content": "3.12\nGeneral-purpose inputs/outputs (GPIOs)\n\nEach of the GPIO pins can be configured by software as output (push-pull or open-drain), as\ninput (with or without pull-up or pull-down) or as peripheral alternate function. Most of the\nGPIO pins are shared with digital or analog alternate functions. Fast I/O toggling can be\nachieved thanks to their mapping on the AHB2 bus.\n\nThe I/Os alternate function configuration can be locked if needed following a specific\nsequence in order to avoid spurious writing to the I/Os registers."
+    },
+    {
+      "candidate_id": "SRC041",
+      "chunk_id": "stm32l432kc_p035_c004",
+      "document": "stm32l432kc",
+      "page": 35,
+      "section": "3.15.1 Temperature sensor",
+      "content_type": "text",
+      "content": "3.15.1\nTemperature sensor\n\nThe temperature sensor (TS) generates a voltage VTS that varies linearly with temperature.\n\nThe temperature sensor is internally connected to the ADC1_IN17 input channel which is\nused to convert the sensor output voltage into a digital value.\n\nThe sensor provides good linearity but it has to be calibrated to obtain good overall\naccuracy of the temperature measurement. As the offset of the temperature sensor varies\nfrom chip to chip due to process variation, the uncalibrated internal temperature sensor is\nsuitable for applications that detect temperature changes only.\n\nTo improve the accuracy of the temperature sensor measurement, each device is\nindividually factory-calibrated by ST. The temperature sensor factory calibration data are\nstored by ST in the system memory area, accessible in read-only mode.\n\n50"
+    },
+    {
+      "candidate_id": "SRC042",
+      "chunk_id": "stm32l432kc_p051_c001",
+      "document": "stm32l432kc",
+      "page": 51,
+      "section": "3.33.2 Embedded Trace Macrocell™",
+      "content_type": "text",
+      "content": "STM32L432KB STM32L432KC\nPinouts and pin description\n\n4\nPinouts and pin description\n\nFigure 5. STM32L432Kx UFQFPN32 pinout(1)\n\nPH3/BOOT0\n\nPA15\n\nVSS\n\nPB7\n\nPB6\n\nPB5\n\nPB4\n\nPB3\n\n32\n\n31\n\n30\n\n29\n\n28\n\n27\n\n26\n\n25\n\nVDD\n\n1\n\n24\n\nPA14\n\nPC14-OSC32_IN\n\n2\n\n23\n\nPA13\n\nPC15-OSC32_OUT\n\n3\n\n22\n\nPA12\n\nNRST\n\n4\n\n21\n\nPA11\n\nUFQFPN32\n\nVDDA/VREF+\n\n5\n\n20\n\nPA10\n\nPA0/CK_IN\n\n6\n\n19\n\nPA9\n\nPA1\n\n7\n\n18\n\nPA8\n\nPA2\n\n8\n\n17\n\nVDD\n\n10\n\n12\n\n13\n\n14\n\n15\n\n16\n\n11\n\n9\n\nVSS\n\nPB0\n\nPB1\n\nPA3\n\nPA4\n\nPA5\n\nPA6\n\nPA7\n\nMSv37605V2\n\n1.\nThe above figure shows the package top view."
+    },
+    {
+      "candidate_id": "SRC043",
+      "chunk_id": "stm32l432kc_p063_c004",
+      "document": "stm32l432kc",
+      "page": 63,
+      "section": "6.1.2 Typical values",
+      "content_type": "text",
+      "content": "6.1.2\nTypical values\n\nUnless otherwise specified, typical data are based on TA = 25 °C, VDD = VDDA = 3 V. They\nare given only as design guidelines and are not tested.\n\nTypical ADC accuracy values are determined by characterization of a batch of samples from\na standard diffusion lot over the full temperature range, where 95% of the devices have an\nerror less than or equal to the value indicated (mean ±2σ)."
+    },
+    {
+      "candidate_id": "SRC044",
+      "chunk_id": "stm32l432kc_p065_c002",
+      "document": "stm32l432kc",
+      "page": 65,
+      "section": "6.1.7 Current consumption measurement",
+      "content_type": "text",
+      "content": "6.1.7\nCurrent consumption measurement\n\nFigure 10. Current consumption measurement scheme\n\nIDD_USB\n\nVDDUSB\n\nIDD\n\nVDD\n\nIDDA\n\nVDDA\n\nMSv41630V1\n\nThe IDD_ALL parameters given in Table 25 to Table 37 represent the total MCU consumption\nincluding the current supplying VDD, VDDA, VDDUSB and VBAT."
+    },
+    {
+      "candidate_id": "SRC045",
+      "chunk_id": "stm32l432kc_p068_c006",
+      "document": "stm32l432kc",
+      "page": 68,
+      "section": "6.3.3 Embedded reset and power control block characteristics",
+      "content_type": "table",
+      "content": "Table 23. Embedded reset and power control block characteristics\n\n|Symbol|Parameter|Conditions(1)|Min|Typ|Max|Unit|\n|---|---|---|---|---|---|---|\n|tRSTTEMPO<br>(2)|Reset temporization after<br>BOR0 is detected|VDDrising|-|250|400|μs|\n|VBOR0<br>(2)|Brown-out reset threshold 0|Rising edge|1.62|1.66|1.7|V|\n|VBOR0<br>(2)|Brown-out reset threshold 0|Falling edge|1.6|1.64|1.69|1.69|\n|VBOR1|Brown-out reset threshold 1|Rising edge|2.06|2.1|2.14|V|\n|VBOR1|Brown-out reset threshold 1|Falling edge|1.96|2|2.04|2.04|\n|VBOR2|Brown-out reset threshold 2|Rising edge|2.26|2.31|2.35|V|\n|VBOR2|Brown-out reset threshold 2|Falling edge|2.16|2.20|2.24|2.24|\n|VBOR3|Brown-out reset threshold 3|Rising edge|2.56|2.61|2.66|V|\n|VBOR3|Brown-out reset threshold 3|Falling edge|2.47|2.52|2.57|2.57|\n|VBOR4|Brown-out reset threshold 4|Rising edge|2.85|2.90|2.95|V|\n|VBOR4|Brown-out reset threshold 4|Falling edge|2.76|2.81|2.86|2.86|\n|VPVD0|Programmable voltage<br>detector threshold 0|Rising edge|2.1|2.15|2.19|V|\n|VPVD0|Programmable voltage<br>detector threshold 0|Falling edge|2|2.05|2.1|2.1|"
+    },
+    {
+      "candidate_id": "SRC046",
+      "chunk_id": "stm32l432kc_p070_c002",
+      "document": "stm32l432kc",
+      "page": 70,
+      "section": "6.3.4 Embedded voltage reference",
+      "content_type": "text",
+      "content": "6.3.4\nEmbedded voltage reference\n\nThe parameters given in Table 24 are derived from tests performed under the ambient\ntemperature and supply voltage conditions summarized in Table 21: General operating\nconditions."
+    },
+    {
+      "candidate_id": "SRC047",
+      "chunk_id": "stm32l432kc_p071_c001",
+      "document": "stm32l432kc",
+      "page": 71,
+      "section": "6.3.4 Embedded voltage reference",
+      "content_type": "text",
+      "content": "STM32L432KB STM32L432KC\nElectrical characteristics\n\nFigure 11. VREFINT versus temperature\n\nV\n\n1.235\n\n1.23\n\n1.225\n\n1.22\n\n1.215\n\n1.21\n\n1.205\n\n1.2\n\n1.195\n\n1.19\n\n1.185\n\n°C\n\n-40\n-20\n0\n20\n40\n60\n80\n100\n120\n\nMean\nMin\nMax\n\nMSv40169V1\n\n148"
+    },
+    {
+      "candidate_id": "SRC048",
+      "chunk_id": "stm32l432kc_p086_c002",
+      "document": "stm32l432kc",
+      "page": 86,
+      "section": "3.6 V",
+      "content_type": "text",
+      "content": "Caution:\nAny floating input pin can also settle to an intermediate voltage level or switch inadvertently,\nas a result of external electromagnetic noise. To avoid current consumption related to\nfloating pins, they must either be configured in analog mode, or forced internally to a definite\ndigital value. This can be done either by using pull-up/down resistors or by configuring the\npins in output mode.\n\nI/O dynamic current consumption\n\nIn addition to the internal peripheral current consumption measured previously (see\nTable 38: Peripheral current consumption), the I/Os used by an application also contribute\nto the current consumption. When an I/O pin switches, it uses the current from the I/O\nsupply voltage to supply the I/O pin circuitry and to charge/discharge the capacitive load\n(internal or external) connected to the pin:\n\nISW\nVDDIOx\nfSW\nC\n×\n×\n=\n\nwhere\n\nISW is the current sunk by a switching I/O to charge/discharge the capacitive load\n\nVDDIOx is the I/O supply voltage\n\nfSW is the I/O switching frequency\n\nC is the total capacitance seen by the I/O pin: C = CINT+ CEXT + CS\nCS is the PCB board capacitance including the pad pin."
+    },
+    {
+      "candidate_id": "SRC049",
+      "chunk_id": "stm32l432kc_p093_c001",
+      "document": "stm32l432kc",
+      "page": 93,
+      "section": "6.3.7 External clock source characteristics",
+      "content_type": "text",
+      "content": "STM32L432KB STM32L432KC\nElectrical characteristics\n\nLow-speed external user clock generated from an external source\n\nIn bypass mode the LSE oscillator is switched off and the input pin is a standard GPIO.\n\nThe external clock signal has to respect the I/O characteristics in Section 6.3.14. However,\nthe recommended clock input waveform is shown in Figure 13."
+    },
+    {
+      "candidate_id": "SRC050",
+      "chunk_id": "stm32l432kc_p093_c007",
+      "document": "stm32l432kc",
+      "page": 93,
+      "section": "6.3.7 External clock source characteristics",
+      "content_type": "text",
+      "content": "90%\n\n10%\n\nVLSEL\n\nt\ntr(LSE)\n\ntf(LSE)\n\ntw(LSEL)\n\nTLSE\n\nMS19215V2\n\nLow-speed external clock generated from a crystal resonator\n\nThe low-speed external (LSE) clock can be supplied with a 32.768 kHz crystal resonator\noscillator. All the information given in this paragraph are based on design simulation results\nobtained with typical external components specified in Table 44. In the application, the\nresonator and the load capacitors have to be placed as close as possible to the oscillator\npins in order to minimize output distortion and startup stabilization time. Refer to the crystal\nresonator manufacturer for more details on the resonator characteristics (frequency,\npackage, accuracy).\n\n148"
+    },
+    {
+      "candidate_id": "SRC051",
+      "chunk_id": "stm32l432kc_p100_c001",
+      "document": "stm32l432kc",
+      "page": 100,
+      "section": "16.4 MHz",
+      "content_type": "text",
+      "content": "Electrical characteristics\nSTM32L432KB STM32L432KC\n\nFigure 16. Typical current consumption versus MSI frequency\n\nHigh-speed internal 48 MHz (HSI48) RC oscillator"
+    },
+    {
+      "candidate_id": "SRC052",
+      "chunk_id": "stm32l432kc_p100_c002",
+      "document": "stm32l432kc",
+      "page": 100,
+      "section": "16.4 MHz",
+      "content_type": "table",
+      "content": "Table 47. HSI48 oscillator characteristics(1)\n\n|Symbol|Parameter|Conditions|Min|Typ|Max|Unit|\n|---|---|---|---|---|---|---|\n|fHSI48|HSI48 Frequency|VDD=3.0V, TA=30°C|-|48|-|MHz|\n|TRIM|HSI48 user trimming step|-|-|0.11(2)|0.18(2)|%|\n|USER TRIM<br>COVERAGE|HSI48 user trimming coverage|±32 steps|±3(3)|±3.5(3)|-|%|\n|DuCy(HSI48)|Duty Cycle|-|45(2)|-|55(2)|%|\n|ACCHSI48_REL|Accuracy of the HSI48 oscillator<br>over temperature (factory<br>calibrated)|VDD = 3.0 V to 3.6 V,<br>TA = –15 to 85 °C|-|-|±3(3)|%|\n|ACCHSI48_REL|Accuracy of the HSI48 oscillator<br>over temperature (factory<br>calibrated)|VDD= 1.65 V to 3.6 V,<br>TA = –40 to 125 °C|-|-|±4.5(3)|±4.5(3)|\n|DVDD(HSI48)|HSI48 oscillator frequency drift<br>with VDD|VDD = 3 V to 3.6 V|-|0.025(3)|0.05(3)|%|\n|DVDD(HSI48)|HSI48 oscillator frequency drift<br>with VDD|VDD = 1.65 V to 3.6 V|-|0.05(3)|0.1(3)|0.1(3)|\n|tsu(HSI48)|HSI48 oscillator start-up time|-|-|2.5(2)|6(2)|μs|\n|IDD(HSI48)|HSI48 oscillator power<br>consumption|-|-|340(2)|380(2)|μA|"
+    },
+    {
+      "candidate_id": "SRC053",
+      "chunk_id": "stm32l432kc_p105_c003",
+      "document": "stm32l432kc",
+      "page": 105,
+      "section": "6.3.12 Electrical sensitivity characteristics",
+      "content_type": "text",
+      "content": "6.3.12\nElectrical sensitivity characteristics\n\nBased on three different tests (ESD, LU) using specific measurement methods, the device is\nstressed in order to determine its performance in terms of electrical sensitivity.\n\nElectrostatic discharge (ESD)\n\nElectrostatic discharges (a positive then a negative pulse separated by 1 second) are\napplied to the pins of each sample according to each pin combination. The sample size\ndepends on the number of supply pins in the device (3 parts × (n+1) supply pins). This test\nconforms to the ANSI/JEDEC standard."
+    },
+    {
+      "candidate_id": "SRC054",
+      "chunk_id": "stm32l432kc_p108_c001",
+      "document": "stm32l432kc",
+      "page": 108,
+      "section": "6.3.14 I/O port characteristics",
+      "content_type": "text",
+      "content": "Electrical characteristics\nSTM32L432KB STM32L432KC\n\n1.\nRefer to Figure 18: I/O input characteristics.\n\n2.\nTested in production.\n\n3.\nGuaranteed by design.\n\n4.\nThis value represents the pad leakage of the IO itself. The total product pad leakage is provided by this formula:\nITotal_Ileak_max = 10 µA + [number of IOs where VIN is applied on the pad] ₓ Ilkg(Max).\n\n5.\nAll FT_xx GPIOs except FT_u and PC3 I/Os.\n\n6.\nMax(VDDXXX) is the maximum value of all the I/O supplies.\n\n7.\nTo sustain a voltage higher than Min(VDD, VDDA, VDDUSB) +0.3 V, the internal Pull-up and Pull-Down resistors must be\ndisabled.\n\n8.\nPull-up and pull-down resistors are designed with a true resistance in series with a switchable PMOS/NMOS. This\nPMOS/NMOS contribution to the series resistance is minimal (~10% order).\n\nAll I/Os are CMOS- and TTL-compliant (no software configuration required). Their\ncharacteristics cover more than the strict CMOS-technology or TTL parameters. The\ncoverage of these requirements is shown in Figure 18 for standard I/Os, and in Figure 18 for\n5 V tolerant I/Os.\n\nFigure 18. I/O input characteristics\n\nTTL requirement Vih min = 2V"
+    },
+    {
+      "candidate_id": "SRC055",
+      "chunk_id": "stm32l432kc_p114_c003",
+      "document": "stm32l432kc",
+      "page": 114,
+      "section": "6.3.18 Analog-to-Digital converter characteristics",
+      "content_type": "table",
+      "content": "Table 63. ADC characteristics(1) (2)\n\n|Symbol|Parameter|Conditions|Min|Typ|Max|Unit|\n|---|---|---|---|---|---|---|\n|VDDA|Analog supply voltage|-|1.62|-|3.6|V|\n|VREF+|Positive reference voltage|VDDA ≥ 2 V|2|-|VDDA|V|\n|VREF+|Positive reference voltage|VDDA < 2 V|VDDA|VDDA|VDDA|V|\n|VREF-|Negative reference<br>voltage|-|VSSA|VSSA|VSSA|V|\n|fADC|ADC clock frequency|Range 1|0.14|-|80|MHz|\n|fADC|ADC clock frequency|Range 2|0.14|-|26|26|\n|fs|Sampling rate for FAST<br>channels|Resolution = 12 bits|-|-|5.33|Msps|\n|fs|Sampling rate for FAST<br>channels|Resolution = 10 bits|-|-|6.15|6.15|\n|fs|Sampling rate for FAST<br>channels|Resolution = 8 bits|-|-|7.27|7.27|\n|fs|Sampling rate for FAST<br>channels|Resolution = 6 bits|-|-|8.88|8.88|\n|fs|Sampling rate for SLOW<br>channels|Resolution = 12 bits|-|-|4.21|4.21|\n|fs|Sampling rate for SLOW<br>channels|Resolution = 10 bits|-|-|4.71|4.71|\n|fs|Sampling rate for SLOW<br>channels|Resolution = 8 bits|-|-|5.33|5.33|\n|fs|Sampling rate for SLOW<br>channels|Resolution = 6 bits|-|-|6.15|6.15|\n|fTRIG|External trigger frequency|fADC = 80 MHz<br>Resolution = 12 bits|-|-|5.33|MHz|\n|fTRIG|External trigger frequency|Resolution = 12 bits|-|-|15|1/fADC|\n|VCMIN|Input common mode|Differential mode|(VREF++<br>VREF-)/2<br>- 0.18|(VREF++<br>VREF-)/2|(VREF++<br>VREF-)/2<br>+ 0.18|V|\n|VAIN (3)|Conversion voltage<br>range(2)|-|0|-|VREF+|V|\n|RAIN|External input impedance|-|-|-|50|kΩ|\n|CADC|Internal sample and hold<br>capacitor|-|-|5|-|pF|\n|tSTAB|Power-up time|-|1|1|1|conversion<br>cycle|\n|tCAL|Calibration time|fADC = 80 MHz|1.45|1.45|1.45|µs|\n|tCAL|Calibration time|-|116|116|116|1/fADC|"
+    },
+    {
+      "candidate_id": "SRC056",
+      "chunk_id": "stm32l432kc_p129_c003",
+      "document": "stm32l432kc",
+      "page": 129,
+      "section": "6.3.19 Digital-to-Analog converter characteristics",
+      "content_type": "text",
+      "content": "1.\nGuaranteed by design.\n\n2.\nIn buffered mode, the output can overshoot above the final value for low input code (starting from min value).\n\n3.\nRefer to Table 57: I/O static characteristics.\n\n4.\nTon is the Refresh phase duration. Toff is the Hold phase duration. Refer to RM0394 reference manual for more details.\n\nFigure 23. 12-bit buffered / non-buffered DAC"
+    },
+    {
+      "candidate_id": "SRC057",
+      "chunk_id": "stm32l432kc_p142_c002",
+      "document": "stm32l432kc",
+      "page": 142,
+      "section": "6.3.24 Communication interfaces characteristics",
+      "content_type": "table",
+      "content": "Table 79. Quad SPI characteristics in SDR mode(1)\n\n|Symbol|Parameter|Conditions|Min|Typ|Max|Unit|\n|---|---|---|---|---|---|---|\n|FCK<br>1/t(CK)|Quad SPI clock frequency|1.71 < VDD< 3.6 V, CLOAD = 20 pF<br>Voltage Range 1|-|-|40|MHz|\n|FCK<br>1/t(CK)|Quad SPI clock frequency|1.71 < VDD< 3.6 V, CLOAD = 15 pF<br>Voltage Range 1|-|-|48|48|\n|FCK<br>1/t(CK)|Quad SPI clock frequency|2.7 < VDD< 3.6 V, CLOAD = 15 pF<br>Voltage Range 1|-|-|60|60|\n|FCK<br>1/t(CK)|Quad SPI clock frequency|1.71 < VDD< 3.6 V CLOAD = 20 pF<br>Voltage Range 2|-|-|26|26|\n|tw(CKH)|Quad SPI clock high and<br>low time|fAHBCLK= 48 MHz, presc=0|t(CK)/2-2|-|t(CK)/2|ns|\n|tw(CKL)|tw(CKL)|tw(CKL)|t(CK)/2|-|t(CK)/2+2|t(CK)/2+2|\n|ts(IN)|Data input setup time|Voltage Range 1|2|-|-|-|\n|ts(IN)|Data input setup time|Voltage Range 2|3.5|-|-|-|\n|th(IN)|Data input hold time|Voltage Range 1|5|-|-|-|\n|th(IN)|Data input hold time|Voltage Range 2|6.5|-|-|-|\n|tv(OUT)|Data output valid time|Voltage Range 1|-|1|5|5|\n|tv(OUT)|Data output valid time|Voltage Range 2|-|3|5|5|\n|th(OUT)|Data output hold time|Voltage Range 1|0|-|-|-|\n|th(OUT)|Data output hold time|Voltage Range 2|0|-|-|-|"
+    },
+    {
+      "candidate_id": "SRC058",
+      "chunk_id": "stm32l432kc_p147_c001",
+      "document": "stm32l432kc",
+      "page": 147,
+      "section": "6.3.24 Communication interfaces characteristics",
+      "content_type": "text",
+      "content": "STM32L432KB STM32L432KC\nElectrical characteristics\n\nFigure 30. SAI slave timing waveforms\n\n1/fSCK\n\nSAI_SCK_X\n\ntw(CKH_X)\nth(FS)\n\ntw(CKL_X)\n\nSAI_FS_X\n(input)\n\ntsu(FS)\n\ntv(SD_ST)\nth(SD_ST)\n\nSAI_SD_X\n(transmit)\n\nSlot n\n\nSlot n+2\n\ntsu(SD_SR)\n\nth(SD_SR)"
+    },
+    {
+      "candidate_id": "SRC059",
+      "chunk_id": "stm32l432kc_p152_c002",
+      "document": "stm32l432kc",
+      "page": 152,
+      "section": "7.2 Thermal characteristics",
+      "content_type": "text",
+      "content": "7.2\nThermal characteristics\n\nThe maximum chip junction temperature (TJmax) must never exceed the values given in\nTable 21: General operating conditions.\n\nThe maximum chip-junction temperature, TJ max, in degrees Celsius, may be calculated\nusing the following equation:\n\nTJ max = TA max + (PD max x ΘJA)\n\nWhere:\n\n•\nTA max is the maximum ambient temperature in °C,\n\n•\nΘJA is the package junction-to-ambient thermal resistance, in °C/W,\n\n•\nPD max is the sum of PINT max and PI/O max (PD max = PINT max + PI/Omax),\n\n•\nPINT max is the product of all IDDXXX and VDDXXX, expressed in Watts. This is the\nmaximum chip internal power.\n\nPI/O max represents the maximum power dissipation on output pins where:\n\nPI/O max = Σ (VOL × IOL) + Σ ((VDDIOx – VOH) × IOH),\n\ntaking into account the actual VOL / IOL and VOH / IOH of the I/Os at low and high level in the\napplication."
+    },
+    {
+      "candidate_id": "SRC060",
+      "chunk_id": "stm32l432kc_p156_c001",
+      "document": "stm32l432kc",
+      "page": 156,
+      "section": "7.2.1 Reference document",
+      "content_type": "text",
+      "content": "STM32L432KB STM32L432KC\n\nIMPORTANT NOTICE – PLEASE READ CAREFULLY\n\nSTMicroelectronics NV and its subsidiaries (“ST”) reserve the right to make changes, corrections, enhancements, modifications, and\nimprovements to ST products and/or to this document at any time without notice. Purchasers should obtain the latest relevant information on\nST products before placing orders. ST products are sold pursuant to ST’s terms and conditions of sale in place at the time of order\nacknowledgement.\n\nPurchasers are solely responsible for the choice, selection, and use of ST products and ST assumes no liability for application assistance or\nthe design of Purchasers’ products.\n\nNo license, express or implied, to any intellectual property right is granted by ST herein.\n\nResale of ST products with provisions different from the information set forth herein shall void any warranty granted by ST for such product.\n\nST and the ST logo are trademarks of ST. All other product or service names are the property of their respective owners.\n\nInformation in this document supersedes and replaces information previously supplied in any prior versions of this document.\n\n© 2018 STMicroelectronics – All rights reserved"
+    }
+  ]
+}

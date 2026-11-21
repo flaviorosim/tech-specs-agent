@@ -1,0 +1,111 @@
+[
+  {
+    "id": "q_v3_a02",
+    "query": "Which CKSEL fuse setting selects the 32.768 kHz low-frequency crystal oscillator on the ATtiny25/45/85?",
+    "document": "attiny85",
+    "relevant_chunk_ids": [
+      "attiny85_p029_c002"
+    ],
+    "category": "exact_identifier"
+  },
+  {
+    "id": "q_v3_a05",
+    "query": "What is the register width of TCNT0, OCR0A, and OCR0B in the ATtiny25/45/85 Timer/Counter0?",
+    "document": "attiny85",
+    "relevant_chunk_ids": [
+      "attiny85_p065_c004"
+    ],
+    "category": "exact_identifier"
+  },
+  {
+    "id": "q_v3_a07",
+    "query": "What prescaler division factor is selected when DTPS11=1 and DTPS10=0 on the ATtiny Timer/Counter1 dead-time prescaler?",
+    "document": "attiny85",
+    "relevant_chunk_ids": [
+      "attiny85_p106_c006"
+    ],
+    "category": "table_lookup"
+  },
+  {
+    "id": "q_v3_a10",
+    "query": "When is the USIDC data-output collision flag set in the ATtiny USI, and in which wire mode is it valid?",
+    "document": "attiny85",
+    "relevant_chunk_ids": [
+      "attiny85_p116_c002"
+    ],
+    "category": "exact_identifier"
+  },
+  {
+    "id": "q_v3_a12",
+    "query": "Why can repeatedly changing debugWIRE program breakpoints shorten Flash data retention on ATtiny devices?",
+    "document": "attiny85",
+    "relevant_chunk_ids": [
+      "attiny85_p140_c002"
+    ],
+    "category": "conceptual"
+  },
+  {
+    "id": "q_v3_a15",
+    "query": "What ADC resolution is specified for ATtiny differential unipolar channels at gains of 1x and 20x?",
+    "document": "attiny85",
+    "relevant_chunk_ids": [
+      "attiny85_p168_c001"
+    ],
+    "category": "table_comparison"
+  },
+  {
+    "id": "q_v3_s02",
+    "query": "What single-bit and double-bit error protection does the STM32L432xx embedded Flash ECC provide?",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": [
+      "stm32l432kc_p016_c001"
+    ],
+    "category": "exact_identifier"
+  },
+  {
+    "id": "q_v3_s04",
+    "query": "For STM32L432xx Stop 2 mode without RTC, what current consumption and SRAM wakeup time does the datasheet table list?",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": [
+      "stm32l432kc_p022_c002"
+    ],
+    "category": "table_lookup"
+  },
+  {
+    "id": "q_v3_s06",
+    "query": "Which STM32L432xx timer can be triggered by a USB SOF event, and in which main operating modes is that interconnect available?",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": [
+      "stm32l432kc_p029_c002"
+    ],
+    "category": "table_lookup"
+  },
+  {
+    "id": "q_v3_s09",
+    "query": "Under what ambient temperature and supply-voltage conditions are typical STM32L432xx electrical values defined unless otherwise stated, and are they guaranteed by testing?",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": [
+      "stm32l432kc_p063_c004"
+    ],
+    "category": "table_or_limit"
+  },
+  {
+    "id": "q_v3_s11",
+    "query": "For the STM32L432xx LSE clock, how does bypass mode differ from using a 32.768 kHz crystal, and what placement practice is recommended for a resonator?",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": [
+      "stm32l432kc_p093_c001",
+      "stm32l432kc_p093_c007"
+    ],
+    "category": "multi_evidence"
+  },
+  {
+    "id": "q_v3_s15",
+    "query": "According to the STM32L432xx Quad-SPI SDR characteristics, what maximum clock frequency is listed for Voltage Range 1, 20 pF load, and 1.71 V < VDD < 3.6 V?",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": [
+      "stm32l432kc_p142_c002"
+    ],
+    "category": "table_or_limit"
+  }
+]

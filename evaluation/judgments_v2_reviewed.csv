@@ -1,0 +1,828 @@
+﻿question_id,query,expected_document,chunk_id,document,page,section,content_type,content,relevance,notes,verificar_pdf
+q_complementary_outputs,Which timers have complementary outputs?,stm32l432kc,stm32l432kc_p004_c006,stm32l432kc,4,"3.21.2 General-purpose timers (TIM2, TIM15, TIM16) . . . . . . . . . . . . . . . . . . . 40",text,"3.21.2
+General-purpose timers (TIM2, TIM15, TIM16) . . . . . . . . . . . . . . . . . . . 40",0,"Entrada do sumário; apenas aponta para a seção, sem informar quais timers têm saídas complementares.",NÃO
+q_complementary_outputs,Which timers have complementary outputs?,stm32l432kc,stm32l432kc_p038_c004,stm32l432kc,38,3.21 Timers and watchdogs,table,"Table 9. Timer feature comparison
+
+|Timer type|Timer|Counter<br>resolution|Counter<br>type|Prescaler<br>factor|DMA<br>request<br>generation|Capture/<br>compare<br>channels|Complementary<br>outputs|
+|---|---|---|---|---|---|---|---|
+|Advanced<br>control|TIM1|16-bit|Up, down,<br>Up/down|Any integer<br>between 1<br>and 65536|Yes|4|3|
+|General-<br>purpose|TIM2|32-bit|Up, down,<br>Up/down|Any integer<br>between 1<br>and 65536|Yes|4|No|
+|General-<br>purpose|TIM15|16-bit|Up|Any integer<br>between 1<br>and 65536|Yes|2|1|",2,"Tabela 9 informa saídas complementares: TIM1 = 3, TIM15 = 1; TIM2 = No.",NÃO
+q_complementary_outputs,Which timers have complementary outputs?,stm32l432kc,stm32l432kc_p039_c002,stm32l432kc,39,3.21 Timers and watchdogs,table,"Table 9. Timer feature comparison (continued)
+
+|Timer type|Timer|Counter<br>resolution|Counter<br>type|Prescaler<br>factor|DMA<br>request<br>generation|Capture/<br>compare<br>channels|Complementary<br>outputs|
+|---|---|---|---|---|---|---|---|
+|General-<br>purpose|TIM16|16-bit|Up|Any integer<br>between 1<br>and 65536|Yes|1|1|
+|Basic|TIM6, TIM7|16-bit|Up|Any integer<br>between 1<br>and 65536|Yes|0|No|",2,Continuação da Tabela 9: TIM16 = 1; TIM6 e TIM7 = No.,NÃO
+q_complementary_outputs,Which timers have complementary outputs?,stm32l432kc,stm32l432kc_p039_c003,stm32l432kc,39,3.21.1 Advanced-control timer (TIM1),text,"3.21.1
+Advanced-control timer (TIM1)
+
+The advanced-control timer can each be seen as a three-phase PWM multiplexed on 6
+channels. They have complementary PWM outputs with programmable inserted dead-
+times. They can also be seen as complete general-purpose timers. The 4 independent
+channels can be used for:
+
+•
+Input capture
+
+•
+Output compare
+
+•
+PWM generation (edge or center-aligned modes) with full modulation capability (0-
+100%)
+
+•
+One-pulse mode output
+
+In debug mode, the advanced-control timer counter can be frozen and the PWM outputs
+disabled to turn off any power switches driven by these outputs.
+
+Many features are shared with those of the general-purpose TIMx timers (described in
+Section 3.21.2) using the same architecture, so the advanced-control timer can work
+together with the TIMx timers via the Timer Link feature for synchronization or event
+chaining.
+
+50",2,Descrição de TIM1 confirma explicitamente saídas PWM complementares.,NÃO
+q_complementary_outputs,Which timers have complementary outputs?,stm32l432kc,stm32l432kc_p040_c001,stm32l432kc,40,3.21.1 Advanced-control timer (TIM1),text,"Functional overview
+STM32L432KB STM32L432KC",0,Somente cabeçalho repetitivo de página; não contém evidência.,NÃO
+q_complementary_outputs,Which timers have complementary outputs?,stm32l432kc,stm32l432kc_p040_c002,stm32l432kc,40,"3.21.2 General-purpose timers (TIM2, TIM15, TIM16)",text,"3.21.2
+General-purpose timers (TIM2, TIM15, TIM16)
+
+There are up to three synchronizable general-purpose timers embedded in the
+STM32L432xx (see Table 9 for differences). Each general-purpose timer can be used to
+generate PWM outputs, or act as a simple time base.
+
+•
+TIM2
+
+It is a full-featured general-purpose timer:
+
+TIM2 has a 32-bit auto-reload up/downcounter and 32-bit prescaler.
+
+This timer features 4 independent channels for input capture/output compare, PWM or
+one-pulse mode output. It can work with the other general-purpose timers via the Timer
+Link feature for synchronization or event chaining.
+
+The counter can be frozen in debug mode.
+
+It has independent DMA request generation and support quadrature encoder.
+
+•
+TIM15 and 16
+
+They are general-purpose timers with mid-range features:
+
+They have 16-bit auto-reload upcounters and 16-bit prescalers.
+
+–
+TIM15 has 2 channels and 1 complementary channel
+
+–
+TIM16 has 1 channel and 1 complementary channel
+
+All channels can be used for input capture/output compare, PWM or one-pulse mode
+output.",2,Descrição afirma explicitamente que TIM15 e TIM16 têm um canal complementar cada.,NÃO
+q_complementary_outputs,Which timers have complementary outputs?,stm32l432kc,stm32l432kc_p040_c003,stm32l432kc,40,"3.21.2 General-purpose timers (TIM2, TIM15, TIM16)",text,"The timers can work together via the Timer Link feature for synchronization or event
+chaining. The timers have independent DMA request generation.
+
+The counters can be frozen in debug mode.",0,Comentário genérico sobre DMA e sincronização; não identifica saídas complementares.,NÃO
+q_complementary_outputs,Which timers have complementary outputs?,stm32l432kc,stm32l432kc_p137_c007,stm32l432kc,137,6.3.23 Timer characteristics,text,148,0,Apenas número isolado; ruído de paginação.,NÃO
+q_r26_address,R26 0x1A X-register Low Byte,attiny85,attiny85_p010_c001,attiny85,10,4.5 General Purpose Register File,text,"4.5
+General Purpose Register File
+The Register File is optimized for the AVR Enhanced RISC instruction set. In order to achieve the required perfor-
+mance and flexibility, the following input/output schemes are supported by the Register File:
+
+• One 8-bit output operand and one 8-bit result input
+
+• Two 8-bit output operands and one 8-bit result input
+
+• Two 8-bit output operands and one 16-bit result input
+
+• One 16-bit output operand and one 16-bit result input
+
+Figure 4-2 shows the structure of the 32 general purpose working registers in the CPU.
+
+Figure 4-2.
+AVR CPU General Purpose Working Registers
+
+7
+0
+Addr.
+
+R0
+0x00
+
+R1
+0x01
+
+R2
+0x02
+
+…
+
+R13
+0x0D
+
+General
+R14
+0x0E
+
+Purpose
+R15
+0x0F
+
+Working
+R16
+0x10
+
+Registers
+R17
+0x11
+
+…
+
+R26
+0x1A
+X-register Low Byte
+
+R27
+0x1B
+X-register High Byte
+
+R28
+0x1C
+Y-register Low Byte
+
+R29
+0x1D
+Y-register High Byte
+
+R30
+0x1E
+Z-register Low Byte
+
+R31
+0x1F
+Z-register High Byte
+
+Most of the instructions operating on the Register File have direct access to all registers, and most of them are sin-
+gle cycle instructions.",2,"Figura 4-2 foi linearizada, mas associa explicitamente R26, 0x1A e X-register Low Byte.",NÃO
+q_r26_address,R26 0x1A X-register Low Byte,attiny85,attiny85_p010_c003,attiny85,10,"4.5.1 The X-register, Y-register, and Z-register",text,"4.5.1
+The X-register, Y-register, and Z-register
+The registers R26..R31 have some added functions to their general purpose usage. These registers are 16-bit
+address pointers for indirect addressing of the data space. The three indirect address registers X, Y, and Z are
+defined as described in Figure 4-3.",1,"Explica R26..R31 como ponteiros X/Y/Z, mas não identifica individualmente R26 = 0x1A e byte baixo.",NÃO
+q_r26_address,R26 0x1A X-register Low Byte,attiny85,attiny85_p011_c001,attiny85,11,"4.5.1 The X-register, Y-register, and Z-register",text,"Figure 4-3.
+The X-, Y-, and Z-registers
+
+15
+XH
+XL
+0",1,"Cabeçalho e fragmento da Figura 4-3 exibem XH/XL, sem relacioná-los a R26 ou 0x1A.",NÃO
+q_r26_address,R26 0x1A X-register Low Byte,attiny85,attiny85_p011_c003,attiny85,11,"4.5.1 The X-register, Y-register, and Z-register",text,"X-register
+7
+0
+7
+0
+
+R27 (0x1B)
+R26 (0x1A)
+
+15
+YH
+YL
+0",1,"Relaciona R26 (0x1A) ao X-register, mas a correspondência explícita com XL/Low Byte está em outro fragmento da figura.",SIM
+q_r26_address,R26 0x1A X-register Low Byte,attiny85,attiny85_p011_c005,attiny85,11,"4.5.1 The X-register, Y-register, and Z-register",text,"Y-register
+7
+0
+7
+0
+
+R29 (0x1D)
+R28 (0x1C)
+
+15
+ZH
+ZL
+0",0,"Fragmento do Y-register (R28/R29), não mapeia R26.",NÃO
+q_r26_address,R26 0x1A X-register Low Byte,attiny85,attiny85_p064_c005,attiny85,64,10.4.2 PORTB – Port B Data Register,text,"10.4.2
+PORTB – Port B Data Register
+
+Bit
+7
+6
+5
+4
+3
+2
+1
+0",0,Cabeçalho de PORTB; sem relação com R26 ou registrador X.,NÃO
+q_r26_address,R26 0x1A X-register Low Byte,attiny85,attiny85_p064_c007,attiny85,64,10.4.2 PORTB – Port B Data Register,text,"0x18
+–
+–
+PORTB5
+PORTB4
+PORTB3
+PORTB2
+PORTB1
+PORTB0
+PORTB
+
+Read/Write
+R
+R
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+
+Initial Value
+0
+0
+0
+0
+0
+0
+0
+0",0,"Dados do registrador PORTB, não do X-register.",NÃO
+q_r26_address,R26 0x1A X-register Low Byte,attiny85,attiny85_p064_c010,attiny85,64,10.4.3 DDRB – Port B Data Direction Register,text,"0x17
+–
+–
+DDB5
+DDB4
+DDB3
+DDB2
+DDB1
+DDB0
+DDRB
+
+Read/Write
+R
+R
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+
+Initial Value
+0
+0
+0
+0
+0
+0
+0
+0",0,"Dados do registrador DDRB, não do X-register.",NÃO
+q_r26_address,R26 0x1A X-register Low Byte,attiny85,attiny85_p115_c006,attiny85,115,15.5.2 USIBR – USI Buffer Register,text,"15.5.2
+USIBR – USI Buffer Register
+
+Bit
+7
+6
+5
+4
+3
+2
+1
+0",0,Cabeçalho do registrador USIBR; sem informação sobre R26.,NÃO
+q_r26_address,R26 0x1A X-register Low Byte,attiny85,attiny85_p153_c004,attiny85,153,20.5.2 Serial Programming Instruction set,table,"Table 20-12.
+Serial Programming Instruction Set
+
+|Instruction/Operation|Instruction Format|Col3|Col4|Col5|
+|---|---|---|---|---|
+|**Instruction/Operation**|**Byte 1**|**Byte 2**|**Byte 3**|**Byte4**|
+|Programming Enable|$AC|$53|$00|$00|
+|Chip Erase (Program Memory/EEPROM)|$AC|$80|$00|$00|
+|Poll RDY/BSY|$F0|$00|$00|data byte out|
+|**Load Instructions**|**Load Instructions**|**Load Instructions**|**Load Instructions**|**Load Instructions**|
+|Load Extended Address byte(1)|$4D|$00|Extended adr|$00|
+|Load Program Memory Page, High byte|$48|adr MSB|adr LSB|high data byte in|
+|Load Program Memory Page, Low byte|$40|adr MSB|adr LSB|low data byte in|
+|Load EEPROM Memory Page (page access)|$C1|$00|0000 000aa|data byte in|
+|**Read Instructions**|**Read Instructions**|**Read Instructions**|**Read Instructions**|**Read Instructions**|
+|Read Program Memory, High byte|$28|adr MSB|adr LSB|high data byte out|
+|Read Program Memory, Low byte|$20|adr MSB|adr LSB|low data byte out|
+|Read EEPROM Memory|$A0|$00|00aa aaaa|data byte out|
+|Read Lock bits|$58|$00|$00|data byte out|
+|Read Signature Byte|$30|$00|0000 000aa|data byte out|
+|Read Fuse bits|$50|$00|$00|data byte out|
+|Read Fuse High bits|$58|$08|$00|data byte out|
+|Read Extended Fuse Bits|$50|$08|$00|data byte out|
+|Read Calibration Byte|$38|$00|$00|data byte out|
+|**Write Instructions**(6)|**Write Instructions**(6)|**Write Instructions**(6)|**Write Instructions**(6)|**Write Instructions**(6)|
+|Write Program Memory Page|$4C|adr MSB|adr LSB|$00|
+|Write EEPROM Memory|$C0|$00|00aa aaaa|data byte in|
+|Write EEPROM Memory Page (page access)|$C2|$00|00aa aa00|$00|
+|Write Lock bits|$AC|$E0|$00|data byte in|
+|Write Fuse bits|$AC|$A0|$00|data byte in|
+|Write Fuse High bits|$AC|$A8|$00|data byte in|
+|Write Extended Fuse Bits|$AC|$A4|$00|data byte in|",0,Tabela de instruções de programação serial; 'low byte' refere-se a outros dados.,NÃO
+q_r26_address,R26 0x1A X-register Low Byte,attiny85,attiny85_p159_c001,attiny85,159,20.7.10 Power-off sequence,table,"Table 20-16.
+High-voltage Serial Programming Instruction Set for ATtiny25/45/85 (Continued)
+
+|Instruction|Col2|Instruction Format|Col4|Col5|Col6|Operation Remarks|
+|---|---|---|---|---|---|---|
+|**Instruction**||**Instr.1/5**|**Instr.2/6**|**Instr.3**|**Instr.4**|**Instr.4**|
+|Load Flash<br>High Address<br>and Program<br>Page|SDI<br>SII<br>SDO|0_0000_000**a**_00<br>0_0001_1100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_0100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1100_00<br>x_xxxx_xxxx_xx||Wait after Instr 3 until SDO<br>goes high. Repeat Instr. 2 - 3<br>for each loaded Flash Page<br>until the entire Flash or all<br>data is programmed. Repeat<br>Instr. 1 for a new 256 byte<br>page.(2)|
+|Load “Read<br>Flash”<br>Command|SDI<br>SII<br>SDO|0_0000_0010_00<br>0_0100_1100_00<br>x_xxxx_xxxx_xx||||Enter Flash Read mode.|
+|Read Flash<br>Low and High<br>Bytes|SDI<br>SII<br>SDO|0_**bbbb**_**bbbb**_00<br>0_0000_1100_00<br>x_xxxx_xxxx_xx|0_0000_000**a**_00<br>0_0001_1100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1000_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1100_00<br>**q**_**qqqq**_**qqq**x_xx|Repeat Instr. 1, 3 - 6 for each<br>new address. Repeat Instr. 2<br>for a new 256 byte page.<br>Instr 5 - 6.|
+|Read Flash<br>Low and High<br>Bytes|SDI<br>SII<br>SDO|0_0000_0000_00<br>0_0111_1000_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0111_1100_00<br>**p**_**pppp**_**ppp**x_xx||||
+|Load “Write<br>EEPROM”<br>Command|SDI<br>SII<br>SDO|0_0001_0001_00<br>0_0100_1100_00<br>x_xxxx_xxxx_xx||||Enter EEPROM Programming<br>mode.|
+|Load<br>EEPROM<br>Page Buffer|SDI<br>SII<br>SDO|0_00**bb**_**bbbb**_00<br>0_0000_1100_00<br>x_xxxx_xxxx_xx|0_**aaaa**_**aaaa**_00<br>0_0001_1100_00<br>x_xxxx_xxxx_xx|0_**eeee**_**eeee**_00<br>0_0010_1100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1101_00<br>x_xxxx_xxxx_xx|Repeat Instr. 1 - 5 until the<br>entire page buffer is filled or<br>until all data within the page is<br>filled.(3)|
+|Load<br>EEPROM<br>Page Buffer|SDI<br>SII<br>SDO|0_0000_0000_00<br>0_0110_1100_00<br>x_xxxx_xxxx_xx||||Instr. 5|
+|Program<br>EEPROM<br>Page|SDI<br>SII<br>SDO|0_0000_0000_00<br>0_0110_0100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1100_00<br>x_xxxx_xxxx_xx|||Wait after Instr. 2 until SDO<br>goes high. Repeat Instr. 1 - 2<br>for each loaded EEPROM<br>page until the entire<br>EEPROM or all data is<br>programmed.|
+|Write<br>EEPROM<br>Byte|SDI<br>SII<br>SDO|0_**bbbb**_**bbbb**_00<br>0_0000_1100_00<br>x_xxxx_xxxx_xx|0_**aaaa**_**aaaa**_00<br>0_0001_1100_00<br>x_xxxx_xxxx_xx|0_**eeee**_**eeee**_00<br>0_0010_1100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1101_00<br>x_xxxx_xxxx_xx|Repeat Instr. 1 - 6 for each<br>new address. Wait after Instr.<br>6 until SDO goes high.(4)<br>Instr. 6|
+|Write<br>EEPROM<br>Byte|SDI<br>SII<br>SDO|0_0000_0000_00<br>0_0110_0100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1100_00<br>x_xxxx_xxxx_xx||||
+|Load “Read<br>EEPROM”<br>Command|SDI<br>SII<br>SDO|0_0000_0011_00<br>0_0100_1100_00<br>x_xxxx_xxxx_xx||||Enter EEPROM Read mode.|
+|Read<br>EEPROM<br>Byte|SDI<br>SII<br>SDO|0_**bbbb**_**bbbb**_00<br>0_0000_1100_00<br>x_xxxx_xxxx_xx|0_**aaaa**_**aaaa**_00<br>0_0001_1100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1000_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1100_00<br>**q**_**qqqq**_**qqq**0_00|Repeat Instr. 1, 3 - 4 for each<br>new address. Repeat Instr. 2<br>for a new 256 byte page.|
+|Write Fuse<br>Low Bits|SDI<br>SII<br>SDO|0_0100_0000_00<br>0_0100_1100_00<br>x_xxxx_xxxx_xx|0_**A987**_**6543**_00<br>0_0010_1100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_0100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1100_00<br>x_xxxx_xxxx_xx|Wait after Instr. 4 until SDO<br>goes high. Write**A - 3** = “0” to<br>program the Fuse bit.|",0,Tabela de programação serial de alta tensão; não relaciona R26 e 0x1A.,NÃO
+q_r26_address,R26 0x1A X-register Low Byte,attiny85,attiny85_p160_c001,attiny85,160,20.7.10 Power-off sequence,table,"Table 20-16.
+High-voltage Serial Programming Instruction Set for ATtiny25/45/85 (Continued)
+
+|Instruction|Col2|Instruction Format|Col4|Col5|Col6|Operation Remarks|
+|---|---|---|---|---|---|---|
+|**Instruction**||**Instr.1/5**|**Instr.2/6**|**Instr.3**|**Instr.4**|**Instr.4**|
+|Write Fuse<br>High Bits|SDI<br>SII<br>SDO|0_0100_0000_00<br>0_0100_1100_00<br>x_xxxx_xxxx_xx|0_**IHGF**_**EDCB**_00<br>0_0010_1100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0111_0100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0111_1100_00<br>x_xxxx_xxxx_xx|Wait after Instr. 4 until SDO<br>goes high. Write**I - B** = “0” to<br>program the Fuse bit.|
+|Write Fuse<br>Extended Bits|SDI<br>SII<br>SDO|0_0100_0000_00<br>0_0100_1100_00<br>x_xxxx_xxxx_xx|0_0000_000**J**_00<br>0_0010_1100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_0110_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1110_00<br>x_xxxx_xxxx_xx|Wait after Instr. 4 until SDO<br>goes high. Write**J** = “0” to<br>program the Fuse bit.|
+|Write Lock<br>Bits|SDI<br>SII<br>SDO|0_0010_0000_00<br>0_0100_1100_00<br>x_xxxx_xxxx_xx|0_0000_00**21**_00<br>0_0010_1100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_0100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1100_00<br>x_xxxx_xxxx_xx|Wait after Instr. 4 until SDO<br>goes high. Write**2 - 1** = “0” to<br>program the Lock bit.|
+|Read Fuse<br>Low Bits|SDI<br>SII<br>SDO|0_0000_0100_00<br>0_0100_1100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1000_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1100_00<br>**A**_**9876**_**543**x_xx||Reading**A - 3** = “0” means<br>the Fuse bit is programmed.|
+|Read Fuse<br>High Bits|SDI<br>SII<br>SDO|0_0000_0100_00<br>0_0100_1100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0111_1010_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0111_1110_00<br>**I**_**HGFE**_**DCB**x_xx||Reading**I - B** = “0” means the<br>Fuse bit is programmed.|
+|Read Fuse<br>Extended Bits|SDI<br>SII<br>SDO|0_0000_0100_00<br>0_0100_1100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1010_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1110_00<br>x_xxxx_xxJx_xx||Reading**J** = “0” means the<br>Fuse bit is programmed.|
+|Read Lock<br>Bits|SDI<br>SII<br>SDO|0_0000_0100_00<br>0_0100_1100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0111_1000_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0111_1100_00<br>x_xxxx_x**21**x_xx||Reading**2, 1** = “0” means the<br>Lock bit is programmed.|
+|Read<br>Signature<br>Bytes|SDI<br>SII<br>SDO|0_0000_1000_00<br>0_0100_1100_00<br>x_xxxx_xxxx_xx|0_0000_00**bb**_00<br>0_0000_1100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1000_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0110_1100_00<br>**q**_**qqqq**_**qqq**x_xx|Repeats Instr 2 4 for each<br>signature byte address.|
+|Read<br>Calibration<br>Byte|SDI<br>SII<br>SDO|0_0000_1000_00<br>0_0100_1100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0000_1100_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0111_1000_00<br>x_xxxx_xxxx_xx|0_0000_0000_00<br>0_0111_1100_00<br>**p**_**pppp**_**ppp**x_xx||
+|Load “No<br>Operation”<br>Command|SDI<br>SII<br>SDO|0_0000_0000_00<br>0_0100_1100_00<br>x_xxxx_xxxx_xx|||||",0,Continuação da tabela de programação serial; não responde ao endereço de R26.,NÃO
+q_rng,32-bit random number generator RNG,stm32l432kc,stm32l432kc_p001_c003,stm32l432kc,1,,text,"•
+Clock Sources
+–
+32 kHz crystal oscillator for RTC (LSE)
+–
+Internal 16 MHz factory-trimmed RC (±1%)
+–
+Internal low-power 32 kHz RC (±5%)
+–
+Internal multispeed 100 kHz to 48 MHz
+oscillator, auto-trimmed by LSE (better than
+±0.25 % accuracy)
+–
+Internal 48 MHz with clock recovery
+–
+2 PLLs for system clock, USB, audio, ADC
+
+•
+14-channel DMA controller
+
+•
+True random number generator
+
+This is information on a product in full production.
+
+www.st.com",1,"Lista de funcionalidades informa que existe um true random number generator, mas não especifica saída de 32 bits.",NÃO
+q_rng,32-bit random number generator RNG,stm32l432kc,stm32l432kc_p004_c003,stm32l432kc,4,3.20 Random number generator (RNG) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38,text,"3.20
+Random number generator (RNG) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38",0,Sumário informa somente título da seção RNG e página.,NÃO
+q_rng,32-bit random number generator RNG,stm32l432kc,stm32l432kc_p012_c002,stm32l432kc,12,7.2.1 Reference document . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 152,table,"Table 1. STM32L432Kx family device features and peripheral counts (continued)
+
+|Peripheral|Col2|STM32L432Kx|
+|---|---|---|
+|Timers|Advanced control|1 (16-bit)|
+|Timers|General purpose|2 (16-bit)<br>1 (32-bit)|
+|Timers|Basic|2 (16-bit)|
+|Timers|Low -power|2 (16-bit)|
+|Timers|SysTick timer|1|
+|Timers|Watchdog timers (independent,<br>window)|2|
+|Comm. interfaces|SPI|2|
+|Comm. interfaces|I2C|2|
+|Comm. interfaces|USART<br>LPUART|2<br>1|
+|Comm. interfaces|SAI|1|
+|Comm. interfaces|CAN|1|
+|Comm. interfaces|USB FS|Yes(1)|
+|Comm. interfaces|SWPMI|Yes|
+|RTC|RTC|Yes|
+|Tamper pins|Tamper pins|1|
+|Random generator|Random generator|Yes|
+|GPIOs<br>Wakeup pins|GPIOs<br>Wakeup pins|26<br>2|
+|Capacitive sensing<br>Number of channels|Capacitive sensing<br>Number of channels|3|
+|12-bit ADC<br>Number of channels|12-bit ADC<br>Number of channels|1<br>10|
+|12-bit DAC channels|12-bit DAC channels|2|
+|Analog comparator|Analog comparator|2|
+|Operational amplifiers|Operational amplifiers|1|
+|Max. CPU frequency|Max. CPU frequency|80 MHz|
+|Operating voltage|Operating voltage|1.71 to 3.6 V|
+|Operating temperature|Operating temperature|Ambient operating temperature: -40 to 85 °C / -<br>40 to 105 °C / -40 to 125 °C<br>Junction temperature: -40 to 105 °C / -40 to<br>125 °C / -40 to 130 °C|
+|Packages|Packages|UFQFPN32|",1,Tabela de recursos confirma que o dispositivo possui gerador de números aleatórios; não mostra 32 bits.,NÃO
+q_rng,32-bit random number generator RNG,stm32l432kc,stm32l432kc_p015_c001,stm32l432kc,15,3.3 Memory protection unit,text,"STM32L432KB STM32L432KC
+Functional overview",0,Somente cabeçalho repetitivo do documento.,NÃO
+q_rng,32-bit random number generator RNG,stm32l432kc,stm32l432kc_p038_c002,stm32l432kc,38,3.20 Random number generator (RNG),text,"3.20
+Random number generator (RNG)
+
+All devices embed an RNG that delivers 32-bit random numbers generated by an integrated
+analog circuit.",2,A seção 3.20 afirma que o RNG integrado gera números aleatórios de 32 bits por circuito analógico.,NÃO
+q_rng,32-bit random number generator RNG,stm32l432kc,stm32l432kc_p050_c001,stm32l432kc,50,3.32 Quad SPI memory interface (QUADSPI),text,"Functional overview
+STM32L432KB STM32L432KC",0,Somente cabeçalho repetitivo do documento.,NÃO
+q_rng,32-bit random number generator RNG,stm32l432kc,stm32l432kc_p101_c005,stm32l432kc,101,16.4 MHz,text,"1.
+Guaranteed by characterization results.
+
+2.
+Guaranteed by design.
+
+148",0,Notas genéricas e número isolado; nenhuma informação sobre RNG.,NÃO
+q_rng,32-bit random number generator RNG,stm32l432kc,stm32l432kc_p137_c002,stm32l432kc,137,6.3.23 Timer characteristics,table,"Table 74. TIMx(1) characteristics
+
+|Symbol|Parameter|Conditions|Min|Max|Unit|
+|---|---|---|---|---|---|
+|tres(TIM)|Timer resolution time|-|1|-|tTIMxCLK|
+|tres(TIM)|Timer resolution time|fTIMxCLK = 80 MHz|12.5|-|ns|
+|fEXT|Timer external clock<br>frequency on CH1 to CH4|-|0|fTIMxCLK/2|MHz|
+|fEXT|Timer external clock<br>frequency on CH1 to CH4|fTIMxCLK = 80 MHz|0|40|MHz|
+|ResTIM|Timer resolution|TIMx (except<br>TIM2)|-|16|bit|
+|ResTIM|Timer resolution|TIM2|-|32|32|
+|tCOUNTER|16-bit counter clock<br>period|-|1|65536|tTIMxCLK|
+|tCOUNTER|16-bit counter clock<br>period|fTIMxCLK = 80 MHz|0.0125|819.2|µs|
+|tMAX_COUNT|Maximum possible count<br>with 32-bit counter|-|-|65536 × 65536|tTIMxCLK|
+|tMAX_COUNT|Maximum possible count<br>with 32-bit counter|fTIMxCLK = 80 MHz|-|53.68|s|",0,"Tabela de características dos timers, sem informações sobre RNG.",NÃO
+q_rng,32-bit random number generator RNG,stm32l432kc,stm32l432kc_p143_c003,stm32l432kc,143,6.3.24 Communication interfaces characteristics,text,"1.
+Guaranteed by characterization results.
+
+148",0,Notas genéricas e número isolado; nenhuma informação sobre RNG.,NÃO
+q_sreg,SREG 0x3F status register,attiny85,attiny85_p008_c005,attiny85,8,4.4 Status Register,text,"4.4
+Status Register
+The Status Register contains information about the result of the most recently executed arithmetic instruction. This
+information can be used for altering program flow in order to perform conditional operations. Note that the Status
+Register is updated after all ALU operations, as specified in the Instruction Set Reference. This will in many cases
+remove the need for using the dedicated compare instructions, resulting in faster and more compact code.
+
+The Status Register is not automatically stored when entering an interrupt routine and restored when returning
+from an interrupt. This must be handled by software.",1,Descreve o Status Register e seu papel em operações da ALU; não traz o endereço 0x3F.,NÃO
+q_sreg,SREG 0x3F status register,attiny85,attiny85_p009_c001,attiny85,9,4.4.1 SREG – AVR Status Register,text,"4.4.1
+SREG – AVR Status Register
+The AVR Status Register – SREG – is defined as:
+
+Bit
+7
+6
+5
+4
+3
+2
+1
+0",1,Identifica a seção SREG e os números dos bits; endereço 0x3F está em outro chunk.,NÃO
+q_sreg,SREG 0x3F status register,attiny85,attiny85_p009_c003,attiny85,9,4.4.1 SREG – AVR Status Register,text,"0x3F
+I
+T
+H
+S
+V
+N
+Z
+C
+SREG
+
+Read/Write
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+
+Initial Value
+0
+0
+0
+0
+0
+0
+0
+0
+
+• Bit 7 – I: Global Interrupt Enable
+The Global Interrupt Enable bit must be set for the interrupts to be enabled. The individual interrupt enable control
+is then performed in separate control registers. If the Global Interrupt Enable Register is cleared, none of the inter-
+rupts are enabled independent of the individual interrupt enable settings. The I-bit is cleared by hardware after an
+interrupt has occurred, and is set by the RETI instruction to enable subsequent interrupts. The I-bit can also be set
+and cleared by the application with the SEI and CLI instructions, as described in the instruction set reference.
+
+• Bit 6 – T: Bit Copy Storage
+The Bit Copy instructions BLD (Bit LoaD) and BST (Bit STore) use the T-bit as source or destination for the oper-
+ated bit. A bit from a register in the Register File can be copied into T by the BST instruction, and a bit in T can be
+copied into a bit in a register in the Register File by the BLD instruction.",2,"Contém endereço 0x3F, nome SREG, bits I/T/H/S/V/N/Z/C e características do registrador.",NÃO
+q_sreg,SREG 0x3F status register,attiny85,attiny85_p013_c001,attiny85,13,4.8 Reset and Interrupt Handling,text,"The second type of interrupts will trigger as long as the interrupt condition is present. These interrupts do not nec-
+essarily have Interrupt Flags. If the interrupt condition disappears before the interrupt is enabled, the interrupt will
+not be triggered.
+
+When the AVR exits from an interrupt, it will always return to the main program and execute one more instruction
+before any pending interrupt is served.
+
+Note that the Status Register is not automatically stored when entering an interrupt routine, nor restored when
+returning from an interrupt routine. This must be handled by software.
+
+When using the CLI instruction to disable interrupts, the interrupts will be immediately disabled. No interrupt will be
+executed after the CLI instruction, even if it occurs simultaneously with the CLI instruction. The following example
+shows how this can be used to avoid interrupts during the timed EEPROM write sequence.
+
+Assembly Code Example
+
+in r16, SREG
+; store SREG value
+
+cli
+; disable interrupts during timed sequence
+
+sbi EECR, EEMPE
+; start EEPROM write
+
+sbi EECR, EEPE
+
+out SREG, r16
+; restore SREG value (I-bit)
+
+C Code Example
+
+char cSREG;
+
+cSREG = SREG; /* store SREG value */",1,"Menciona SREG em rotinas de interrupção e exemplos de assembly, sem seu mapa/endereço.",NÃO
+q_sreg,SREG 0x3F status register,attiny85,attiny85_p032_c002,attiny85,32,6.5.1 OSCCAL – Oscillator Calibration Register,table,"Table 6-14.
+Internal RC Oscillator Frequency Range
+
+|OSCCAL Value|Typical Lowest Frequency<br>with Respect to Nominal Frequency|Typical Highest Frequency<br>with Respect to Nominal Frequency|
+|---|---|---|
+|0x00|50%|100%|
+|0x3F|75%|150%|
+|0x7F|100%|200%|",0,"0x3F é valor de OSCCAL nesta tabela, não endereço do SREG; falso positivo lexical.",NÃO
+q_sreg,SREG 0x3F status register,attiny85,attiny85_p051_c008,attiny85,51,9.3.2 GIMSK – General Interrupt Mask Register,text,"0x3B
+–
+INT0
+PCIE
+–
+–
+–
+–
+–
+GIMSK
+
+Read/Write
+R
+R/W
+R/W
+R
+R
+R
+R
+R
+
+Initial Value
+0
+0
+0
+0
+0
+0
+0
+0
+
+• Bits 7, 4:0 – Res: Reserved Bits
+These bits are reserved bits in the ATtiny25/45/85 and will always read as zero.
+
+• Bit 6 – INT0: External Interrupt Request 0 Enable
+When the INT0 bit is set (one) and the I-bit in the Status Register (SREG) is set (one), the external pin interrupt is
+enabled. The Interrupt Sense Control0 bits 1/0 (ISC01 and ISC00) in the MCU Control Register (MCUCR) define
+whether the external interrupt is activated on rising and/or falling edge of the INT0 pin or level sensed. Activity on
+the pin will cause an interrupt request even if INT0 is configured as an output. The corresponding interrupt of Exter-
+nal Interrupt Request 0 is executed from the INT0 Interrupt Vector.
+
+• Bit 5 – PCIE: Pin Change Interrupt Enable
+When the PCIE bit is set (one) and the I-bit in the Status Register (SREG) is set (one), pin change interrupt is
+enabled. Any change on any enabled PCINT[5:0] pin will cause an interrupt. The corresponding interrupt of Pin
+Change Interrupt Request is executed from the PCI Interrupt Vector. PCINT[5:0] pins are enabled individually by
+the PCMSK0 Register.",1,GIMSK menciona o bit I do SREG em condições para interrupções; não descreve o registrador 0x3F.,NÃO
+q_sreg,SREG 0x3F status register,attiny85,attiny85_p094_c001,attiny85,94,12.3.9 PLLCSR – PLL Control and Status Register,text,"12.3.9
+PLLCSR – PLL Control and Status Register
+
+Bit
+7
+6
+5
+4
+3
+2
+1
+0",0,"Cabeçalho do PLLCSR, outro registrador.",NÃO
+q_sreg,SREG 0x3F status register,attiny85,attiny85_p103_c006,attiny85,103,13.3.8 PLLCSR – PLL Control and Status Register,text,"13.3.8
+PLLCSR – PLL Control and Status Register
+
+Bit
+7
+6
+5
+4
+3
+2
+1
+0",0,"Cabeçalho do PLLCSR, outro registrador.",NÃO
+q_sreg,SREG 0x3F status register,attiny85,attiny85_p115_c006,attiny85,115,15.5.2 USIBR – USI Buffer Register,text,"15.5.2
+USIBR – USI Buffer Register
+
+Bit
+7
+6
+5
+4
+3
+2
+1
+0",0,"Cabeçalho do USIBR, outro registrador.",NÃO
+q_tim2_resolution,TIM2 counter resolution,stm32l432kc,stm32l432kc_p004_c006,stm32l432kc,4,"3.21.2 General-purpose timers (TIM2, TIM15, TIM16) . . . . . . . . . . . . . . . . . . . 40",text,"3.21.2
+General-purpose timers (TIM2, TIM15, TIM16) . . . . . . . . . . . . . . . . . . . 40",0,Entrada de sumário; não informa resolução do contador TIM2.,NÃO
+q_tim2_resolution,TIM2 counter resolution,stm32l432kc,stm32l432kc_p038_c004,stm32l432kc,38,3.21 Timers and watchdogs,table,"Table 9. Timer feature comparison
+
+|Timer type|Timer|Counter<br>resolution|Counter<br>type|Prescaler<br>factor|DMA<br>request<br>generation|Capture/<br>compare<br>channels|Complementary<br>outputs|
+|---|---|---|---|---|---|---|---|
+|Advanced<br>control|TIM1|16-bit|Up, down,<br>Up/down|Any integer<br>between 1<br>and 65536|Yes|4|3|
+|General-<br>purpose|TIM2|32-bit|Up, down,<br>Up/down|Any integer<br>between 1<br>and 65536|Yes|4|No|
+|General-<br>purpose|TIM15|16-bit|Up|Any integer<br>between 1<br>and 65536|Yes|2|1|",2,Tabela 9 informa explicitamente TIM2 com contador de 32 bits.,NÃO
+q_tim2_resolution,TIM2 counter resolution,stm32l432kc,stm32l432kc_p039_c002,stm32l432kc,39,3.21 Timers and watchdogs,table,"Table 9. Timer feature comparison (continued)
+
+|Timer type|Timer|Counter<br>resolution|Counter<br>type|Prescaler<br>factor|DMA<br>request<br>generation|Capture/<br>compare<br>channels|Complementary<br>outputs|
+|---|---|---|---|---|---|---|---|
+|General-<br>purpose|TIM16|16-bit|Up|Any integer<br>between 1<br>and 65536|Yes|1|1|
+|Basic|TIM6, TIM7|16-bit|Up|Any integer<br>between 1<br>and 65536|Yes|0|No|",1,Continuação da tabela de comparação de timers; não inclui TIM2 nem sua resolução.,NÃO
+q_tim2_resolution,TIM2 counter resolution,stm32l432kc,stm32l432kc_p040_c001,stm32l432kc,40,3.21.1 Advanced-control timer (TIM1),text,"Functional overview
+STM32L432KB STM32L432KC",0,Somente cabeçalho repetitivo; sem informação técnica.,NÃO
+q_tim2_resolution,TIM2 counter resolution,stm32l432kc,stm32l432kc_p040_c002,stm32l432kc,40,"3.21.2 General-purpose timers (TIM2, TIM15, TIM16)",text,"3.21.2
+General-purpose timers (TIM2, TIM15, TIM16)
+
+There are up to three synchronizable general-purpose timers embedded in the
+STM32L432xx (see Table 9 for differences). Each general-purpose timer can be used to
+generate PWM outputs, or act as a simple time base.
+
+•
+TIM2
+
+It is a full-featured general-purpose timer:
+
+TIM2 has a 32-bit auto-reload up/downcounter and 32-bit prescaler.
+
+This timer features 4 independent channels for input capture/output compare, PWM or
+one-pulse mode output. It can work with the other general-purpose timers via the Timer
+Link feature for synchronization or event chaining.
+
+The counter can be frozen in debug mode.
+
+It has independent DMA request generation and support quadrature encoder.
+
+•
+TIM15 and 16
+
+They are general-purpose timers with mid-range features:
+
+They have 16-bit auto-reload upcounters and 16-bit prescalers.
+
+–
+TIM15 has 2 channels and 1 complementary channel
+
+–
+TIM16 has 1 channel and 1 complementary channel
+
+All channels can be used for input capture/output compare, PWM or one-pulse mode
+output.",2,Descrição afirma explicitamente que TIM2 possui contador up/down de 32 bits.,NÃO
+q_tim2_resolution,TIM2 counter resolution,stm32l432kc,stm32l432kc_p055_c002,stm32l432kc,55,3.33.2 Embedded Trace Macrocell™,table,"|Port|Col2|AF0|AF1|AF2|AF3|AF4|AF5|AF6|AF7|
+|---|---|---|---|---|---|---|---|---|---|
+|**Port**|**Port**|**SYS_AF**|**TIM1/TIM2/**<br>**LPTIM1**|**TIM1/TIM2**|**USART2**|**I2C1/I2C2/I2C3**|**SPI1/SPI2**|**SPI3**|**USART1/**<br>**USART2/**<br>**USART3**|
+|Port A|PA0|-|TIM2_CH1|-|-|-|-|-|USART2_CTS|
+|Port A|PA1|-|TIM2_CH2|-|-|I2C1_SMBA|SPI1_SCK|-|USART2_RTS_<br>DE|
+|Port A|PA2|-|TIM2_CH3|-|-|-|-|-|USART2_TX|
+|Port A|PA3|-|TIM2_CH4|-|-|-|-|-|USART2_RX|
+|Port A|PA4|-|-|-|-|-|SPI1_NSS|SPI3_NSS|USART2_CK|
+|Port A|PA5|-|TIM2_CH1|TIM2_ETR|-|-|SPI1_SCK|-|-|
+|Port A|PA6|-|TIM1_BKIN|-|-|-|SPI1_MISO|COMP1_OUT|USART3_CTS|
+|Port A|PA7|-|TIM1_CH1N|-|-|I2C3_SCL|SPI1_MOSI|-|-|
+|Port A|PA8|MCO|TIM1_CH1|-|-|-|-|-|USART1_CK|
+|Port A|PA9|-|TIM1_CH2|-|-|I2C1_SCL|-|-|USART1_TX|
+|Port A|PA10|-|TIM1_CH3|-|-|I2C1_SDA|-|-|USART1_RX|
+|Port A|PA11|-|TIM1_CH4|TIM1_BKIN2|-|-|SPI1_MISO|COMP1_OUT|USART1_CTS|
+|Port A|PA12|-|TIM1_ETR|-|-|-|SPI1_MOSI|-|USART1_RTS_<br>DE|
+|Port A|PA13|JTMS-SWDIO|IR_OUT|-|-|-|-|-|-|
+|Port A|PA14|JTCK-SWCLK|LPTIM1_OUT|-|-|I2C1_SMBA|-|-|-|
+|Port A|PA15|JTDI|TIM2_CH1|TIM2_ETR|USART2_RX|-|SPI1_NSS|SPI3_NSS|USART3_RTS_<br>DE|",0,Tabela de funções alternativas/pinos de TIM2; não traz resolução do contador.,NÃO
+q_tim2_resolution,TIM2 counter resolution,stm32l432kc,stm32l432kc_p055_c003,stm32l432kc,55,3.33.2 Embedded Trace Macrocell™,text,"LPTIM1
+TIM1/TIM2
+USART1/
+
+AF0
+AF1
+AF2
+AF3
+AF4
+AF5
+AF6
+AF7
+
+Table 15. Alternate function AF0 to AF7(1)
+
+PA11
+-
+TIM1_CH4
+TIM1_BKIN2
+
+PA5
+-
+TIM2_CH1
+TIM2_ETR
+
+PA15
+JTDI
+TIM2_CH1
+TIM2_ETR
+
+PA6
+-
+TIM1_BKIN
+-
+
+PA14
+JTCK-SWCLK
+LPTIM1_OUT
+-
+
+PA7
+-
+TIM1_CH1N
+-
+
+PA13
+JTMS-SWDIO
+IR_OUT
+-
+
+PA0
+-
+TIM2_CH1
+-
+
+PA1
+-
+TIM2_CH2
+-
+
+PA2
+-
+TIM2_CH3
+-
+
+PA3
+-
+TIM2_CH4
+-
+
+PA4
+-
+-
+-
+
+PA8
+MCO
+TIM1_CH1
+-
+
+PA12
+-
+TIM1_ETR
+-
+
+PA9
+-
+TIM1_CH2
+-
+
+PA10
+-
+TIM1_CH3
+-
+
+SYS_AF
+TIM1/TIM2/
+
+Port
+
+Port A",0,Texto fragmentado da tabela de pinos/AF; não traz resolução do contador.,NÃO
+q_tim2_resolution,TIM2 counter resolution,stm32l432kc,stm32l432kc_p137_c002,stm32l432kc,137,6.3.23 Timer characteristics,table,"Table 74. TIMx(1) characteristics
+
+|Symbol|Parameter|Conditions|Min|Max|Unit|
+|---|---|---|---|---|---|
+|tres(TIM)|Timer resolution time|-|1|-|tTIMxCLK|
+|tres(TIM)|Timer resolution time|fTIMxCLK = 80 MHz|12.5|-|ns|
+|fEXT|Timer external clock<br>frequency on CH1 to CH4|-|0|fTIMxCLK/2|MHz|
+|fEXT|Timer external clock<br>frequency on CH1 to CH4|fTIMxCLK = 80 MHz|0|40|MHz|
+|ResTIM|Timer resolution|TIMx (except<br>TIM2)|-|16|bit|
+|ResTIM|Timer resolution|TIM2|-|32|32|
+|tCOUNTER|16-bit counter clock<br>period|-|1|65536|tTIMxCLK|
+|tCOUNTER|16-bit counter clock<br>period|fTIMxCLK = 80 MHz|0.0125|819.2|µs|
+|tMAX_COUNT|Maximum possible count<br>with 32-bit counter|-|-|65536 × 65536|tTIMxCLK|
+|tMAX_COUNT|Maximum possible count<br>with 32-bit counter|fTIMxCLK = 80 MHz|-|53.68|s|",2,Tabela 74 indica TIM2 com valor de resolução 32; a unidade aparece como '32' (extração suspeita).,SIM

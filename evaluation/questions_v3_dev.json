@@ -1,0 +1,165 @@
+[
+  {
+    "id": "q_v3_a01",
+    "query": "When EEPM1=0 and EEPM0=1 on the ATtiny25/45/85, which EEPROM programming operation is selected, and how long does it take?",
+    "document": "attiny85",
+    "relevant_chunk_ids": [
+      "attiny85_p021_c007"
+    ],
+    "category": "table_lookup"
+  },
+  {
+    "id": "q_v3_a03",
+    "query": "For the ATtiny25/45/85, which two peripherals should be considered for disabling to save power during sleep, and why?",
+    "document": "attiny85",
+    "relevant_chunk_ids": [
+      "attiny85_p036_c004",
+      "attiny85_p036_c006"
+    ],
+    "category": "multi_evidence"
+  },
+  {
+    "id": "q_v3_a04",
+    "query": "How does programming the WDTON fuse change the watchdog initial state and disable behavior on ATtiny25/45/85?",
+    "document": "attiny85",
+    "relevant_chunk_ids": [
+      "attiny85_p043_c002"
+    ],
+    "category": "table_comparison"
+  },
+  {
+    "id": "q_v3_a06",
+    "query": "In ATtiny Timer/Counter0 CTC mode, what sets the counter TOP and what event resets TCNT0 to zero?",
+    "document": "attiny85",
+    "relevant_chunk_ids": [
+      "attiny85_p072_c003"
+    ],
+    "category": "conceptual"
+  },
+  {
+    "id": "q_v3_a08",
+    "query": "In ATtiny USI three-wire mode, after how many USCK clock pulses are the master/slave data registers interchanged, and which flag can signal completion?",
+    "document": "attiny85",
+    "relevant_chunk_ids": [
+      "attiny85_p109_c017"
+    ],
+    "category": "conceptual"
+  },
+  {
+    "id": "q_v3_a09",
+    "query": "How does the master create the START condition on an ATtiny USI two-wire bus, and which flag is set by the slave start detector?",
+    "document": "attiny85",
+    "relevant_chunk_ids": [
+      "attiny85_p113_c003"
+    ],
+    "category": "procedure"
+  },
+  {
+    "id": "q_v3_a11",
+    "query": "After changing the ADC input channel during ATtiny Free Running mode, which channel is reflected by the next conversion result?",
+    "document": "attiny85",
+    "relevant_chunk_ids": [
+      "attiny85_p128_c003"
+    ],
+    "category": "conceptual"
+  },
+  {
+    "id": "q_v3_a13",
+    "query": "During an ATtiny Chip Erase, what happens to fuse bits and under what condition is EEPROM preserved?",
+    "document": "attiny85",
+    "relevant_chunk_ids": [
+      "attiny85_p156_c005"
+    ],
+    "category": "conditional"
+  },
+  {
+    "id": "q_v3_a14",
+    "query": "According to the ATtiny25/45/85 DC characteristics notes, what is the maximum recommended sum of all port output sink currents IOL?",
+    "document": "attiny85",
+    "relevant_chunk_ids": [
+      "attiny85_p162_c002"
+    ],
+    "category": "table_or_limit"
+  },
+  {
+    "id": "q_v3_s01",
+    "query": "How does the ART Accelerator improve STM32L432xx instruction execution from Flash at high CPU frequencies?",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": [
+      "stm32l432kc_p014_c003"
+    ],
+    "category": "conceptual"
+  },
+  {
+    "id": "q_v3_s03",
+    "query": "What are the STM32L432xx supply voltage ranges for VDD and VDDA, distinguishing ADC/comparator use from DAC/op-amp use?",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": [
+      "stm32l432kc_p017_c005"
+    ],
+    "category": "table_comparison"
+  },
+  {
+    "id": "q_v3_s05",
+    "query": "Can STM32L432xx timers trigger ADC/DAC conversions in Low-power Run and Low-power Sleep, and is that connection supported in Stop 2?",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": [
+      "stm32l432kc_p028_c005"
+    ],
+    "category": "table_or_limit"
+  },
+  {
+    "id": "q_v3_s07",
+    "query": "Which STM32L432xx GPIO output drive types are supported, and how can alternate-function configuration be protected against unintended writes?",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": [
+      "stm32l432kc_p033_c002"
+    ],
+    "category": "conceptual"
+  },
+  {
+    "id": "q_v3_s08",
+    "query": "Which ADC input channel digitizes the STM32L432xx internal temperature sensor, and why does it need calibration for accurate temperature measurements?",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": [
+      "stm32l432kc_p035_c004"
+    ],
+    "category": "exact_identifier"
+  },
+  {
+    "id": "q_v3_s10",
+    "query": "What is the typical STM32L432xx BOR1 brown-out reset threshold on a rising VDD edge?",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": [
+      "stm32l432kc_p068_c006"
+    ],
+    "category": "table_lookup"
+  },
+  {
+    "id": "q_v3_s12",
+    "query": "At VDD=3.0 V and TA=30°C, what is the nominal HSI48 clock frequency specified for the STM32L432xx?",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": [
+      "stm32l432kc_p100_c002"
+    ],
+    "category": "table_lookup"
+  },
+  {
+    "id": "q_v3_s13",
+    "query": "What sequence of ESD pulses is described in the STM32L432xx electrical sensitivity test, and which standards family does the procedure cite?",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": [
+      "stm32l432kc_p105_c003"
+    ],
+    "category": "conceptual"
+  },
+  {
+    "id": "q_v3_s14",
+    "query": "For the STM32L432xx ADC, how is the positive reference VREF+ constrained when VDDA is below 2 V?",
+    "document": "stm32l432kc",
+    "relevant_chunk_ids": [
+      "stm32l432kc_p114_c003"
+    ],
+    "category": "table_lookup"
+  }
+]

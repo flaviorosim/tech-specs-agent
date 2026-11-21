@@ -1,0 +1,737 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "v3_source_anchored_draft",
+  "corpus_sha256": "bd771e4321426d49a0242c5512b95383e87d5b3ab1ea23050dd78649120e683f",
+  "source_file": "evaluation/benchmark_v3_sources.json",
+  "judgment_policy": "Each relevant_chunk_ids entry is a verified supporting anchor from the supplied extracted chunk; no exhaustive relevance judgments were made. Another chunk may also answer the question.",
+  "pdf_verification": "Answers checked against extracted text only; verify technical values and figures in manufacturer PDFs before treating as authoritative.",
+  "questions": [
+    {
+      "id": "q_v3_a01",
+      "split": "dev",
+      "query": "When EEPM1=0 and EEPM0=1 on the ATtiny25/45/85, which EEPROM programming operation is selected, and how long does it take?",
+      "document": "attiny85",
+      "category": "table_lookup",
+      "reference_answer": "Erase Only; 1.8 ms.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC001",
+          "chunk_id": "attiny85_p021_c007",
+          "document": "attiny85",
+          "page": 21,
+          "section": "5.5.4 EECR – EEPROM Control Register",
+          "content_type": "table",
+          "verbatim_excerpts": [
+            "|0|1|1.8 ms|Erase Only|"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": true
+    },
+    {
+      "id": "q_v3_a02",
+      "split": "test",
+      "query": "Which CKSEL fuse setting selects the 32.768 kHz low-frequency crystal oscillator on the ATtiny25/45/85?",
+      "document": "attiny85",
+      "category": "exact_identifier",
+      "reference_answer": "CKSEL = 0110.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC003",
+          "chunk_id": "attiny85_p029_c002",
+          "document": "attiny85",
+          "page": 29,
+          "section": "6.2.5 Low-Frequency Crystal Oscillator",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "setting CKSEL fuses to ‘0110’"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_a03",
+      "split": "dev",
+      "query": "For the ATtiny25/45/85, which two peripherals should be considered for disabling to save power during sleep, and why?",
+      "document": "attiny85",
+      "category": "multi_evidence",
+      "reference_answer": "Disable the ADC before sleeping if unused, because it otherwise remains enabled in all sleep modes; turn off the Brown-out Detector when not needed because it otherwise consumes power in sleep, especially deeper modes.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC005",
+          "chunk_id": "attiny85_p036_c004",
+          "document": "attiny85",
+          "page": 36,
+          "section": "7.4.1 Analog to Digital Converter",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "the ADC should be disabled before entering\nany sleep mode."
+          ]
+        },
+        {
+          "candidate_id": "SRC006",
+          "chunk_id": "attiny85_p036_c006",
+          "document": "attiny85",
+          "page": 36,
+          "section": "7.4.3 Brown-out Detector",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "If the Brown-out Detector is not needed in the application, this module should be turned off."
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_a04",
+      "split": "dev",
+      "query": "How does programming the WDTON fuse change the watchdog initial state and disable behavior on ATtiny25/45/85?",
+      "document": "attiny85",
+      "category": "table_comparison",
+      "reference_answer": "With WDTON unprogrammed, the watchdog starts disabled and can be disabled using a timed sequence; with WDTON programmed, it starts enabled and cannot be disabled (always enabled).",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC007",
+          "chunk_id": "attiny85_p043_c002",
+          "document": "attiny85",
+          "page": 43,
+          "section": "8.4 Watchdog Timer",
+          "content_type": "table",
+          "verbatim_excerpts": [
+            "|Unprogrammed|1|Disabled|Timed sequence|No limitations|",
+            "|Programmed|2|Enabled|Always enabled|Timed sequence|"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": true
+    },
+    {
+      "id": "q_v3_a05",
+      "split": "test",
+      "query": "What is the register width of TCNT0, OCR0A, and OCR0B in the ATtiny25/45/85 Timer/Counter0?",
+      "document": "attiny85",
+      "category": "exact_identifier",
+      "reference_answer": "TCNT0, OCR0A and OCR0B are 8-bit registers.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC011",
+          "chunk_id": "attiny85_p065_c004",
+          "document": "attiny85",
+          "page": 65,
+          "section": "11.2.1 Registers",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "The Timer/Counter (TCNT0) and Output Compare Registers (OCR0A and OCR0B) are 8-bit registers."
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_a06",
+      "split": "dev",
+      "query": "In ATtiny Timer/Counter0 CTC mode, what sets the counter TOP and what event resets TCNT0 to zero?",
+      "document": "attiny85",
+      "category": "conceptual",
+      "reference_answer": "OCR0A defines TOP and thus counter resolution; TCNT0 is cleared on compare match with OCR0A.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC012",
+          "chunk_id": "attiny85_p072_c003",
+          "document": "attiny85",
+          "page": 72,
+          "section": "11.7.2 Clear Timer on Compare Match (CTC) Mode",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "The\nOCR0A defines the top value for the counter",
+            "the counter is cleared to zero when the counter value (TCNT0) matches the OCR0A"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_a07",
+      "split": "test",
+      "query": "What prescaler division factor is selected when DTPS11=1 and DTPS10=0 on the ATtiny Timer/Counter1 dead-time prescaler?",
+      "document": "attiny85",
+      "category": "table_lookup",
+      "reference_answer": "The prescaler divides the Timer/Counter1 clock by 4 (4x).",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC014",
+          "chunk_id": "attiny85_p106_c006",
+          "document": "attiny85",
+          "page": 106,
+          "section": "14.1.1 DTPS1 – Timer/Counter1 Dead Time Prescaler Register 1",
+          "content_type": "table",
+          "verbatim_excerpts": [
+            "|1|0|4x|"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": true
+    },
+    {
+      "id": "q_v3_a08",
+      "split": "dev",
+      "query": "In ATtiny USI three-wire mode, after how many USCK clock pulses are the master/slave data registers interchanged, and which flag can signal completion?",
+      "document": "attiny85",
+      "category": "conceptual",
+      "reference_answer": "After 8 USCK clocks; the USIOIF counter-overflow interrupt flag can indicate transfer completion.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC015",
+          "chunk_id": "attiny85_p109_c017",
+          "document": "attiny85",
+          "page": 109,
+          "section": "15.3.1 Three-wire Mode",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "after eight USCK clocks",
+            "USIOIF, can therefore be used to determine when a transfer is completed"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_a09",
+      "split": "dev",
+      "query": "How does the master create the START condition on an ATtiny USI two-wire bus, and which flag is set by the slave start detector?",
+      "document": "attiny85",
+      "category": "procedure",
+      "reference_answer": "The master drives SDA low while SCL stays high; the slave start detector sets the USISIF flag.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC016",
+          "chunk_id": "attiny85_p113_c003",
+          "document": "attiny85",
+          "page": 113,
+          "section": "15.3.4 Two-wire Mode",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "forcing the SDA low line while keeping the SCL line high",
+            "detects the start condition and sets the USISIF Flag"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_a10",
+      "split": "test",
+      "query": "When is the USIDC data-output collision flag set in the ATtiny USI, and in which wire mode is it valid?",
+      "document": "attiny85",
+      "category": "exact_identifier",
+      "reference_answer": "USIDC is set when bit 7 of the USI Data Register differs from the physical pin level; it is valid only in two-wire mode.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC017",
+          "chunk_id": "attiny85_p116_c002",
+          "document": "attiny85",
+          "page": 116,
+          "section": "15.5.3 USISR – USI Status Register",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "This bit is logical one when bit 7 in the USI Data Register differs from the physical pin value.",
+            "The flag is only valid\nwhen two-wire mode is used."
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_a11",
+      "split": "dev",
+      "query": "After changing the ADC input channel during ATtiny Free Running mode, which channel is reflected by the next conversion result?",
+      "document": "attiny85",
+      "category": "conceptual",
+      "reference_answer": "The next result still reflects the previous channel selection; later results reflect the new channel.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC019",
+          "chunk_id": "attiny85_p128_c003",
+          "document": "attiny85",
+          "page": 128,
+          "section": "17.6.1 ADC Input Channels",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "the next result will reflect the previous channel selection. Subsequent conversions will reflect the\nnew channel selection."
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_a12",
+      "split": "test",
+      "query": "Why can repeatedly changing debugWIRE program breakpoints shorten Flash data retention on ATtiny devices?",
+      "document": "attiny85",
+      "category": "conceptual",
+      "reference_answer": "Changing a breakpoint requires Flash reprogramming; repeated reprogramming reduces Flash data retention.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC020",
+          "chunk_id": "attiny85_p140_c002",
+          "document": "attiny85",
+          "page": 140,
+          "section": "18.4 Software Break Points",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "The Flash must be re-programmed each time a Break Point is changed.",
+            "The use of Break Points will therefore reduce the Flash Data retention."
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_a13",
+      "split": "dev",
+      "query": "During an ATtiny Chip Erase, what happens to fuse bits and under what condition is EEPROM preserved?",
+      "document": "attiny85",
+      "category": "conditional",
+      "reference_answer": "Fuse bits are not changed; EEPROM contents are preserved if the EESAVE fuse is programmed.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC022",
+          "chunk_id": "attiny85_p156_c005",
+          "document": "attiny85",
+          "page": 156,
+          "section": "20.7.3 Chip Erase",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "The Fuse bits are not changed.",
+            "The EEPROM memory is preserved during Chip Erase if the EESAVE Fuse is programmed."
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_a14",
+      "split": "dev",
+      "query": "According to the ATtiny25/45/85 DC characteristics notes, what is the maximum recommended sum of all port output sink currents IOL?",
+      "document": "attiny85",
+      "category": "table_or_limit",
+      "reference_answer": "The combined IOL across all ports should not exceed 60 mA.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC023",
+          "chunk_id": "attiny85_p162_c002",
+          "document": "attiny85",
+          "page": 162,
+          "section": "21.2 DC Characteristics",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "The sum of all IOL, for all ports, should not exceed 60 mA."
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_a15",
+      "split": "test",
+      "query": "What ADC resolution is specified for ATtiny differential unipolar channels at gains of 1x and 20x?",
+      "document": "attiny85",
+      "category": "table_comparison",
+      "reference_answer": "Both gain settings have a specified 10-bit resolution.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC025",
+          "chunk_id": "attiny85_p168_c001",
+          "document": "attiny85",
+          "page": 168,
+          "section": "21.7 ADC Characteristics",
+          "content_type": "table",
+          "verbatim_excerpts": [
+            "||Resolution|Gain = 1x|||10|Bits|",
+            "||Resolution|Gain = 20x|||10|Bits|"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": true
+    },
+    {
+      "id": "q_v3_s01",
+      "split": "dev",
+      "query": "How does the ART Accelerator improve STM32L432xx instruction execution from Flash at high CPU frequencies?",
+      "document": "stm32l432kc",
+      "category": "conceptual",
+      "reference_answer": "It uses an instruction prefetch queue and a branch cache; performance is described as equivalent to zero Flash wait states up to 80 MHz in the cited CoreMark context.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC031",
+          "chunk_id": "stm32l432kc_p014_c003",
+          "document": "stm32l432kc",
+          "page": 14,
+          "section": "3.2 Adaptive real-time memory accelerator (ART Accelerator™)",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "implements an instruction prefetch queue and branch cache",
+            "equivalent to 0 wait state program\nexecution from Flash memory at a CPU frequency up to 80 MHz."
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_s02",
+      "split": "test",
+      "query": "What single-bit and double-bit error protection does the STM32L432xx embedded Flash ECC provide?",
+      "document": "stm32l432kc",
+      "category": "exact_identifier",
+      "reference_answer": "The ECC supports detection and correction of single-bit errors and detection of double-bit errors.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC032",
+          "chunk_id": "stm32l432kc_p016_c001",
+          "document": "stm32l432kc",
+          "page": 16,
+          "section": "3.4 Embedded Flash memory",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "single error detection and correction",
+            "double error detection."
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_s03",
+      "split": "dev",
+      "query": "What are the STM32L432xx supply voltage ranges for VDD and VDDA, distinguishing ADC/comparator use from DAC/op-amp use?",
+      "document": "stm32l432kc",
+      "category": "table_comparison",
+      "reference_answer": "VDD is 1.71–3.6 V. VDDA is 1.62–3.6 V for ADCs/comparators, and requires at least 1.8 V for DAC/op-amp functions, up to 3.6 V.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC033",
+          "chunk_id": "stm32l432kc_p017_c005",
+          "document": "stm32l432kc",
+          "page": 17,
+          "section": "3.9.1 Power supply schemes",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "VDD = 1.71 to 3.6 V",
+            "VDDA = 1.62 V (ADCs/COMPs) / 1.8 (DAC/OPAMP) to 3.6 V"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_s04",
+      "split": "test",
+      "query": "For STM32L432xx Stop 2 mode without RTC, what current consumption and SRAM wakeup time does the datasheet table list?",
+      "document": "stm32l432kc",
+      "category": "table_lookup",
+      "reference_answer": "1.3 µA without RTC; 6.8 µs when waking into SRAM.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC036",
+          "chunk_id": "stm32l432kc_p022_c002",
+          "document": "stm32l432kc",
+          "page": 22,
+          "section": "3.9.4 Low-power modes",
+          "content_type": "table",
+          "verbatim_excerpts": [
+            "1.3 µA w/o RTC<br>1.4 µA w/RTC|6.8 µs in SRAM"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": true
+    },
+    {
+      "id": "q_v3_s05",
+      "split": "dev",
+      "query": "Can STM32L432xx timers trigger ADC/DAC conversions in Low-power Run and Low-power Sleep, and is that connection supported in Stop 2?",
+      "document": "stm32l432kc",
+      "category": "table_or_limit",
+      "reference_answer": "The TIMx-to-ADCx/DAC1 conversion trigger interconnect is available in Low-power Run and Low-power Sleep, but not in Stop 2.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC037",
+          "chunk_id": "stm32l432kc_p028_c005",
+          "document": "stm32l432kc",
+          "page": 28,
+          "section": "3.10 Interconnect matrix",
+          "content_type": "table",
+          "verbatim_excerpts": [
+            "|TIMx|ADCx<br>DAC1|Conversion triggers|Y|Y|Y|Y|-|-|"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": true
+    },
+    {
+      "id": "q_v3_s06",
+      "split": "test",
+      "query": "Which STM32L432xx timer can be triggered by a USB SOF event, and in which main operating modes is that interconnect available?",
+      "document": "stm32l432kc",
+      "category": "table_lookup",
+      "reference_answer": "USB SOF can trigger TIM2 in Run and Sleep modes; the table does not mark it available in low-power run, low-power sleep or stop modes.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC038",
+          "chunk_id": "stm32l432kc_p029_c002",
+          "document": "stm32l432kc",
+          "page": 29,
+          "section": "3.10 Interconnect matrix",
+          "content_type": "table",
+          "verbatim_excerpts": [
+            "|USB|TIM2|Timer triggered by USB SOF|Y|Y|-|-|-|-|"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": true
+    },
+    {
+      "id": "q_v3_s07",
+      "split": "dev",
+      "query": "Which STM32L432xx GPIO output drive types are supported, and how can alternate-function configuration be protected against unintended writes?",
+      "document": "stm32l432kc",
+      "category": "conceptual",
+      "reference_answer": "GPIO outputs may be push-pull or open-drain; the alternate-function configuration can be locked using a specific locking sequence.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC040",
+          "chunk_id": "stm32l432kc_p033_c002",
+          "document": "stm32l432kc",
+          "page": 33,
+          "section": "3.12 General-purpose inputs/outputs (GPIOs)",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "output (push-pull or open-drain)",
+            "The I/Os alternate function configuration can be locked"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_s08",
+      "split": "dev",
+      "query": "Which ADC input channel digitizes the STM32L432xx internal temperature sensor, and why does it need calibration for accurate temperature measurements?",
+      "document": "stm32l432kc",
+      "category": "exact_identifier",
+      "reference_answer": "The internal temperature sensor feeds ADC1_IN17. Device-specific offsets make calibration necessary for good absolute accuracy; ST stores individual factory calibration data in read-only system memory.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC041",
+          "chunk_id": "stm32l432kc_p035_c004",
+          "document": "stm32l432kc",
+          "page": 35,
+          "section": "3.15.1 Temperature sensor",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "internally connected to the ADC1_IN17 input channel",
+            "individually factory-calibrated by ST"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_s09",
+      "split": "test",
+      "query": "Under what ambient temperature and supply-voltage conditions are typical STM32L432xx electrical values defined unless otherwise stated, and are they guaranteed by testing?",
+      "document": "stm32l432kc",
+      "category": "table_or_limit",
+      "reference_answer": "TA = 25 °C and VDD = VDDA = 3 V. Typical values are design guidelines and are not tested.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC043",
+          "chunk_id": "stm32l432kc_p063_c004",
+          "document": "stm32l432kc",
+          "page": 63,
+          "section": "6.1.2 Typical values",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "typical data are based on TA = 25 °C, VDD = VDDA = 3 V",
+            "They\nare given only as design guidelines and are not tested."
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_s10",
+      "split": "dev",
+      "query": "What is the typical STM32L432xx BOR1 brown-out reset threshold on a rising VDD edge?",
+      "document": "stm32l432kc",
+      "category": "table_lookup",
+      "reference_answer": "2.1 V typical (2.06 V minimum, 2.14 V maximum in the shown row).",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC045",
+          "chunk_id": "stm32l432kc_p068_c006",
+          "document": "stm32l432kc",
+          "page": 68,
+          "section": "6.3.3 Embedded reset and power control block characteristics",
+          "content_type": "table",
+          "verbatim_excerpts": [
+            "|VBOR1|Brown-out reset threshold 1|Rising edge|2.06|2.1|2.14|V|"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": true
+    },
+    {
+      "id": "q_v3_s11",
+      "split": "test",
+      "query": "For the STM32L432xx LSE clock, how does bypass mode differ from using a 32.768 kHz crystal, and what placement practice is recommended for a resonator?",
+      "document": "stm32l432kc",
+      "category": "multi_evidence",
+      "reference_answer": "In bypass mode the LSE oscillator is switched off and the input pin operates as a standard GPIO. When using a 32.768 kHz crystal resonator, put it and its load capacitors as close as possible to the oscillator pins to reduce distortion and startup stabilization time.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC049",
+          "chunk_id": "stm32l432kc_p093_c001",
+          "document": "stm32l432kc",
+          "page": 93,
+          "section": "6.3.7 External clock source characteristics",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "In bypass mode the LSE oscillator is switched off and the input pin is a standard GPIO."
+          ]
+        },
+        {
+          "candidate_id": "SRC050",
+          "chunk_id": "stm32l432kc_p093_c007",
+          "document": "stm32l432kc",
+          "page": 93,
+          "section": "6.3.7 External clock source characteristics",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "resonator and the load capacitors have to be placed as close as possible to the oscillator\npins"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_s12",
+      "split": "dev",
+      "query": "At VDD=3.0 V and TA=30°C, what is the nominal HSI48 clock frequency specified for the STM32L432xx?",
+      "document": "stm32l432kc",
+      "category": "table_lookup",
+      "reference_answer": "48 MHz.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC052",
+          "chunk_id": "stm32l432kc_p100_c002",
+          "document": "stm32l432kc",
+          "page": 100,
+          "section": "16.4 MHz",
+          "content_type": "table",
+          "verbatim_excerpts": [
+            "|fHSI48|HSI48 Frequency|VDD=3.0V, TA=30°C|-|48|-|MHz|"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": true
+    },
+    {
+      "id": "q_v3_s13",
+      "split": "dev",
+      "query": "What sequence of ESD pulses is described in the STM32L432xx electrical sensitivity test, and which standards family does the procedure cite?",
+      "document": "stm32l432kc",
+      "category": "conceptual",
+      "reference_answer": "A positive pulse followed by a negative pulse separated by 1 second; the datasheet cites an ANSI/JEDEC standard.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC053",
+          "chunk_id": "stm32l432kc_p105_c003",
+          "document": "stm32l432kc",
+          "page": 105,
+          "section": "6.3.12 Electrical sensitivity characteristics",
+          "content_type": "text",
+          "verbatim_excerpts": [
+            "a positive then a negative pulse separated by 1 second",
+            "ANSI/JEDEC standard."
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": false
+    },
+    {
+      "id": "q_v3_s14",
+      "split": "dev",
+      "query": "For the STM32L432xx ADC, how is the positive reference VREF+ constrained when VDDA is below 2 V?",
+      "document": "stm32l432kc",
+      "category": "table_lookup",
+      "reference_answer": "The listed VREF+ equals VDDA when VDDA is below 2 V.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC055",
+          "chunk_id": "stm32l432kc_p114_c003",
+          "document": "stm32l432kc",
+          "page": 114,
+          "section": "6.3.18 Analog-to-Digital converter characteristics",
+          "content_type": "table",
+          "verbatim_excerpts": [
+            "|VREF+|Positive reference voltage|VDDA < 2 V|VDDA|VDDA|VDDA|V|"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": true
+    },
+    {
+      "id": "q_v3_s15",
+      "split": "test",
+      "query": "According to the STM32L432xx Quad-SPI SDR characteristics, what maximum clock frequency is listed for Voltage Range 1, 20 pF load, and 1.71 V < VDD < 3.6 V?",
+      "document": "stm32l432kc",
+      "category": "table_or_limit",
+      "reference_answer": "40 MHz.",
+      "source_evidence": [
+        {
+          "candidate_id": "SRC057",
+          "chunk_id": "stm32l432kc_p142_c002",
+          "document": "stm32l432kc",
+          "page": 142,
+          "section": "6.3.24 Communication interfaces characteristics",
+          "content_type": "table",
+          "verbatim_excerpts": [
+            "Voltage Range 1|-|-|40|MHz|"
+          ]
+        }
+      ],
+      "verification_status": "verified_against_extracted_chunks_only",
+      "pdf_review_recommended": true
+    }
+  ]
+}

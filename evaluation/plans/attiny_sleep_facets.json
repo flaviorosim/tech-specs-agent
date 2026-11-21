@@ -1,0 +1,14 @@
+{
+  "question": "How do the ADC and Brown-out Detector contribute to ATtiny25/45/85 sleep-mode power consumption, and what should be disabled if they are not needed?",
+  "document": "attiny85",
+  "facets": [
+    {
+      "id": "adc",
+      "query": "ATtiny25/45/85 ADC disable before entering sleep mode to save power"
+    },
+    {
+      "id": "bod",
+      "query": "ATtiny25/45/85 Brown-out Detector BOD disabled during deep sleep power consumption"
+    }
+  ]
+}

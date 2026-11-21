@@ -1,0 +1,3327 @@
+﻿question_id,query,expected_document,chunk_id,document,page,section,content_type,content,relevance,notes,verificar_pdf,origem
+q_v3_a01,"When EEPM1=0 and EEPM0=1 on the ATtiny25/45/85, which EEPROM programming operation is selected, and how long does it take?",attiny85,attiny85_p016_c003,attiny85,16,5.3 EEPROM Data Memory,text,"5.3
+EEPROM Data Memory
+The ATtiny25/45/85 contains 128/256/512 bytes of data EEPROM memory. It is organized as a separate data
+space, in which single bytes can be read and written. The EEPROM has an endurance of at least 100,000
+write/erase cycles. The access between the EEPROM and the CPU is described in the following, specifying the
+EEPROM Address Registers, the EEPROM Data Register, and the EEPROM Control Register. For details see
+“Serial Downloading” on page 151.",0,"Fala de EEPROM/memória ou programação genérica; não informa EEPM=01 e 1,8 ms.",NÃO,recuperado_top5
+q_v3_a01,"When EEPM1=0 and EEPM0=1 on the ATtiny25/45/85, which EEPROM programming operation is selected, and how long does it take?",attiny85,attiny85_p017_c002,attiny85,17,5.3.2 Atomic Byte Programming,text,"5.3.2
+Atomic Byte Programming
+Using Atomic Byte Programming is the simplest mode. When writing a byte to the EEPROM, the user must write
+the address into the EEAR Register and data into EEDR Register. If the EEPMn bits are zero, writing EEPE (within
+four cycles after EEMPE is written) will trigger the erase/write operation. Both the erase and write cycle are done in
+one operation and the total programming time is given in Table 5-1 on page 21. The EEPE bit remains set until the
+erase and write operations are completed. While the device is busy with programming, it is not possible to do any
+other EEPROM operations.",1,"Descreve bits EEPM ou outro modo EEPROM, mas não dá conjuntamente operação e tempo para 01.",NÃO,recuperado_top5
+q_v3_a01,"When EEPM1=0 and EEPM0=1 on the ATtiny25/45/85, which EEPROM programming operation is selected, and how long does it take?",attiny85,attiny85_p020_c009,attiny85,20,5.5.2 EEARL – EEPROM Address Register,text,"0x1E
+EEAR7
+EEAR6
+EEAR5
+EEAR4
+EEAR3
+EEAR2
+EEAR1
+EEAR0
+EEARL
+
+Rear/Write
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+
+Initial Value
+X
+X
+X
+X
+X
+X
+X
+X
+
+• Bit 7 – EEAR7: EEPROM Address
+This is the most significant EEPROM address bit of ATtiny45. In devices with less EEPROM, i.e. ATtiny25, this bit
+is reserved and will always read zero. The initial value of the EEPROM Address Register (EEAR) is undefined and
+a proper value must therefore be written before the EEPROM is accessed.
+
+• Bits 6:0 – EEAR[6:0]: EEPROM Address
+These are the (low) bits of the EEPROM Address Register. The EEPROM data bytes are addressed linearly in the
+range 0...(128/256/512-1). The initial value of EEAR is undefined and a proper value must be therefore be written
+before the EEPROM may be accessed.",0,"Fala de EEPROM/memória ou programação genérica; não informa EEPM=01 e 1,8 ms.",NÃO,recuperado_top5
+q_v3_a01,"When EEPM1=0 and EEPM0=1 on the ATtiny25/45/85, which EEPROM programming operation is selected, and how long does it take?",attiny85,attiny85_p021_c006,attiny85,21,5.5.4 EECR – EEPROM Control Register,text,"0x1C
+–
+–
+EEPM1
+EEPM0
+EERIE
+EEMPE
+EEPE
+EERE
+EECR
+
+Read/Write
+R
+R
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+
+Initial Value
+0
+0
+X
+X
+0
+0
+X
+0
+
+• Bit 7 – Res: Reserved Bit
+This bit is reserved for future use and will always read as 0 in ATtiny25/45/85. For compatibility with future AVR
+devices, always write this bit to zero. After reading, mask out this bit.
+
+• Bit 6 – Res: Reserved Bit
+This bit is reserved in the ATtiny25/45/85 and will always read as zero.
+
+• Bits 5:4 – EEPM[1:0]: EEPROM Programming Mode Bits
+The EEPROM Programming mode bits setting defines which programming action that will be triggered when writ-
+ing EEPE. It is possible to program data in one atomic operation (erase the old value and program the new value)
+or to split the Erase and Write operations in two different operations. The Programming times for the different
+modes are shown in Table 5-1. While EEPE is set, any write to EEPMn will be ignored. During reset, the EEPMn
+bits will be reset to 0b00 unless the EEPROM is busy programming.",1,"Descreve bits EEPM ou outro modo EEPROM, mas não dá conjuntamente operação e tempo para 01.",NÃO,recuperado_top5
+q_v3_a01,"When EEPM1=0 and EEPM0=1 on the ATtiny25/45/85, which EEPROM programming operation is selected, and how long does it take?",attiny85,attiny85_p021_c007,attiny85,21,5.5.4 EECR – EEPROM Control Register,table,"Table 5-1.
+EEPROM Mode Bits
+
+|EEPM1|EEPM0|Programming<br>Time|Operation|
+|---|---|---|---|
+|0|0|3.4 ms|Erase and Write in one operation (Atomic Operation)|
+|0|1|1.8 ms|Erase Only|
+|1|0|1.8 ms|Write Only|
+|1|1|–|Reserved for future use|",2,"EEPM1=0 e EEPM0=1 => Erase Only, tempo 1,8 ms (Tabela 5-1).",NÃO,recuperado_top5
+q_v3_a01,"When EEPM1=0 and EEPM0=1 on the ATtiny25/45/85, which EEPROM programming operation is selected, and how long does it take?",attiny85,attiny85_p151_c003,attiny85,151,20.5 Serial Downloading,text,"Note:
+In Table 20-10 above, the pin mapping for SPI programming is listed. Not all parts use the SPI pins dedicated for the
+internal SPI interface.
+
+When programming the EEPROM, an auto-erase cycle is built into the self-timed programming operation (in the
+Serial mode ONLY) and there is no need to first execute the Chip Erase instruction. The Chip Erase operation
+turns the content of every memory location in both the Program and EEPROM arrays into 0xFF.
+
+Depending on CKSEL Fuses, a valid clock must be present. The minimum low and high periods for the serial clock
+(SCK) input are defined as follows:
+
+Low: > 2 CPU clock cycles for fck < 12 MHz, 3 CPU clock cycles for fck >= 12 MHz
+
+High: > 2 CPU clock cycles for fck < 12 MHz, 3 CPU clock cycles for fck >= 12 MHz",0,"Fala de EEPROM/memória ou programação genérica; não informa EEPM=01 e 1,8 ms.",NÃO,recuperado_top5
+q_v3_a01,"When EEPM1=0 and EEPM0=1 on the ATtiny25/45/85, which EEPROM programming operation is selected, and how long does it take?",attiny85,attiny85_p151_c004,attiny85,151,20.5.1 Serial Programming Algorithm,text,"20.5.1
+Serial Programming Algorithm
+When writing serial data to the ATtiny25/45/85, data is clocked on the rising edge of SCK.",0,"Fala de EEPROM/memória ou programação genérica; não informa EEPM=01 e 1,8 ms.",NÃO,recuperado_top5
+q_v3_a01,"When EEPM1=0 and EEPM0=1 on the ATtiny25/45/85, which EEPROM programming operation is selected, and how long does it take?",attiny85,attiny85_p155_c001,attiny85,155,20.6 High-voltage Serial Programming,text,"20.6
+High-voltage Serial Programming
+This section describes how to program and verify Flash Program memory, EEPROM Data memory, Lock bits and
+Fuse bits in the ATtiny25/45/85.
+
+Figure 20-3.
+High-voltage Serial Programming
+
++11.5 - 12.5V
+
++4.5 - 5.5V
+
+PB5
+
+VCC
+
+(RESET)
+
+PB3
+SCI
+
+PB2
+
+SDO
+
+PB1
+
+SII
+
+GND
+
+PB0
+
+SDI",0,"Fala de EEPROM/memória ou programação genérica; não informa EEPM=01 e 1,8 ms.",NÃO,recuperado_top5
+q_v3_a03,"For the ATtiny25/45/85, which two peripherals should be considered for disabling to save power during sleep, and why?",attiny85,attiny85_p004_c001,attiny85,4,1.1.4 RESET,text,"2.
+Overview
+
+The ATtiny25/45/85 is a low-power CMOS 8-bit microcontroller based on the AVR enhanced RISC architecture. By
+executing powerful instructions in a single clock cycle, the ATtiny25/45/85 achieves throughputs approaching 1
+MIPS per MHz allowing the system designer to optimize power consumption versus processing speed.",0,Não explica a decisão de desligar ADC e BOD nos modos sleep.,NÃO,recuperado_top5
+q_v3_a03,"For the ATtiny25/45/85, which two peripherals should be considered for disabling to save power during sleep, and why?",attiny85,attiny85_p005_c001,attiny85,5,2.1 Block Diagram,text,"The ATtiny25/45/85 provides the following features: 2/4/8K bytes of In-System Programmable Flash, 128/256/512
+bytes EEPROM, 128/256/256 bytes SRAM, 6 general purpose I/O lines, 32 general purpose working registers, one
+8-bit Timer/Counter with compare modes, one 8-bit high speed Timer/Counter, Universal Serial Interface, Internal
+and External Interrupts, a 4-channel, 10-bit ADC, a programmable Watchdog Timer with internal Oscillator, and
+three software selectable power saving modes. Idle mode stops the CPU while allowing the SRAM, Timer/Counter,
+ADC, Analog Comparator, and Interrupt system to continue functioning. Power-down mode saves the register con-
+tents, disabling all chip functions until the next Interrupt or Hardware Reset. ADC Noise Reduction mode stops the
+CPU and all I/O modules except ADC, to minimize switching noise during ADC conversions.
+
+The device is manufactured using Atmel’s high density non-volatile memory technology. The On-chip ISP Flash
+allows the Program memory to be re-programmed In-System through an SPI serial interface, by a conventional
+non-volatile memory programmer or by an On-chip boot code running on the AVR core.",1,"Trata de consumo, sleep ou desligamento de periféricos, mas não identifica ambos ADC e BOD com os motivos.",NÃO,recuperado_top5
+q_v3_a03,"For the ATtiny25/45/85, which two peripherals should be considered for disabling to save power during sleep, and why?",attiny85,attiny85_p015_c001,attiny85,15,4.8.1 Interrupt Response Time,text,"5.
+AVR Memories
+
+This section describes the different memories in the ATtiny25/45/85. The AVR architecture has two main memory
+spaces, the Data memory and the Program memory space. In addition, the ATtiny25/45/85 features an EEPROM
+Memory for data storage. All three memory spaces are linear and regular.",0,Não explica a decisão de desligar ADC e BOD nos modos sleep.,NÃO,recuperado_top5
+q_v3_a03,"For the ATtiny25/45/85, which two peripherals should be considered for disabling to save power during sleep, and why?",attiny85,attiny85_p021_c006,attiny85,21,5.5.4 EECR – EEPROM Control Register,text,"0x1C
+–
+–
+EEPM1
+EEPM0
+EERIE
+EEMPE
+EEPE
+EERE
+EECR
+
+Read/Write
+R
+R
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+
+Initial Value
+0
+0
+X
+X
+0
+0
+X
+0
+
+• Bit 7 – Res: Reserved Bit
+This bit is reserved for future use and will always read as 0 in ATtiny25/45/85. For compatibility with future AVR
+devices, always write this bit to zero. After reading, mask out this bit.
+
+• Bit 6 – Res: Reserved Bit
+This bit is reserved in the ATtiny25/45/85 and will always read as zero.
+
+• Bits 5:4 – EEPM[1:0]: EEPROM Programming Mode Bits
+The EEPROM Programming mode bits setting defines which programming action that will be triggered when writ-
+ing EEPE. It is possible to program data in one atomic operation (erase the old value and program the new value)
+or to split the Erase and Write operations in two different operations. The Programming times for the different
+modes are shown in Table 5-1. While EEPE is set, any write to EEPMn will be ignored. During reset, the EEPMn
+bits will be reset to 0b00 unless the EEPROM is busy programming.",0,Não explica a decisão de desligar ADC e BOD nos modos sleep.,NÃO,recuperado_top5
+q_v3_a03,"For the ATtiny25/45/85, which two peripherals should be considered for disabling to save power during sleep, and why?",attiny85,attiny85_p031_c001,attiny85,31,6.3 System Clock Prescaler,text,"6.3
+System Clock Prescaler
+The ATtiny25/45/85 system clock can be divided by setting the “CLKPR – Clock Prescale Register” on page 32.
+This feature can be used to decrease power consumption when the requirement for processing power is low. This
+can be used with all clock source options, and it will affect the clock frequency of the CPU and all synchronous
+peripherals. clkI/O, clkADC, clkCPU, and clkFLASH are divided by a factor as shown in Table 6-15 on page 33.",1,"Trata de consumo, sleep ou desligamento de periféricos, mas não identifica ambos ADC e BOD com os motivos.",NÃO,recuperado_top5
+q_v3_a03,"For the ATtiny25/45/85, which two peripherals should be considered for disabling to save power during sleep, and why?",attiny85,attiny85_p036_c002,attiny85,36,7.3 Power Reduction Register,text,"7.3
+Power Reduction Register
+The Power Reduction Register (PRR), see “PRR – Power Reduction Register” on page 38, provides a method to
+reduce power consumption by stopping the clock to individual peripherals. The current state of the peripheral is fro-
+zen and the I/O registers can not be read or written. Resources used by the peripheral when stopping the clock will
+remain occupied, hence the peripheral should in most cases be disabled before stopping the clock. Waking up a
+module, which is done by clearing the bit in PRR, puts the module in the same state as before shutdown.
+
+Module shutdown can be used in Idle mode and Active mode to significantly reduce the overall power consump-
+tion. In all other sleep modes, the clock is already stopped. See “Supply Current of I/O modules” on page 177 for
+examples.",1,"Trata de consumo, sleep ou desligamento de periféricos, mas não identifica ambos ADC e BOD com os motivos.",NÃO,recuperado_top5
+q_v3_a03,"For the ATtiny25/45/85, which two peripherals should be considered for disabling to save power during sleep, and why?",attiny85,attiny85_p036_c004,attiny85,36,7.4.1 Analog to Digital Converter,text,"7.4.1
+Analog to Digital Converter
+If enabled, the ADC will be enabled in all sleep modes. To save power, the ADC should be disabled before entering
+any sleep mode. When the ADC is turned off and on again, the next conversion will be an extended conversion.
+Refer to “Analog to Digital Converter” on page 122 for details on ADC operation.",2,ADC deve ser desabilitado antes do sleep se não for usado; explicita motivo de economia.,NÃO,recuperado_top5
+q_v3_a03,"For the ATtiny25/45/85, which two peripherals should be considered for disabling to save power during sleep, and why?",attiny85,attiny85_p037_c003,attiny85,37,7.4.6 Port Pins,text,"7.4.6
+Port Pins
+When entering a sleep mode, all port pins should be configured to use minimum power. The most important thing
+is then to ensure that no pins drive resistive loads. In sleep modes where both the I/O clock (clkI/O) and the ADC
+clock (clkADC) are stopped, the input buffers of the device will be disabled. This ensures that no power is consumed
+by the input logic when not needed. In some cases, the input logic is needed for detecting wake-up conditions, and
+it will then be enabled. Refer to the section “Digital Input Enable and Sleep Modes” on page 57 for details on which
+pins are enabled. If the input buffer is enabled and the input signal is left floating or has an analog signal level close
+to VCC/2, the input buffer will use excessive power.
+
+For analog input pins, the digital input buffer should be disabled at all times. An analog signal level close to VCC/2
+on an input pin can cause significant current even in active mode. Digital input buffers can be disabled by writing to
+the Digital Input Disable Register (DIDR0). Refer to “DIDR0 – Digital Input Disable Register 0” on page 121 for
+details.",1,"Trata de consumo, sleep ou desligamento de periféricos, mas não identifica ambos ADC e BOD com os motivos.",NÃO,recuperado_top5
+q_v3_a03,"For the ATtiny25/45/85, which two peripherals should be considered for disabling to save power during sleep, and why?",attiny85,attiny85_p038_c002,attiny85,38,7.5.1 MCUCR – MCU Control Register,table,"Table 7-2.
+Sleep Mode Select
+
+|SM1|SM0|Sleep Mode|
+|---|---|---|
+|0|0|Idle|
+|0|1|ADC Noise Reduction|
+|1|0|Power-down|
+|1|1|Reserved|",0,Não explica a decisão de desligar ADC e BOD nos modos sleep.,NÃO,recuperado_top5
+q_v3_a03,"For the ATtiny25/45/85, which two peripherals should be considered for disabling to save power during sleep, and why?",attiny85,attiny85_p147_c002,attiny85,147,20.1 Program And Data Memory Lock Bits,text,"20.1
+Program And Data Memory Lock Bits
+ATtiny25/45/85 provides two Lock bits which can be left unprogrammed (“1”) or can be programmed (“0”) to obtain
+the additional security listed in Table 20-2. Lock bits can be erased to “1” with the Chip Erase command, only.
+
+Program memory can be read out via the debugWIRE interface when the DWEN fuse is programmed, even if the
+Lock Bits are set. Thus, when Lock Bit security is required debugWIRE should always be disabled (by clearing the
+DWEN fuse).",0,Não explica a decisão de desligar ADC e BOD nos modos sleep.,NÃO,recuperado_top5
+q_v3_a03,"For the ATtiny25/45/85, which two peripherals should be considered for disabling to save power during sleep, and why?",attiny85,attiny85_p165_c007,attiny85,165,21.5.2 Enhanced Power-On Reset,text,"21.5.2
+Enhanced Power-On Reset
+This implementation of power-on reset exists in newer versions of ATtiny25/45/85. The table below describes the
+characteristics of this power-on reset and it is valid for the following devices, only:
+
+• ATtiny25, revision E, and newer",0,Não explica a decisão de desligar ADC e BOD nos modos sleep.,NÃO,recuperado_top5
+q_v3_a04,How does programming the WDTON fuse change the watchdog initial state and disable behavior on ATtiny25/45/85?,attiny85,attiny85_p042_c004,attiny85,42,8.4 Watchdog Timer,text,"8.4
+Watchdog Timer
+The Watchdog Timer is clocked from an On-chip Oscillator which runs at 128 kHz. By controlling the Watchdog
+Timer prescaler, the Watchdog Reset interval can be adjusted as shown in Table 8-3 on page 46. The WDR –
+Watchdog Reset – instruction resets the Watchdog Timer. The Watchdog Timer is also reset when it is disabled
+and when a Chip Reset occurs. Ten different clock cycle periods can be selected to determine the reset period. If
+the reset period expires without another Watchdog Reset, the ATtiny25/45/85 resets and executes from the Reset
+Vector. For timing details on the Watchdog Reset, refer to Table 8-3 on page 46.
+
+The Wathdog Timer can also be configured to generate an interrupt instead of a reset. This can be very helpful
+when using the Watchdog to wake-up from Power-down.",1,"Descreve o watchdog, o WDTON ou o registrador de controle, sem a comparação completa de estados.",NÃO,recuperado_top5
+q_v3_a04,How does programming the WDTON fuse change the watchdog initial state and disable behavior on ATtiny25/45/85?,attiny85,attiny85_p043_c001,attiny85,43,8.4 Watchdog Timer,text,"To prevent unintentional disabling of the Watchdog or unintentional change of time-out period, two different safety
+levels are selected by the fuse WDTON as shown in Table 8-1 Refer to “Timed Sequences for Changing the Con-
+figuration of the Watchdog Timer” on page 43 for details.",1,"Descreve o watchdog, o WDTON ou o registrador de controle, sem a comparação completa de estados.",NÃO,recuperado_top5
+q_v3_a04,How does programming the WDTON fuse change the watchdog initial state and disable behavior on ATtiny25/45/85?,attiny85,attiny85_p043_c002,attiny85,43,8.4 Watchdog Timer,table,"Table 8-1.
+WDT Configuration as a Function of the Fuse Settings of WDTON
+
+|WDTON|Safety<br>Level|WDT Initial<br>State|How to Disable the<br>WDT|How to Change Time-<br>out|
+|---|---|---|---|---|
+|Unprogrammed|1|Disabled|Timed sequence|No limitations|
+|Programmed|2|Enabled|Always enabled|Timed sequence|",2,Tabela WDTON: não programado inicia desligado; programado inicia ligado e não pode ser desligado.,NÃO,recuperado_top5
+q_v3_a04,How does programming the WDTON fuse change the watchdog initial state and disable behavior on ATtiny25/45/85?,attiny85,attiny85_p043_c005,attiny85,43,8.4 Watchdog Timer,text,"128 kHz
+OSCILLATOR
+
+WATCHDOG
+
+RESET
+
+WDP0
+WDP1
+WDP2
+WDP3
+
+WDE
+
+MCU RESET",0,Não descreve comportamento do fuse WDTON sobre watchdog.,NÃO,recuperado_top5
+q_v3_a04,How does programming the WDTON fuse change the watchdog initial state and disable behavior on ATtiny25/45/85?,attiny85,attiny85_p045_c004,attiny85,45,8.5.2 WDTCR – Watchdog Timer Control Register,text,"0x21
+WDIF
+WDIE
+WDP3
+WDCE
+WDE
+WDP2
+WDP1
+WDP0
+WDTCR
+
+Read/Write
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+
+Initial Value
+0
+0
+0
+0
+X
+0
+0
+0
+
+• Bit 7 – WDIF: Watchdog Timeout Interrupt Flag
+This bit is set when a time-out occurs in the Watchdog Timer and the Watchdog Timer is configured for interrupt.
+WDIF is cleared by hardware when executing the corresponding interrupt handling vector. Alternatively, WDIF is
+cleared by writing a logic one to the flag. When the I-bit in SREG and WDIE are set, the Watchdog Time-out Inter-
+rupt is executed.
+
+• Bit 6 – WDIE: Watchdog Timeout Interrupt Enable
+When this bit is written to one, WDE is cleared, and the I-bit in the Status Register is set, the Watchdog Time-out
+Interrupt is enabled. In this mode the corresponding interrupt is executed instead of a reset if a timeout in the
+Watchdog Timer occurs.
+
+If WDE is set, WDIE is automatically cleared by hardware when a time-out occurs. This is useful for keeping the
+Watchdog Reset security while using the interrupt. After the WDIE bit is cleared, the next time-out will generate a
+reset. To avoid the Watchdog Reset, WDIE must be set after each interrupt.",1,"Descreve o watchdog, o WDTON ou o registrador de controle, sem a comparação completa de estados.",NÃO,recuperado_top5
+q_v3_a04,How does programming the WDTON fuse change the watchdog initial state and disable behavior on ATtiny25/45/85?,attiny85,attiny85_p048_c001,attiny85,48,8.5.2 WDTCR – Watchdog Timer Control Register,text,"9.
+Interrupts
+
+This section describes the specifics of the interrupt handling as performed in ATtiny25/45/85. For a general expla-
+nation of the AVR interrupt handling, refer to “Reset and Interrupt Handling” on page 12.",0,Não descreve comportamento do fuse WDTON sobre watchdog.,NÃO,recuperado_top5
+q_v3_a04,How does programming the WDTON fuse change the watchdog initial state and disable behavior on ATtiny25/45/85?,attiny85,attiny85_p048_c002,attiny85,48,9.1 Interrupt Vectors in ATtiny25/45/85,text,"9.1
+Interrupt Vectors in ATtiny25/45/85
+The interrupt vectors of ATtiny25/45/85 are described in Table 9-1below.",0,Não descreve comportamento do fuse WDTON sobre watchdog.,NÃO,recuperado_top5
+q_v3_a04,How does programming the WDTON fuse change the watchdog initial state and disable behavior on ATtiny25/45/85?,attiny85,attiny85_p148_c004,attiny85,148,20.2 Fuse Bytes,table,"Table 20-4.
+Fuse High Byte
+
+|Fuse High Byte|Bit No|Description|Default Value|
+|---|---|---|---|
+|RSTDISBL(1) (2)|7|External reset disabled|1 (unprogrammed)|
+|DWEN(1) (2) (3)|6|DebugWIRE enabled|1 (unprogrammed)|
+|SPIEN(4)|5|Serial program and data download<br>enabled|0 (programmed)<br>(SPI prog. enabled)|
+|WDTON (5)|4|Watchdog timer always on|1 (unprogrammed)|
+|EESAVE|3|EEPROM preserves chip erase|1 (unprogrammed)<br>(EEPROM not preserved)|
+|BODLEVEL2(6)|2|Brown-out Detector trigger level|1 (unprogrammed)|
+|BODLEVEL1(6)|1|Brown-out Detector trigger level|1 (unprogrammed)|
+|BODLEVEL0(6)|0|Brown-out Detector trigger level|1 (unprogrammed)|",2,"Fuse WDTON descrito como watchdog always on, com padrão não programado; confirma parte da resposta.",NÃO,recuperado_top5
+q_v3_a04,How does programming the WDTON fuse change the watchdog initial state and disable behavior on ATtiny25/45/85?,attiny85,attiny85_p148_c005,attiny85,148,20.2 Fuse Bytes,text,"Notes:
+1. Controls use of RESET pin. See “Alternate Functions of Port B” on page 60.
+
+2. After this fuse has been programmed device can be programmed via high-voltage serial mode, only.
+
+3. Must be unprogrammed when lock bit security is required. See “Program And Data Memory Lock Bits” on page
+147.
+
+4. This fuse is not accessible in SPI programming mode.
+
+5. See “WDTCR – Watchdog Timer Control Register” on page 45 for details.
+
+6. See table “BODLEVEL Fuse Coding. TA = -40°C to +85°C” on page 166.",0,Não descreve comportamento do fuse WDTON sobre watchdog.,NÃO,recuperado_top5
+q_v3_a04,How does programming the WDTON fuse change the watchdog initial state and disable behavior on ATtiny25/45/85?,attiny85,attiny85_p151_c004,attiny85,151,20.5.1 Serial Programming Algorithm,text,"20.5.1
+Serial Programming Algorithm
+When writing serial data to the ATtiny25/45/85, data is clocked on the rising edge of SCK.",0,Não descreve comportamento do fuse WDTON sobre watchdog.,NÃO,recuperado_top5
+q_v3_a04,How does programming the WDTON fuse change the watchdog initial state and disable behavior on ATtiny25/45/85?,attiny85,attiny85_p155_c001,attiny85,155,20.6 High-voltage Serial Programming,text,"20.6
+High-voltage Serial Programming
+This section describes how to program and verify Flash Program memory, EEPROM Data memory, Lock bits and
+Fuse bits in the ATtiny25/45/85.
+
+Figure 20-3.
+High-voltage Serial Programming
+
++11.5 - 12.5V
+
++4.5 - 5.5V
+
+PB5
+
+VCC
+
+(RESET)
+
+PB3
+SCI
+
+PB2
+
+SDO
+
+PB1
+
+SII
+
+GND
+
+PB0
+
+SDI",0,Não descreve comportamento do fuse WDTON sobre watchdog.,NÃO,recuperado_top5
+q_v3_a06,"In ATtiny Timer/Counter0 CTC mode, what sets the counter TOP and what event resets TCNT0 to zero?",attiny85,attiny85_p068_c002,attiny85,68,11.4 Counter Unit,text,"11.4
+Counter Unit
+The main part of the 8-bit Timer/Counter is the programmable bi-directional counter unit. Figure 11-4 shows a
+block diagram of the counter and its surroundings.
+
+Figure 11-4.
+Counter Unit Block Diagram
+
+TOVn
+(Int.Req.)
+
+DATA BUS
+
+Clock Select
+
+count
+
+Tn
+Edge
+Detector
+
+clkTn
+
+clear
+
+TCNTn
+Control Logic
+
+direction
+
+( From Prescaler )
+
+bottom
+
+top
+
+Signal description (internal signals):
+
+count
+Increment or decrement TCNT0 by 1.
+direction
+Select between increment and decrement.
+clear
+Clear TCNT0 (set all bits to zero).
+clkTn
+Timer/Counter clock, referred to as clkT0 in the following.
+top
+Signalize that TCNT0 has reached maximum value.
+bottom
+Signalize that TCNT0 has reached minimum value (zero).
+
+Depending of the mode of operation used, the counter is cleared, incremented, or decremented at each timer clock
+(clkT0). clkT0 can be generated from an external or internal clock source, selected by the Clock Select bits
+(CS0[2:0]). When no clock source is selected (CS0[2:0] = 0) the timer is stopped. However, the TCNT0 value can",1,"Trata do contador, modos WGM ou OCR0A/CTC, sem enunciar os dois fatos de forma completa.",NÃO,recuperado_top5
+q_v3_a06,"In ATtiny Timer/Counter0 CTC mode, what sets the counter TOP and what event resets TCNT0 to zero?",attiny85,attiny85_p072_c002,attiny85,72,11.7.1 Normal Mode,text,"11.7.1
+Normal Mode
+The simplest mode of operation is the Normal mode (WGM0[2:0] = 0). In this mode the counting direction is always
+up (incrementing), and no counter clear is performed. The counter simply overruns when it passes its maximum 8-
+bit value (TOP = 0xFF) and then restarts from the bottom (0x00). In normal operation the Timer/Counter Overflow
+Flag (TOV0) will be set in the same timer clock cycle as the TCNT0 becomes zero. The TOV0 Flag in this case
+behaves like a ninth bit, except that it is only set, not cleared. However, combined with the timer overflow interrupt
+that automatically clears the TOV0 Flag, the timer resolution can be increased by software. There are no special
+cases to consider in the Normal mode, a new counter value can be written anytime.
+
+The Output Compare Unit can be used to generate interrupts at some given time. Using the Output Compare to
+generate waveforms in Normal mode is not recommended, since this will occupy too much of the CPU time.",0,Trata de outro modo/temporizador ou de registro sem a regra CTC pedida.,NÃO,recuperado_top5
+q_v3_a06,"In ATtiny Timer/Counter0 CTC mode, what sets the counter TOP and what event resets TCNT0 to zero?",attiny85,attiny85_p072_c003,attiny85,72,11.7.2 Clear Timer on Compare Match (CTC) Mode,text,"11.7.2
+Clear Timer on Compare Match (CTC) Mode
+In Clear Timer on Compare or CTC mode (WGM0[2:0] = 2), the OCR0A Register is used to manipulate the counter
+resolution. In CTC mode the counter is cleared to zero when the counter value (TCNT0) matches the OCR0A. The
+OCR0A defines the top value for the counter, hence also its resolution. This mode allows greater control of the
+Compare Match output frequency. It also simplifies the operation of counting external events.
+
+The timing diagram for the CTC mode is shown in Figure 11-7. The counter value (TCNT0) increases until a Com-
+pare Match occurs between TCNT0 and OCR0A, and then counter (TCNT0) is cleared.
+
+Figure 11-7.
+CTC Mode, Timing Diagram
+
+OCnx Interrupt Flag Set
+
+TCNTn
+
+OCn
+(Toggle)
+
+(COMnx[1:0] = 1)",2,OCR0A define TOP; compare match TCNT0=OCR0A reinicializa o contador.,NÃO,recuperado_top5
+q_v3_a06,"In ATtiny Timer/Counter0 CTC mode, what sets the counter TOP and what event resets TCNT0 to zero?",attiny85,attiny85_p072_c006,attiny85,72,11.7.2 Clear Timer on Compare Match (CTC) Mode,text,"1
+Period
+3
+
+An interrupt can be generated each time the counter value reaches the TOP value by using the OCF0A Flag. If the
+interrupt is enabled, the interrupt handler routine can be used for updating the TOP value. However, changing TOP
+to a value close to BOTTOM when the counter is running with none or a low prescaler value must be done with
+care since the CTC mode does not have the double buffering feature. If the new value written to OCR0A is lower
+than the current value of TCNT0, the counter will miss the Compare Match. The counter will then have to count to
+its maximum value (0xFF) and wrap around starting at 0x00 before the Compare Match can occur.
+
+For generating a waveform output in CTC mode, the OC0A output can be set to toggle its logical level on each
+Compare Match by setting the Compare Output mode bits to toggle mode (COM0A[1:0] = 1). The OC0A value will
+not be visible on the port pin unless the data direction for the pin is set to output. The waveform generated will have
+a maximum frequency of fOC0 = fclk_I/O/2 when OCR0A is set to zero (0x00). The waveform frequency is defined by
+the following equation:",2,Cita OCR0A como valor TOP modificável e as consequências de perder compare match.,NÃO,recuperado_top5
+q_v3_a06,"In ATtiny Timer/Counter0 CTC mode, what sets the counter TOP and what event resets TCNT0 to zero?",attiny85,attiny85_p074_c004,attiny85,74,11.7.4 Phase Correct PWM Mode,text,"In phase correct PWM mode the counter is incremented until the counter value matches TOP. When the counter
+reaches TOP, it changes the count direction. The TCNT0 value will be equal to TOP for one timer clock cycle. The
+timing diagram for the phase correct PWM mode is shown on Figure 11-9. The TCNT0 value is in the timing dia-
+gram shown as a histogram for illustrating the dual-slope operation. The diagram includes non-inverted and
+inverted PWM outputs. The small horizontal line marks on the TCNT0 slopes represent Compare Matches
+between OCR0x and TCNT0.",0,Trata de outro modo/temporizador ou de registro sem a regra CTC pedida.,NÃO,recuperado_top5
+q_v3_a06,"In ATtiny Timer/Counter0 CTC mode, what sets the counter TOP and what event resets TCNT0 to zero?",attiny85,attiny85_p077_c001,attiny85,77,11.8 Timer/Counter Timing Diagrams,text,"Figure 11-13 shows the setting of OCF0A and the clearing of TCNT0 in CTC mode and fast PWM mode where
+OCR0A is TOP.
+
+Figure 11-13. Timer/Counter Timing Diagram, Clear Timer on Compare Match mode, with Prescaler (fclk_I/O/8)",2,"Identifica OCR0A como TOP e descreve limpeza de TCNT0 em CTC, mas menos detalhado.",NÃO,recuperado_top5
+q_v3_a06,"In ATtiny Timer/Counter0 CTC mode, what sets the counter TOP and what event resets TCNT0 to zero?",attiny85,attiny85_p078_c006,attiny85,78,11.9.2 TCCR0A – Timer/Counter Control Register A,table,"Table 11-4.
+Compare Output Mode, Phase Correct PWM Mode(1)
+
+|COM0A1<br>COM0B1|COM0A0<br>COM0B0|Description|
+|---|---|---|
+|0|0|Normal port operation, OC0A/OC0B disconnected.|
+|0|1|Reserved|
+|1|0|Clear OC0A/OC0B on Compare Match when up-counting.<br>Set OC0A/OC0B on Compare Match when down-counting.|
+|1|1|Set OC0A/OC0B on Compare Match when up-counting.<br>Clear OC0A/OC0B on Compare Match when down-counting.|",0,Trata de outro modo/temporizador ou de registro sem a regra CTC pedida.,NÃO,recuperado_top5
+q_v3_a06,"In ATtiny Timer/Counter0 CTC mode, what sets the counter TOP and what event resets TCNT0 to zero?",attiny85,attiny85_p079_c001,attiny85,79,11.9.2 TCCR0A – Timer/Counter Control Register A,text,"• Bits 1:0 – WGM0[1:0]: Waveform Generation Mode
+Combined with the WGM02 bit found in the TCCR0B Register, these bits control the counting sequence of the
+counter, the source for maximum (TOP) counter value, and what type of waveform generation to be used, see
+Table 11-5. Modes of operation supported by the Timer/Counter unit are: Normal mode (counter), Clear Timer on
+Compare Match (CTC) mode, and two types of Pulse Width Modulation (PWM) modes (see “Modes of Operation”
+on page 71).",1,"Trata do contador, modos WGM ou OCR0A/CTC, sem enunciar os dois fatos de forma completa.",NÃO,recuperado_top5
+q_v3_a06,"In ATtiny Timer/Counter0 CTC mode, what sets the counter TOP and what event resets TCNT0 to zero?",attiny85,attiny85_p080_c001,attiny85,80,11.9.3 TCCR0B – Timer/Counter Control Register B,text,"The FOC0B bit is always read as zero.
+
+• Bits 5:4 – Res: Reserved Bits
+These bits are reserved bits in the ATtiny25/45/85 and will always read as zero.
+
+• Bit 3 – WGM02: Waveform Generation Mode
+See the description in the “TCCR0A – Timer/Counter Control Register A” on page 77.
+
+• Bits 2:0 – CS0[2:0]: Clock Select
+The three Clock Select bits select the clock source to be used by the Timer/Counter.",1,"Trata do contador, modos WGM ou OCR0A/CTC, sem enunciar os dois fatos de forma completa.",NÃO,recuperado_top5
+q_v3_a06,"In ATtiny Timer/Counter0 CTC mode, what sets the counter TOP and what event resets TCNT0 to zero?",attiny85,attiny85_p089_c008,attiny85,89,12.3.1 TCCR1 – Timer/Counter1 Control Register,table,"Table 12-5.
+Timer/Counter1 Prescale Select
+
+|CS13|CS12|CS11|CS10|Asynchronous<br>Clocking Mode|Synchronous<br>Clocking Mode|
+|---|---|---|---|---|---|
+|0|0|0|0|T/C1 stopped|T/C1 stopped|
+|0|0|0|1|PCK|CK|
+|0|0|1|0|PCK/2|CK/2|
+|0|0|1|1|PCK/4|CK/4|
+|0|1|0|0|PCK/8|CK/8|
+|0|1|0|1|PCK/16|CK/16|
+|0|1|1|0|PCK/32|CK/32|",0,Trata de outro modo/temporizador ou de registro sem a regra CTC pedida.,NÃO,recuperado_top5
+q_v3_a08,"In ATtiny USI three-wire mode, after how many USCK clock pulses are the master/slave data registers interchanged, and which flag can signal completion?",attiny85,attiny85_p108_c002,attiny85,108,15.1 Features,text,"15.1
+Features
+• Two-wire Synchronous Data Transfer (Master or Slave)
+• Three-wire Synchronous Data Transfer (Master or Slave)
+• Data Received Interrupt
+• Wakeup from Idle Mode
+• Wake-up from All Sleep Modes In Two-wire Mode
+• Two-wire Start Condition Detector with Interrupt Capability",1,"Descreve USI/clock/transferência, mas não reúne oito pulsos e a flag USIOIF.",NÃO,recuperado_top5
+q_v3_a08,"In ATtiny USI three-wire mode, after how many USCK clock pulses are the master/slave data registers interchanged, and which flag can signal completion?",attiny85,attiny85_p109_c003,attiny85,109,15.3.1 Three-wire Mode,text,"15.3.1
+Three-wire Mode
+The USI three-wire mode is compliant to the Serial Peripheral Interface (SPI) mode 0 and 1, but does not have the
+slave select (SS) pin functionality. However, this feature can be implemented in software, if required. Pin names
+used in this mode are DI, DO, and USCK.
+
+Figure 15-2.
+Three-wire Mode Operation, Simplified Diagram",1,"Descreve USI/clock/transferência, mas não reúne oito pulsos e a flag USIOIF.",NÃO,recuperado_top5
+q_v3_a08,"In ATtiny USI three-wire mode, after how many USCK clock pulses are the master/slave data registers interchanged, and which flag can signal completion?",attiny85,attiny85_p109_c010,attiny85,109,15.3.1 Three-wire Mode,text,"USCK
+
+SLAVE",0,Não responde nem o número de pulsos USCK nem a sinalização USIOIF.,NÃO,recuperado_top5
+q_v3_a08,"In ATtiny USI three-wire mode, after how many USCK clock pulses are the master/slave data registers interchanged, and which flag can signal completion?",attiny85,attiny85_p109_c017,attiny85,109,15.3.1 Three-wire Mode,text,"USCK
+
+PORTxn
+
+MASTER
+
+Figure 15-2 shows two USI units operating in three-wire mode, one as Master and one as Slave. The two USI Data
+Registers are interconnected in such way that after eight USCK clocks, the data in each register has been inter-
+changed. The same clock also increments the USI’s 4-bit counter. The Counter Overflow (interrupt) Flag, or
+USIOIF, can therefore be used to determine when a transfer is completed. The clock is generated by the Master
+device software by toggling the USCK pin via the PORTB register or by writing a one to bit USITC bit in USICR.",2,Oito ciclos USCK trocam os registradores; USIOIF sinaliza conclusão.,NÃO,recuperado_top5
+q_v3_a08,"In ATtiny USI three-wire mode, after how many USCK clock pulses are the master/slave data registers interchanged, and which flag can signal completion?",attiny85,attiny85_p110_c007,attiny85,110,15.3.1 Three-wire Mode,text,"MSB
+
+6
+5
+4
+3
+2
+1
+LSB
+
+D
+C
+B
+A
+E
+
+The three-wire mode timing is shown in Figure 15-3 At the top of the figure is a USCK cycle reference. One bit is
+shifted into the USI Data Register (USIDR) for each of these cycles. The USCK timing is shown for both external
+clock modes. In external clock mode 0 (USICS0 = 0), DI is sampled at positive edges, and DO is changed (USI
+Data Register is shifted by one) at negative edges. In external clock mode 1 (USICS0 = 1) the opposite edges with
+respect to mode 0 are used. In other words, data is sampled at negative and changes the output at positive edges.
+The USI clock modes corresponds to the SPI data mode 0 and 1.
+
+Referring to the timing diagram (Figure 15-3), a bus transfer involves the following steps:",1,"Descreve USI/clock/transferência, mas não reúne oito pulsos e a flag USIOIF.",NÃO,recuperado_top5
+q_v3_a08,"In ATtiny USI three-wire mode, after how many USCK clock pulses are the master/slave data registers interchanged, and which flag can signal completion?",attiny85,attiny85_p110_c008,attiny85,110,15.3.1 Three-wire Mode,text,"1.
+The slave and master devices set up their data outputs and, depending on the protocol used, enable their
+output drivers (mark A and B). The output is set up by writing the data to be transmitted to the USI Data
+Register. The output is enabled by setting the corresponding bit in the Data Direction Register of Port B.
+Note that there is not a preferred order of points A and B in the figure, but both must be at least one half
+USCK cycle before point C, where the data is sampled. This is in order to ensure that the data setup
+requirement is satisfied. The 4-bit counter is reset to zero.
+
+2.
+The master software generates a clock pulse by toggling the USCK line twice (C and D). The bit values on
+the data input (DI) pins are sampled by the USI on the first edge (C), and the data output is changed on
+the opposite edge (D). The 4-bit counter will count both edges.
+
+3.
+Step 2. is repeated eight times for a complete register (byte) transfer.",1,"Descreve USI/clock/transferência, mas não reúne oito pulsos e a flag USIOIF.",NÃO,recuperado_top5
+q_v3_a08,"In ATtiny USI three-wire mode, after how many USCK clock pulses are the master/slave data registers interchanged, and which flag can signal completion?",attiny85,attiny85_p110_c009,attiny85,110,15.3.1 Three-wire Mode,text,"4.
+After eight clock pulses (i.e., 16 clock edges) the counter will overflow and indicate that the transfer has
+been completed. If USI Buffer Registers are not used the data bytes that have been transferred must now
+be processed before a new transfer can be initiated. The overflow interrupt will wake up the processor if it
+is set to Idle mode. Depending of the protocol used the slave device can now set its output to high
+impedance.",2,Após oito pulsos há overflow do contador que sinaliza fim da transferência (sem nomear USIOIF).,NÃO,recuperado_top5
+q_v3_a08,"In ATtiny USI three-wire mode, after how many USCK clock pulses are the master/slave data registers interchanged, and which flag can signal completion?",attiny85,attiny85_p112_c012,attiny85,112,15.3.4 Two-wire Mode,text,"SCL
+
+PORTxn
+
+MASTER
+
+Figure 15-4 shows two USI units operating in two-wire mode, one as master and one as slave. It is only the physi-
+cal layer that is shown since the system operation is highly dependent of the communication scheme used. The
+main differences between the master and slave operation at this level is the serial clock generation which is always
+done by the master. Only the slave uses the clock control unit.
+
+Clock generation must be implemented in software, but the shift operation is done automatically in both devices.
+Note that clocking only on negative edges for shifting data is of practical use in this mode. The slave can insert wait
+states at start or end of transfer by forcing the SCL clock low. This means that the master must always check if the
+SCL line was actually released after it has generated a positive edge.",0,Não responde nem o número de pulsos USCK nem a sinalização USIOIF.,NÃO,recuperado_top5
+q_v3_a08,"In ATtiny USI three-wire mode, after how many USCK clock pulses are the master/slave data registers interchanged, and which flag can signal completion?",attiny85,attiny85_p116_c002,attiny85,116,15.5.3 USISR – USI Status Register,text,"• Bit 4 – USIDC: Data Output Collision
+This bit is logical one when bit 7 in the USI Data Register differs from the physical pin value. The flag is only valid
+when two-wire mode is used. This signal is useful when implementing Two-wire bus master arbitration.
+
+• Bits 3:0 – USICNT[3:0]: Counter Value
+These bits reflect the current 4-bit counter value. The 4-bit counter value can directly be read or written by the
+CPU.
+
+The 4-bit counter increments by one for each clock generated either by the external clock edge detector, by a
+Timer/Counter0 Compare Match, or by software using USICLK or USITC strobe bits. The clock source depends on
+the setting of the USICS[1:0] bits.
+
+For external clock operation a special feature is added that allows the clock to be generated by writing to the
+USITC strobe bit. This feature is enabled by choosing an external clock source (USICS1 = 1) and writing a one to
+the USICLK bit.
+
+Note that even when no wire mode is selected (USIWM[1:0] = 0) the external clock input (USCK/SCL) can still be
+used by the counter.",1,"Descreve USI/clock/transferência, mas não reúne oito pulsos e a flag USIOIF.",NÃO,recuperado_top5
+q_v3_a09,"How does the master create the START condition on an ATtiny USI two-wire bus, and which flag is set by the slave start detector?",attiny85,attiny85_p108_c002,attiny85,108,15.1 Features,text,"15.1
+Features
+• Two-wire Synchronous Data Transfer (Master or Slave)
+• Three-wire Synchronous Data Transfer (Master or Slave)
+• Data Received Interrupt
+• Wakeup from Idle Mode
+• Wake-up from All Sleep Modes In Two-wire Mode
+• Two-wire Start Condition Detector with Interrupt Capability",1,"Descreve detecção START, USISIF ou fluxo two-wire, mas não reúne todas as condições.",NÃO,recuperado_top5
+q_v3_a09,"How does the master create the START condition on an ATtiny USI two-wire bus, and which flag is set by the slave start detector?",attiny85,attiny85_p109_c017,attiny85,109,15.3.1 Three-wire Mode,text,"USCK
+
+PORTxn
+
+MASTER
+
+Figure 15-2 shows two USI units operating in three-wire mode, one as Master and one as Slave. The two USI Data
+Registers are interconnected in such way that after eight USCK clocks, the data in each register has been inter-
+changed. The same clock also increments the USI’s 4-bit counter. The Counter Overflow (interrupt) Flag, or
+USIOIF, can therefore be used to determine when a transfer is completed. The clock is generated by the Master
+device software by toggling the USCK pin via the PORTB register or by writing a one to bit USITC bit in USICR.",0,Não informa geração START nem flag USISIF no two-wire.,NÃO,recuperado_top5
+q_v3_a09,"How does the master create the START condition on an ATtiny USI two-wire bus, and which flag is set by the slave start detector?",attiny85,attiny85_p112_c012,attiny85,112,15.3.4 Two-wire Mode,text,"SCL
+
+PORTxn
+
+MASTER
+
+Figure 15-4 shows two USI units operating in two-wire mode, one as master and one as slave. It is only the physi-
+cal layer that is shown since the system operation is highly dependent of the communication scheme used. The
+main differences between the master and slave operation at this level is the serial clock generation which is always
+done by the master. Only the slave uses the clock control unit.
+
+Clock generation must be implemented in software, but the shift operation is done automatically in both devices.
+Note that clocking only on negative edges for shifting data is of practical use in this mode. The slave can insert wait
+states at start or end of transfer by forcing the SCL clock low. This means that the master must always check if the
+SCL line was actually released after it has generated a positive edge.",1,"Descreve detecção START, USISIF ou fluxo two-wire, mas não reúne todas as condições.",NÃO,recuperado_top5
+q_v3_a09,"How does the master create the START condition on an ATtiny USI two-wire bus, and which flag is set by the slave start detector?",attiny85,attiny85_p113_c003,attiny85,113,15.3.4 Two-wire Mode,text,"Referring to the timing diagram (Figure 15-5), a bus transfer involves the following steps:
+
+1.
+The start condition is generated by the master by forcing the SDA low line while keeping the SCL line high
+(A). SDA can be forced low either by writing a zero to bit 7 of the USI Data Register, or by setting the cor-
+responding bit in the PORTB register to zero. Note that the Data Direction Register bit must be set to one
+for the output to be enabled. The start detector logic of the slave device (see Figure 15-6 on page 114)
+detects the start condition and sets the USISIF Flag. The flag can generate an interrupt if necessary.
+
+2.
+In addition, the start detector will hold the SCL line low after the master has forced a negative edge on this
+line (B). This allows the slave to wake up from sleep or complete other tasks before setting up the USI
+Data Register to receive the address. This is done by clearing the start condition flag and resetting the
+counter.
+
+3.
+The master set the first bit to be transferred and releases the SCL line (C). The slave samples the data
+and shifts it into the USI Data Register at the positive edge of the SCL clock.",2,SDA baixa com SCL alta forma START; detector escravo seta USISIF.,NÃO,recuperado_top5
+q_v3_a09,"How does the master create the START condition on an ATtiny USI two-wire bus, and which flag is set by the slave start detector?",attiny85,attiny85_p113_c004,attiny85,113,15.3.4 Two-wire Mode,text,"4.
+After eight bits containing slave address and data direction (read or write) have been transferred, the
+slave counter overflows and the SCL line is forced low (D). If the slave is not the one the master has
+addressed, it releases the SCL line and waits for a new start condition.
+
+5.
+When the slave is addressed, it holds the SDA line low during the acknowledgment cycle before holding
+the SCL line low again (i.e., the USI Counter Register must be set to 14 before releasing SCL at (D)).
+Depending on the R/W bit the master or slave enables its output. If the bit is set, a master read operation
+is in progress (i.e., the slave drives the SDA line) The slave can hold the SCL line low after the acknowl-
+edge (E).
+
+6.
+Multiple bytes can now be transmitted, all in same direction, until a stop condition is given by the master
+(F), or a new start condition is given.
+
+If the slave is not able to receive more data it does not acknowledge the data byte it has last received. When the
+master does a read operation it must terminate the operation by forcing the acknowledge bit low after the last byte
+transmitted.",1,"Descreve detecção START, USISIF ou fluxo two-wire, mas não reúne todas as condições.",NÃO,recuperado_top5
+q_v3_a09,"How does the master create the START condition on an ATtiny USI two-wire bus, and which flag is set by the slave start detector?",attiny85,attiny85_p113_c005,attiny85,113,15.3.5 Start Condition Detector,text,"15.3.5
+Start Condition Detector
+The start condition detector is shown in Figure 15-6. The SDA line is delayed (in the range of 50 to 300 ns) to
+ensure valid sampling of the SCL line. The start condition detector is only enabled in two-wire mode.",1,"Descreve detecção START, USISIF ou fluxo two-wire, mas não reúne todas as condições.",NÃO,recuperado_top5
+q_v3_a09,"How does the master create the START condition on an ATtiny USI two-wire bus, and which flag is set by the slave start detector?",attiny85,attiny85_p116_c001,attiny85,116,15.5.3 USISR – USI Status Register,text,"If USISIE bit in USICR and the Global Interrupt Enable Flag are set, an interrupt will be generated when this flag is
+set. The flag will only be cleared by writing a logical one to the USISIF bit. Clearing this bit will release the start
+detection hold of USCL in two-wire mode.
+
+A start condition interrupt will wakeup the processor from all sleep modes.
+
+• Bit 6 – USIOIF: Counter Overflow Interrupt Flag
+This flag is set (one) when the 4-bit counter overflows (i.e., at the transition from 15 to 0). If the USIOIE bit in
+USICR and the Global Interrupt Enable Flag are set an interrupt will also be generated when the flag is set. The
+flag will only be cleared if a one is written to the USIOIF bit. Clearing this bit will release the counter overflow hold
+of SCL in two-wire mode.
+
+A counter overflow interrupt will wakeup the processor from Idle sleep mode.
+
+• Bit 5 – USIPF: Stop Condition Flag
+When two-wire mode is selected, the USIPF Flag is set (one) when a stop condition has been detected. The flag is
+cleared by writing a one to this bit. Note that this is not an interrupt flag. This signal is useful when implementing
+two-wire bus master arbitration.",2,Descreve diretamente USISIF e o clear da flag de START; útil para a segunda parte.,NÃO,recuperado_top5
+q_v3_a11,"After changing the ADC input channel during ATtiny Free Running mode, which channel is reflected by the next conversion result?",attiny85,attiny85_p122_c002,attiny85,122,17.1 Features,text,"17.1
+Features
+• 10-bit Resolution
+• 1 LSB Integral Non-linearity
+• ± 2 LSB Absolute Accuracy
+• 65 - 260 µs Conversion Time
+• Up to 15 kSPS at Maximum Resolution
+• Four Multiplexed Single Ended Input Channels
+• Two differential input channels with selectable gain
+• Temperature sensor input channel
+• Optional Left Adjustment for ADC Result Readout
+• 0 - VCC ADC Input Voltage Range
+• Selectable 1.1V / 2.56V ADC Voltage Reference
+• Free Running or Single Conversion Mode
+• ADC Start Conversion by Auto Triggering on Interrupt Sources
+• Interrupt on ADC Conversion Complete
+• Sleep Mode Noise Cancele
+• Unipolar / Bibilar Input Mode
+• Input Polarity Reversal Mode",1,"Descreve free running, buffering ou atualização de canal, sem a defasagem do resultado seguinte.",NÃO,recuperado_top5
+q_v3_a11,"After changing the ADC input channel during ATtiny Free Running mode, which channel is reflected by the next conversion result?",attiny85,attiny85_p124_c001,attiny85,124,17.3 Operation,text,"If ADC0 or ADC2 is selected as both the positive and negative input to the differential gain amplifier (ADC0-ADC0
+or ADC2-ADC2), the remaining offset in the gain stage and conversion circuitry can be measured directly as the
+result of the conversion. This figure can be subtracted from subsequent conversions with the same gain setting to
+reduce offset error to below 1 LSW.
+
+The on-chip temperature sensor is selected by writing the code “1111” to the MUX[3:0] bits in ADMUX register
+when the ADC4 channel is used as an ADC input.
+
+The ADC is enabled by setting the ADC Enable bit, ADEN in ADCSRA. Voltage reference and input channel selec-
+tions will not go into effect until ADEN is set. The ADC does not consume power when ADEN is cleared, so it is
+recommended to switch off the ADC before entering power saving sleep modes.
+
+The ADC generates a 10-bit result which is presented in the ADC Data Registers, ADCH and ADCL. By default,
+the result is presented right adjusted, but can optionally be presented left adjusted by setting the ADLAR bit in
+ADMUX.",0,Não explica qual canal alimenta o resultado seguinte do ADC em free running.,NÃO,recuperado_top5
+q_v3_a11,"After changing the ADC input channel during ATtiny Free Running mode, which channel is reflected by the next conversion result?",attiny85,attiny85_p124_c005,attiny85,124,17.4 Starting a Conversion,text,"Using the ADC Interrupt Flag as a trigger source makes the ADC start a new conversion as soon as the ongoing
+conversion has finished. The ADC then operates in Free Running mode, constantly sampling and updating the
+ADC Data Register. The first conversion must be started by writing a logical one to the ADSC bit in ADCSRA. In
+this mode the ADC will perform successive conversions independently of whether the ADC Interrupt Flag, ADIF is
+cleared or not.",1,"Descreve free running, buffering ou atualização de canal, sem a defasagem do resultado seguinte.",NÃO,recuperado_top5
+q_v3_a11,"After changing the ADC input channel during ATtiny Free Running mode, which channel is reflected by the next conversion result?",attiny85,attiny85_p127_c003,attiny85,127,17.5 Prescaling and Conversion Timing,text,"ADC Clock
+
+Trigger
+Source
+
+ADATE
+
+ADIF
+
+ADCH
+
+and MSB of Result
+
+ADCL
+
+of Result
+
+Prescaler
+Reset
+Sample &
+Hold
+
+Conversion
+
+Complete
+Prescaler
+Reset
+
+MUX and REFS
+Update
+
+In Free Running mode, a new conversion will be started immediately after the conversion completes, while ADSC
+remains high.
+
+Figure 17-7.
+ADC Timing Diagram, Free Running Conversion
+
+One Conversion
+Next Conversion
+
+11
+12
+13
+
+3
+4
+
+Cycle Number
+1
+2
+
+ADC Clock
+
+ADSC
+
+ADIF
+
+ADCH
+
+Sign and MSB of Result
+
+ADCL
+
+LSB of Result
+
+Sample & Hold
+
+Conversion
+
+MUX and REFS
+Update
+
+Complete
+
+For a summary of conversion times, see Table 17-1.",1,"Descreve free running, buffering ou atualização de canal, sem a defasagem do resultado seguinte.",NÃO,recuperado_top5
+q_v3_a11,"After changing the ADC input channel during ATtiny Free Running mode, which channel is reflected by the next conversion result?",attiny85,attiny85_p128_c001,attiny85,128,17.6 Changing Channel or Reference Selection,text,"17.6
+Changing Channel or Reference Selection
+The MUX[3:0] and REFS[2:0] bits in the ADMUX Register are single buffered through a temporary register to which
+the CPU has random access. This ensures that the channels and voltage reference selection only takes place at a
+safe point during the conversion. The channel and voltage reference selection is continuously updated until a con-
+version is started. Once the conversion starts, the channel and voltage reference selection is locked to ensure a
+sufficient sampling time for the ADC. Continuous updating resumes in the last ADC clock cycle before the conver-
+sion completes (ADIF in ADCSRA is set). Note that the conversion starts on the following rising ADC clock edge
+after ADSC is written. The user is thus advised not to write new channel or voltage reference selection values to
+ADMUX until one ADC clock cycle after ADSC is written.
+
+If Auto Triggering is used, the exact time of the triggering event can be indeterministic. Special care must be taken
+when updating the ADMUX Register, in order to control which conversion will be affected by the new settings.",1,"Descreve free running, buffering ou atualização de canal, sem a defasagem do resultado seguinte.",NÃO,recuperado_top5
+q_v3_a11,"After changing the ADC input channel during ATtiny Free Running mode, which channel is reflected by the next conversion result?",attiny85,attiny85_p128_c002,attiny85,128,17.6 Changing Channel or Reference Selection,text,"If both ADATE and ADEN is written to one, an interrupt event can occur at any time. If the ADMUX Register is
+changed in this period, the user cannot tell if the next conversion is based on the old or the new settings. ADMUX
+can be safely updated in the following ways:
+
+a.
+When ADATE or ADEN is cleared.
+
+b.
+During conversion, minimum one ADC clock cycle after the trigger event.
+
+c.
+After a conversion, before the Interrupt Flag used as trigger source is cleared.
+
+When updating ADMUX in one of these conditions, the new settings will affect the next ADC conversion.",1,"Descreve free running, buffering ou atualização de canal, sem a defasagem do resultado seguinte.",NÃO,recuperado_top5
+q_v3_a11,"After changing the ADC input channel during ATtiny Free Running mode, which channel is reflected by the next conversion result?",attiny85,attiny85_p128_c003,attiny85,128,17.6.1 ADC Input Channels,text,"17.6.1
+ADC Input Channels
+When changing channel selections, the user should observe the following guidelines to ensure that the correct
+channel is selected:
+
+In Single Conversion mode, always select the channel before starting the conversion. The channel selection may
+be changed one ADC clock cycle after writing one to ADSC. However, the simplest method is to wait for the con-
+version to complete before changing the channel selection.
+
+In Free Running mode, always select the channel before starting the first conversion. The channel selection may
+be changed one ADC clock cycle after writing one to ADSC. However, the simplest method is to wait for the first
+conversion to complete, and then change the channel selection. Since the next conversion has already started
+automatically, the next result will reflect the previous channel selection. Subsequent conversions will reflect the
+new channel selection.",2,Próxima conversão ainda usa canal anterior; as posteriores usam o novo.,NÃO,recuperado_top5
+q_v3_a11,"After changing the ADC input channel during ATtiny Free Running mode, which channel is reflected by the next conversion result?",attiny85,attiny85_p138_c001,attiny85,138,17.13.4 ADCSRB – ADC Control and Status Register B,text,"• Bits 4:3 – Res: Reserved Bits
+These bits are reserved bits in the ATtiny25/45/85 and will always read as zero.
+
+• Bits 2:0 – ADTS[2:0]: ADC Auto Trigger Source
+If ADATE in ADCSRA is written to one, the value of these bits selects which source will trigger an ADC conversion.
+If ADATE is cleared, the ADTS[2:0] settings will have no effect. A conversion will be triggered by the rising edge of
+the selected Interrupt Flag. Note that switching from a trigger source that is cleared to a trigger source that is set,
+will generate a positive edge on the trigger signal. If ADEN in ADCSRA is set, this will start a conversion. Switching
+to Free Running mode (ADTS[2:0]=0) will not cause a trigger event, even if the ADC Interrupt Flag is set.",0,Não explica qual canal alimenta o resultado seguinte do ADC em free running.,NÃO,recuperado_top5
+q_v3_a13,"During an ATtiny Chip Erase, what happens to fuse bits and under what condition is EEPROM preserved?",attiny85,attiny85_p017_c004,attiny85,17,5.3.4 Erase,text,"5.3.4
+Erase
+To erase a byte, the address must be written to EEAR. If the EEPMn bits are 0b01, writing the EEPE (within four
+cycles after EEMPE is written) will trigger the erase operation only (programming time is given in Table 5-1 on
+page 21). The EEPE bit remains set until the erase operation completes. While the device is busy programming, it
+is not possible to do any other EEPROM operations.",0,Não especifica o efeito de chip erase nos fuses e em EESAVE.,NÃO,recuperado_top5
+q_v3_a13,"During an ATtiny Chip Erase, what happens to fuse bits and under what condition is EEPROM preserved?",attiny85,attiny85_p147_c002,attiny85,147,20.1 Program And Data Memory Lock Bits,text,"20.1
+Program And Data Memory Lock Bits
+ATtiny25/45/85 provides two Lock bits which can be left unprogrammed (“1”) or can be programmed (“0”) to obtain
+the additional security listed in Table 20-2. Lock bits can be erased to “1” with the Chip Erase command, only.
+
+Program memory can be read out via the debugWIRE interface when the DWEN fuse is programmed, even if the
+Lock Bits are set. Thus, when Lock Bit security is required debugWIRE should always be disabled (by clearing the
+DWEN fuse).",1,"Descreve aspectos de chip erase e fuses, mas não reúne os dois fatos pedidos.",NÃO,recuperado_top5
+q_v3_a13,"During an ATtiny Chip Erase, what happens to fuse bits and under what condition is EEPROM preserved?",attiny85,attiny85_p148_c004,attiny85,148,20.2 Fuse Bytes,table,"Table 20-4.
+Fuse High Byte
+
+|Fuse High Byte|Bit No|Description|Default Value|
+|---|---|---|---|
+|RSTDISBL(1) (2)|7|External reset disabled|1 (unprogrammed)|
+|DWEN(1) (2) (3)|6|DebugWIRE enabled|1 (unprogrammed)|
+|SPIEN(4)|5|Serial program and data download<br>enabled|0 (programmed)<br>(SPI prog. enabled)|
+|WDTON (5)|4|Watchdog timer always on|1 (unprogrammed)|
+|EESAVE|3|EEPROM preserves chip erase|1 (unprogrammed)<br>(EEPROM not preserved)|
+|BODLEVEL2(6)|2|Brown-out Detector trigger level|1 (unprogrammed)|
+|BODLEVEL1(6)|1|Brown-out Detector trigger level|1 (unprogrammed)|
+|BODLEVEL0(6)|0|Brown-out Detector trigger level|1 (unprogrammed)|",2,Fuse EESAVE marcado como preservação da EEPROM durante chip erase; tabela de fuses.,NÃO,recuperado_top5
+q_v3_a13,"During an ATtiny Chip Erase, what happens to fuse bits and under what condition is EEPROM preserved?",attiny85,attiny85_p151_c003,attiny85,151,20.5 Serial Downloading,text,"Note:
+In Table 20-10 above, the pin mapping for SPI programming is listed. Not all parts use the SPI pins dedicated for the
+internal SPI interface.
+
+When programming the EEPROM, an auto-erase cycle is built into the self-timed programming operation (in the
+Serial mode ONLY) and there is no need to first execute the Chip Erase instruction. The Chip Erase operation
+turns the content of every memory location in both the Program and EEPROM arrays into 0xFF.
+
+Depending on CKSEL Fuses, a valid clock must be present. The minimum low and high periods for the serial clock
+(SCK) input are defined as follows:
+
+Low: > 2 CPU clock cycles for fck < 12 MHz, 3 CPU clock cycles for fck >= 12 MHz
+
+High: > 2 CPU clock cycles for fck < 12 MHz, 3 CPU clock cycles for fck >= 12 MHz",1,"Descreve aspectos de chip erase e fuses, mas não reúne os dois fatos pedidos.",NÃO,recuperado_top5
+q_v3_a13,"During an ATtiny Chip Erase, what happens to fuse bits and under what condition is EEPROM preserved?",attiny85,attiny85_p156_c004,attiny85,156,20.7.2 Considerations for Efficient Programming,text,"20.7.2
+Considerations for Efficient Programming
+The loaded command and address are retained in the device during programming. For efficient programming, the
+following should be considered.
+
+• The command needs only be loaded once when writing or reading multiple memory locations.
+
+• Skip writing the data value 0xFF that is the contents of the entire EEPROM (unless the EESAVE Fuse is
+programmed) and Flash after a Chip Erase.
+
+• Address High byte needs only be loaded before programming or reading a new 256 word window in Flash or
+256 byte EEPROM. This consideration also applies to Signature bytes reading.",1,"Descreve aspectos de chip erase e fuses, mas não reúne os dois fatos pedidos.",NÃO,recuperado_top5
+q_v3_a13,"During an ATtiny Chip Erase, what happens to fuse bits and under what condition is EEPROM preserved?",attiny85,attiny85_p156_c005,attiny85,156,20.7.3 Chip Erase,text,"20.7.3
+Chip Erase
+The Chip Erase will erase the Flash and EEPROM(1) memories plus Lock bits. The Lock bits are not reset until the
+Program memory has been completely erased. The Fuse bits are not changed. A Chip Erase must be performed
+before the Flash and/or EEPROM are re-programmed.
+
+Note:
+1. The EEPROM memory is preserved during Chip Erase if the EESAVE Fuse is programmed.",2,Fuse bits inalterados; EEPROM preservada quando fuse EESAVE programado.,NÃO,recuperado_top5
+q_v3_a13,"During an ATtiny Chip Erase, what happens to fuse bits and under what condition is EEPROM preserved?",attiny85,attiny85_p160_c002,attiny85,160,20.7.10 Power-off sequence,text,"Notes:
+1. a = address high bits, b = address low bits, d = data in high bits, e = data in low bits, p = data out high bits, q = data out low
+bits, x = don’t care, 1 = Lock Bit1, 2 = Lock Bit2, 3 = CKSEL0 Fuse, 4 = CKSEL1 Fuse, 5 = CKSEL2 Fuse, 6 = CKSEL3
+Fuse, 7 = SUT0 Fuse, 8 = SUT1 Fuse, 9 = CKOUT Fuse, A = CKDIV8 Fuse, B = BODLEVEL0 Fuse, C = BODLEVEL1
+Fuse, D = BODLEVEL2 Fuse, E = EESAVE Fuse, F = WDTON Fuse, G = SPIEN Fuse, H = DWEN Fuse, I = RSTDISBL
+Fuse, J = SELFPRGEN Fuse
+
+2. For page sizes less than 256 words, parts of the address (bbbb_bbbb) will be parts of the page address.
+
+3. For page sizes less than 256 bytes, parts of the address (bbbb_bbbb) will be parts of the page address.
+
+4. The EEPROM is written page-wise. But only the bytes that are loaded into the page are actually written to the EEPROM.
+Page-wise EEPROM access is more efficient when multiple bytes are to be written to the same page. Note that auto-erase
+of EEPROM is not available in High-voltage Serial Programming, only in SPI Programming.",0,Não especifica o efeito de chip erase nos fuses e em EESAVE.,NÃO,recuperado_top5
+q_v3_a14,"According to the ATtiny25/45/85 DC characteristics notes, what is the maximum recommended sum of all port output sink currents IOL?",attiny85,attiny85_p003_c001,attiny85,3,1.1.3 Port B (PB5:PB0),text,"Port B also serves the functions of various special features of the ATtiny25/45/85 as listed in “Alternate Functions
+of Port B” on page 60.
+
+On ATtiny25, the programmable I/O ports PB3 and PB4 (pins 2 and 3) are exchanged in ATtiny15 Compatibility
+Mode for supporting the backward compatibility with ATtiny15.",0,Não contém o limite total de corrente IOL de todas as portas.,NÃO,recuperado_top5
+q_v3_a14,"According to the ATtiny25/45/85 DC characteristics notes, what is the maximum recommended sum of all port output sink currents IOL?",attiny85,attiny85_p004_c001,attiny85,4,1.1.4 RESET,text,"2.
+Overview
+
+The ATtiny25/45/85 is a low-power CMOS 8-bit microcontroller based on the AVR enhanced RISC architecture. By
+executing powerful instructions in a single clock cycle, the ATtiny25/45/85 achieves throughputs approaching 1
+MIPS per MHz allowing the system designer to optimize power consumption versus processing speed.",0,Não contém o limite total de corrente IOL de todas as portas.,NÃO,recuperado_top5
+q_v3_a14,"According to the ATtiny25/45/85 DC characteristics notes, what is the maximum recommended sum of all port output sink currents IOL?",attiny85,attiny85_p015_c001,attiny85,15,4.8.1 Interrupt Response Time,text,"5.
+AVR Memories
+
+This section describes the different memories in the ATtiny25/45/85. The AVR architecture has two main memory
+spaces, the Data memory and the Program memory space. In addition, the ATtiny25/45/85 features an EEPROM
+Memory for data storage. All three memory spaces are linear and regular.",0,Não contém o limite total de corrente IOL de todas as portas.,NÃO,recuperado_top5
+q_v3_a14,"According to the ATtiny25/45/85 DC characteristics notes, what is the maximum recommended sum of all port output sink currents IOL?",attiny85,attiny85_p048_c002,attiny85,48,9.1 Interrupt Vectors in ATtiny25/45/85,text,"9.1
+Interrupt Vectors in ATtiny25/45/85
+The interrupt vectors of ATtiny25/45/85 are described in Table 9-1below.",0,Não contém o limite total de corrente IOL de todas as portas.,NÃO,recuperado_top5
+q_v3_a14,"According to the ATtiny25/45/85 DC characteristics notes, what is the maximum recommended sum of all port output sink currents IOL?",attiny85,attiny85_p155_c005,attiny85,155,20.7 High-voltage Serial Programming Algorithm,text,"20.7
+High-voltage Serial Programming Algorithm
+To program and verify the ATtiny25/45/85 in the High-voltage Serial Programming mode, the following sequence is
+recommended (See instruction formats in Table 20-16):",0,Não contém o limite total de corrente IOL de todas as portas.,NÃO,recuperado_top5
+q_v3_a14,"According to the ATtiny25/45/85 DC characteristics notes, what is the maximum recommended sum of all port output sink currents IOL?",attiny85,attiny85_p161_c004,attiny85,161,21.2 DC Characteristics,table,"Table 21-1.
+DC Characteristics. TA = -40C to +85C
+
+|Symbol|Parameter|Condition|Min.|Typ.(1)|Max.|Units|
+|---|---|---|---|---|---|---|
+|VIL|Input Low-voltage, except<br>XTAL1 and RESET pin|VCC = 1.8V - 2.4V<br>VCC = 2.4V - 5.5V|-0.5<br>-0.5||0.2VCC<br>(3)<br>0.3VCC<br>(3)|V<br>V|
+|VIH|Input High-voltage, except<br>XTAL1 and RESET pin|VCC = 1.8V - 2.4V<br>VCC = 2.4V - 5.5V|0.7VCC<br>(2)<br>0.6VCC<br>(2)||VCC +0.5<br>VCC +0.5|V<br>V|
+|VIL1|Input Low-voltage, XTAL1 pin,<br>External Clock Selected|VCC = 1.8V - 5.5V|-0.5||0.1VCC<br>(3)|V|
+|VIH1|Input High-voltage, XTAL1 pin,<br>External Clock Selected|VCC = 1.8V - 2.4V<br>VCC = 2.4V - 5.5V|0.8VCC<br>(2)<br>0.7VCC<br>(2)||VCC +0.5<br>VCC +0.5|V<br>V|
+|VIL2|Input Low-voltage,<br>RESET pin|VCC = 1.8V - 5.5V|-0.5||0.2VCC<br>(3)|V<br>V|
+|VIH2|Input High-voltage,<br>RESET pin|VCC = 1.8V - 5.5V|0.9VCC<br>(2)||VCC +0.5|V|
+|VIL3|Input Low-voltage,<br>RESET pin as I/O|VCC = 1.8V - 2.4V<br>VCC = 2.4V - 5.5V|-0.5<br>-0.5||0.2VCC<br>(3)<br>0.3VCC<br>(3)|V<br>V|
+|VIH3|Input High-voltage,<br>RESET pin as I/O|VCC = 1.8V - 2.4V<br>VCC = 2.4V - 5.5V|0.7VCC<br>(2)<br>0.6VCC<br>(2)||VCC +0.5<br>VCC +0.5|V<br>V|
+|VOL|Output Low-voltage,(4)<br>Port B (except RESET)(6)|IOL = 10 mA, VCC = 5V<br>IOL = 5 mA, VCC = 3V|||0.6<br>0.5|V<br>V|
+|VOH|Output High-voltage, (5)<br>Port B (except RESET)(6)|IOH = -10 mA, VCC = 5V<br>IOH = -5 mA, VCC = 3V|4.3<br>2.5|||V<br>V|
+|IIL|Input Leakage<br>Current I/O Pin|VCC = 5.5V, pin low<br>(absolute value)||< 0.05|1|µA|
+|IIH|Input Leakage<br>Current I/O Pin|VCC = 5.5V, pin high<br>(absolute value)||< 0.05|1|µA|
+|RRST|Reset Pull-up Resistor|VCC = 5.5V, input low|30||60|k|",1,"Caracteriza saída/corrente dos pinos, mas não fixa o limite agregado IOL=60 mA.",NÃO,recuperado_top5
+q_v3_a14,"According to the ATtiny25/45/85 DC characteristics notes, what is the maximum recommended sum of all port output sink currents IOL?",attiny85,attiny85_p162_c001,attiny85,162,21.2 DC Characteristics,table,"Table 21-1.
+DC Characteristics. TA = -40C to +85C (Continued)
+
+|Symbol|Parameter|Condition|Min.|Typ.(1)|Max.|Units|
+|---|---|---|---|---|---|---|
+|Rpu|I/O Pin Pull-up Resistor|VCC = 5.5V, input low|20||50|k|
+|ICC|Power Supply Current(7)|Active 1 MHz, VCC = 2V||0.3|0.55|mA|
+|ICC|Power Supply Current(7)|Active 4 MHz, VCC = 3V||1.5|2.5|mA|
+|ICC|Power Supply Current(7)|Active 8 MHz, VCC = 5V||5|8|mA|
+|ICC|Power Supply Current(7)|Idle 1 MHz, VCC = 2V||0.1|0.2|mA|
+|ICC|Power Supply Current(7)|Idle 4 MHz, VCC = 3V||0.35|0.6|mA|
+|ICC|Power Supply Current(7)|Idle 8 MHz, VCC = 5V||1.2|2|mA|
+|ICC|Power-down mode(8)|WDT enabled, VCC = 3V|||10|µA|
+|ICC|Power-down mode(8)|WDT disabled, VCC = 3V|||2|µA|",0,Não contém o limite total de corrente IOL de todas as portas.,NÃO,recuperado_top5
+q_v3_a14,"According to the ATtiny25/45/85 DC characteristics notes, what is the maximum recommended sum of all port output sink currents IOL?",attiny85,attiny85_p162_c002,attiny85,162,21.2 DC Characteristics,text,"Notes:
+1. Typical values at 25C.
+
+2. “Min” means the lowest value where the pin is guaranteed to be read as high.
+
+3. “Max” means the highest value where the pin is guaranteed to be read as low.
+
+4. Although each I/O port can sink more than the test conditions (10 mA at VCC = 5V, 5 mA at VCC = 3V) under steady state
+conditions (non-transient), the following must be observed:
+1] The sum of all IOL, for all ports, should not exceed 60 mA.
+If IOL exceeds the test condition, VOL may exceed the related specification. Pins are not guaranteed to sink current greater
+than the listed test condition.
+
+5. Although each I/O port can source more than the test conditions (10 mA at VCC = 5V, 5 mA at VCC = 3V) under steady state
+conditions (non-transient), the following must be observed:
+1] The sum of all IOH, for all ports, should not exceed 60 mA.
+If IOH exceeds the test condition, VOH may exceed the related specification. Pins are not guaranteed to source current
+greater than the listed test condition.",2,Nota técnica explícita: soma de IOL de todas as portas não pode exceder 60 mA.,NÃO,recuperado_top5
+q_v3_a14,"According to the ATtiny25/45/85 DC characteristics notes, what is the maximum recommended sum of all port output sink currents IOL?",attiny85,attiny85_p172_c001,attiny85,172,21.9 High-voltage Serial Programming Characteristics,text,"22. Typical Characteristics
+
+The data contained in this section is largely based on simulations and characterization of similar devices in the
+same process and design methods. Thus, the data should be treated as indications of how the part will behave.
+
+The following charts show typical behavior. These figures are not tested during manufacturing. All current con-
+sumption measurements are performed with all I/O pins configured as inputs and with internal pull-ups enabled. A
+sine wave generator with rail-to-rail output is used as clock source.
+
+The power consumption in Power-down mode is independent of clock selection.
+
+The current consumption is a function of several factors such as: operating voltage, operating frequency, loading of
+I/O pins, switching rate of I/O pins, code executed and ambient temperature. The dominating factors are operating
+voltage and frequency.
+
+The current drawn from capacitive loaded pins may be estimated (for one pin) as CL*VCC*f where CL = load capac-
+itance, VCC = operating voltage and f = average switching frequency of I/O pin.",0,Não contém o limite total de corrente IOL de todas as portas.,NÃO,recuperado_top5
+q_v3_a14,"According to the ATtiny25/45/85 DC characteristics notes, what is the maximum recommended sum of all port output sink currents IOL?",attiny85,attiny85_p183_c001,attiny85,183,22.6 Pin Driver Strength,text,"Figure 22-20. I/O Pin Output Voltage vs. Sink Current (VCC = 5V)
+
+I/O PIN OUTPUT VOLTAGE vs. SINK CURRENT
+
+VCC = 5V
+
+0,6",1,"Caracteriza saída/corrente dos pinos, mas não fixa o limite agregado IOL=60 mA.",NÃO,recuperado_top5
+q_v3_a14,"According to the ATtiny25/45/85 DC characteristics notes, what is the maximum recommended sum of all port output sink currents IOL?",attiny85,attiny85_p184_c003,attiny85,184,22.6 Pin Driver Strength,text,"5
+
+4,9
+
+4,8
+
+VOH (V)
+
+4,7
+
+4,6
+
+4,5
+
+4,4
+
+0
+5
+10
+15
+20
+25
+
+IOH (mA)
+
+Figure 22-23. Reset Pin Output Voltage vs. Sink Current (VCC = 3V)
+
+RESET AS I/O PIN OUTPUT VOLTAGE vs. SINK CURRENT
+
+VCC = 3V
+
+1.5
+
+85 °C
+
+1
+
+VOL (V)
+
+0 °C
+
+-45 °C
+
+0.5
+
+0
+
+0
+0.5
+1
+1.5
+2
+2.5
+3
+
+IOL (mA)",1,"Caracteriza saída/corrente dos pinos, mas não fixa o limite agregado IOL=60 mA.",NÃO,recuperado_top5
+q_v3_a14,"According to the ATtiny25/45/85 DC characteristics notes, what is the maximum recommended sum of all port output sink currents IOL?",attiny85,attiny85_p185_c001,attiny85,185,22.6 Pin Driver Strength,text,"Figure 22-24. Reset Pin Output Voltage vs. Sink Current (VCC = 5V)
+
+RESET AS I/O PIN OUTPUT VOLTAGE vs. SINK CURRENT
+
+VCC = 5V
+
+1
+
+0.8
+
+0.6
+
+VOL (V)
+
+85 °C
+
+0.4
+
+0 °C
+
+-45 °C
+
+0.2
+
+0
+
+0
+0.5
+1
+1.5
+2
+2.5
+3
+
+IOL (mA)
+
+Figure 22-25. Reset Pin Output Voltage vs. Source Current (VCC = 3V)
+
+RESET AS I/O PIN OUTPUT VOLTAGE vs. SOURCE CURRENT
+
+VCC = 3V
+
+3.5
+
+3
+
+2.5
+
+2
+
+VOH (V)
+
+1.5
+
+-45 °C
+
+1
+
+25 °C
+85 °C
+
+0.5
+
+0
+
+0
+0.5
+1
+1.5
+2
+
+IOH (mA)",1,"Caracteriza saída/corrente dos pinos, mas não fixa o limite agregado IOL=60 mA.",NÃO,recuperado_top5
+q_v3_s01,How does the ART Accelerator improve STM32L432xx instruction execution from Flash at high CPU frequencies?,stm32l432kc,stm32l432kc_p001_c002,stm32l432kc,1,,text,"•
+Core: Arm® 32-bit Cortex®-M4 CPU with FPU,
+Adaptive real-time accelerator (ART
+Accelerator™) allowing 0-wait-state execution
+from Flash memory, frequency up to 80 MHz,
+MPU, 100DMIPS and DSP instructions
+
+•
+Rich analog peripherals (independent supply)
+–
+1x 12-bit ADC 5 Msps, up to 16-bit with
+hardware oversampling, 200 µA/Msps
+–
+2x 12-bit DAC output channels, low-power
+sample and hold
+–
+1x operational amplifier with built-in PGA
+–
+2x ultra-low-power comparators
+
+•
+Performance benchmark
+–
+1.25 DMIPS/MHz (Drystone 2.1)
+–
+273.55 CoreMark® (3.42 CoreMark/MHz @
+80 MHz)
+
+•
+Energy benchmark
+–
+176.7 ULPBench® score
+
+•
+14x communication interfaces
+–
+USB 2.0 full-speed crystal less solution
+with LPM and BCD
+–
+1x SAI (serial audio interface)
+–
+2x I2C FM+(1 Mbit/s), SMBus/PMBus
+–
+3x USARTs (ISO 7816, LIN, IrDA, modem)
+–
+1x LPUART (Stop 2 wake-up)
+–
+2x SPIs (and 1x Quad SPI)
+–
+CAN (2.0B Active)
+–
+SWPMI single wire protocol master I/F
+–
+IRTIM (Infrared interface)",2,"Declara execução Flash equivalente a zero wait state até 80 MHz (efeito, sem mecanismo).",NÃO,recuperado_top5
+q_v3_s01,How does the ART Accelerator improve STM32L432xx instruction execution from Flash at high CPU frequencies?,stm32l432kc,stm32l432kc_p003_c003,stm32l432kc,3,3.2 Adaptive real-time memory accelerator (ART Accelerator™) . . . . . . . . . 14,text,"3.2
+Adaptive real-time memory accelerator (ART Accelerator™) . . . . . . . . . 14",0,Não descreve o funcionamento/benefício ART para execução da Flash.,NÃO,recuperado_top5
+q_v3_s01,How does the ART Accelerator improve STM32L432xx instruction execution from Flash at high CPU frequencies?,stm32l432kc,stm32l432kc_p007_c004,stm32l432kc,7,7.2.1 Reference document . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 152,text,". . . . . . . . . . . . . . . . . . . . . . . 66
+Table 20.
+Thermal characteristics. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+Table 21.
+General operating conditions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
+Table 22.
+Operating conditions at power-up / power-down . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
+Table 23.
+Embedded reset and power control block characteristics. . . . . . . . . . . . . . . . . . . . . . . . . . 68
+Table 24.
+Embedded internal voltage reference. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
+Table 25.
+Current consumption in Run and Low-power run modes, code with data processing
+running from Flash, ART enable (Cache ON Prefetch OFF) . . . . . . . . . . . . . . . . . . . . . . . 73
+Table 26.
+Current consumption in Run and Low-power run modes, code with data processing
+running from Flash, ART disable . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74
+Table 27.
+Current consumption in Run and Low-power run modes, code with data processing
+running from",0,Não descreve o funcionamento/benefício ART para execução da Flash.,NÃO,recuperado_top5
+q_v3_s01,How does the ART Accelerator improve STM32L432xx instruction execution from Flash at high CPU frequencies?,stm32l432kc,stm32l432kc_p007_c005,stm32l432kc,7,7.2.1 Reference document . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 152,text,"SRAM1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 75
+Table 28.
+Typical current consumption in Run and Low-power run modes, with different codes
+running from Flash, ART enable (Cache ON Prefetch OFF) . . . . . . . . . . . . . . . . . . . . . . . 76
+Table 29.
+Typical current consumption in Run and Low-power run modes, with different codes
+running from Flash, ART disable . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+Table 30.
+Typical current consumption in Run and Low-power run modes, with different codes
+running from SRAM1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+Table 31.
+Current consumption in Sleep and Low-power sleep modes, Flash ON . . . . . . . . . . . . . . 78
+Table 32.
+Current consumption in Low-power sleep modes, Flash in power-down . . . . . . . . . . . . . . 79
+Table 33.
+Current consumption in Stop 2 mode . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 79
+Table 34.
+Current consumption in Stop 1 mode . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .",0,Não descreve o funcionamento/benefício ART para execução da Flash.,NÃO,recuperado_top5
+q_v3_s01,How does the ART Accelerator improve STM32L432xx instruction execution from Flash at high CPU frequencies?,stm32l432kc,stm32l432kc_p011_c001,stm32l432kc,11,7.2.1 Reference document . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 152,text,"STM32L432KB STM32L432KC
+Description
+
+2
+Description
+
+The STM32L432xx devices are the ultra-low-power microcontrollers based on the high-
+performance Arm® Cortex®-M4 32-bit RISC core operating at a frequency of up to 80 MHz.
+The Cortex-M4 core features a Floating point unit (FPU) single precision which supports all
+Arm® single-precision data-processing instructions and data types. It also implements a full
+set of DSP instructions and a memory protection unit (MPU) which enhances application
+security.
+
+The STM32L432xx devices embed high-speed memories (Flash memory up to 256 Kbyte,
+64 Kbyte of SRAM), a Quad SPI flash memories interface and an extensive range of
+enhanced I/Os and peripherals connected to two APB buses, two AHB buses and a 32-bit
+multi-AHB bus matrix.
+
+The STM32L432xx devices embed several protection mechanisms for embedded Flash
+memory and SRAM: readout protection, write protection, proprietary code readout
+protection and Firewall.",1,"Apresenta contexto do MCU/execução Flash, sem explicar prefetch+branch cache e impacto.",NÃO,recuperado_top5
+q_v3_s01,How does the ART Accelerator improve STM32L432xx instruction execution from Flash at high CPU frequencies?,stm32l432kc,stm32l432kc_p014_c003,stm32l432kc,14,3.2 Adaptive real-time memory accelerator (ART Accelerator™),text,"3.2
+Adaptive real-time memory accelerator (ART Accelerator™)
+
+The ART Accelerator™ is a memory accelerator which is optimized for STM32 industry-
+standard Arm® Cortex®-M4 processors. It balances the inherent performance advantage of
+the Arm® Cortex®-M4 over Flash memory technologies, which normally requires the
+processor to wait for the Flash memory at higher frequencies.
+
+To release the processor near 100 DMIPS performance at 80MHz, the accelerator
+implements an instruction prefetch queue and branch cache, which increases program
+execution speed from the 64-bit Flash memory. Based on CoreMark benchmark, the
+performance achieved thanks to the ART accelerator is equivalent to 0 wait state program
+execution from Flash memory at a CPU frequency up to 80 MHz.",2,Prefetch queue e branch cache reduzem penalidade de Flash; desempenho equivalente a 0 wait states.,NÃO,recuperado_top5
+q_v3_s01,How does the ART Accelerator improve STM32L432xx instruction execution from Flash at high CPU frequencies?,stm32l432kc,stm32l432kc_p035_c001,stm32l432kc,35,3.14.2 Extended interrupt/event controller (EXTI),text,"STM32L432KB STM32L432KC
+Functional overview",0,Não descreve o funcionamento/benefício ART para execução da Flash.,NÃO,recuperado_top5
+q_v3_s01,How does the ART Accelerator improve STM32L432xx instruction execution from Flash at high CPU frequencies?,stm32l432kc,stm32l432kc_p050_c004,stm32l432kc,50,3.33.2 Embedded Trace Macrocell™,text,"3.33.2
+Embedded Trace Macrocell™
+
+The Arm® Embedded Trace Macrocell™ provides a greater visibility of the instruction and
+data flow inside the CPU core by streaming compressed data at a very high rate from the
+STM32L432xx through a small number of ETM pins to an external hardware trace port
+analyzer (TPA) device. Real-time instruction and data flow activity be recorded and then
+formatted for display on the host computer that runs the debugger software. TPA hardware
+is commercially available from common development tool vendors.
+
+The Embedded Trace Macrocell™ operates with third party debugger software tools.",0,Não descreve o funcionamento/benefício ART para execução da Flash.,NÃO,recuperado_top5
+q_v3_s01,How does the ART Accelerator improve STM32L432xx instruction execution from Flash at high CPU frequencies?,stm32l432kc,stm32l432kc_p059_c001,stm32l432kc,59,3.33.2 Embedded Trace Macrocell™,text,"STM32L432KB STM32L432KC
+Memory mapping
+
+5
+Memory mapping
+
+Figure 6. STM32L432xx memory map
+
+0xFFFF FFFF
+
+0xBFFF FFFF
+
+Reserved
+
+Cortex™-M4
+
+0xA000 1400
+
+with FPU
+
+7
+
+QUADSPI registers
+
+Internal
+Peripherals
+
+0xA000 1000
+
+0xE000 0000
+
+Reserved
+0x5FFF FFFF
+
+6
+
+0x5006 0C00
+
+AHB2
+
+0x4800 0000
+
+Reserved
+
+0xC000 0000
+
+0x4002 4400
+
+QUADSPI
+
+AHB1
+
+registers
+
+5
+
+0x4002 0000
+
+Reserved
+
+0xA000 1000
+
+0x4001 5800
+
+APB2
+
+0xA000 0000
+
+0x4001 0000
+
+QUADSPI Flash
+
+Reserved
+
+bank
+
+0x4000 9800
+
+4
+
+0x9000 0000
+
+APB1
+
+0x4000 0000
+
+0x1FFF FFFF
+
+0x8000 0000
+
+3
+
+Reserved
+
+0x6000 0000
+
+0x1FFF 7810
+
+Options Bytes
+
+2
+
+0x1FFF 7800
+
+Reserved
+
+0x1FFF 7400
+
+Peripherals
+
+OTP area
+
+0x4000 0000
+
+0x1FFF 7000
+
+System memory
+
+1
+
+0x1FFF 0000
+
+SRAM2
+0x2000 C000
+
+Reserved
+0x1000 4000
+
+SRAM1
+
+0x1000 0000
+SRAM2
+
+0x2000 0000
+
+Reserved
+
+0
+
+0x0804 0000
+
+CODE
+
+Flash memory
+
+0x0800 0000
+
+Reserved
+
+0x0000 0000
+
+0x0004 0000
+
+Flash, system memory
+or SRAM, depending on
+
+BOOT configuration
+
+0x0000 0000
+Reserved
+
+MSv36892V2
+
+62",0,Não descreve o funcionamento/benefício ART para execução da Flash.,NÃO,recuperado_top5
+q_v3_s03,"What are the STM32L432xx supply voltage ranges for VDD and VDDA, distinguishing ADC/comparator use from DAC/op-amp use?",stm32l432kc,stm32l432kc_p011_c002,stm32l432kc,11,7.2.1 Reference document . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 152,text,"The devices offer a fast 12-bit ADC (5 Msps), two comparators, one operational amplifier,
+two DAC channels, a low-power RTC, one general-purpose 32-bit timer, one 16-bit PWM
+timer dedicated to motor control, four general-purpose 16-bit timers, and two 16-bit low-
+power timers.
+
+In addition, up to 3 capacitive sensing channels are available.
+
+They also feature standard and advanced communication interfaces.
+
+•
+Two I2Cs
+
+•
+Two SPIs
+
+•
+Two USARTs and one Low-Power UART.
+
+•
+One SAI (Serial Audio Interfaces)
+
+•
+One CAN
+
+•
+One USB full-speed device crystal less
+
+•
+One SWPMI (Single Wire Protocol Master Interface)
+
+The STM32L432xx operates in the -40 to +85 °C (+105 °C junction), -40 to +105 °C
+(+125 °C junction) and -40 to +125 °C (+130 °C junction) temperature ranges from a 1.71 to
+3.6 V power supply. A comprehensive set of power-saving modes allows the design of low-
+power applications.
+
+Some independent power supplies are supported: analog independent supply input for
+ADC, DAC, OPAMP and comparators
+
+The STM32L432xx family offers a single 32-pin package.",0,Não apresenta os limites solicitados VDD e VDDA por periférico.,NÃO,recuperado_top5
+q_v3_s03,"What are the STM32L432xx supply voltage ranges for VDD and VDDA, distinguishing ADC/comparator use from DAC/op-amp use?",stm32l432kc,stm32l432kc_p017_c005,stm32l432kc,17,3.9.1 Power supply schemes,text,"3.9.1
+Power supply schemes
+
+•
+VDD = 1.71 to 3.6 V: external power supply for I/Os (VDDIO1), the internal regulator and
+the system analog such as reset, power management and internal clocks. It is provided
+externally through VDD pins.
+
+•
+VDDA = 1.62 V (ADCs/COMPs) / 1.8 (DAC/OPAMP) to 3.6 V: external analog power
+supply for ADCs, DAC, OPAMPs, Comparators and Voltage reference buffer. The VDDA
+voltage level is independent from the VDD voltage.
+
+Note:
+When the functions supplied by VDDA or VDDUSB are not used, these supplies should
+preferably be shorted to VDD.
+
+Note:
+If these supplies are tied to ground, the I/Os supplied by these power supplies are not 5 V
+tolerant (refer to Table 18: Voltage characteristics).
+
+Note:
+VDDIOx is the I/Os general purpose digital functions supply. VDDIOx represents VDDIO1, with
+VDDIO1 = VDD.
+
+50",2,"VDD 1,71–3,6 V; VDDA 1,62 V para ADC/COMP e 1,8 V para DAC/OPAMP, até 3,6 V.",NÃO,recuperado_top5
+q_v3_s03,"What are the STM32L432xx supply voltage ranges for VDD and VDDA, distinguishing ADC/comparator use from DAC/op-amp use?",stm32l432kc,stm32l432kc_p018_c001,stm32l432kc,18,3.9.1 Power supply schemes,text,"Figure 2. Power supply overview
+
+VDDA domain
+
+A/D converters
+Comparators
+D/A converters
+Operational amplifiers
+Voltage reference buffer
+
+VDDA
+
+VSSA
+
+USB transceivers
+VDDUSB",1,"Contextualiza VDDA e periféricos analógicos, sem dar todos os intervalos por função.",NÃO,recuperado_top5
+q_v3_s03,"What are the STM32L432xx supply voltage ranges for VDD and VDDA, distinguishing ADC/comparator use from DAC/op-amp use?",stm32l432kc,stm32l432kc_p037_c002,stm32l432kc,37,3.17 Comparators (COMP),text,"3.17
+Comparators (COMP)
+
+The STM32L432xx devices embed two rail-to-rail comparators with programmable
+reference voltage (internal or external), hysteresis and speed (low speed for low-power) and
+with selectable output polarity.
+
+The reference voltage can be one of the following:
+
+•
+External I/O
+
+•
+DAC output channels
+
+•
+Internal reference voltage or submultiple (1/4, 1/2, 3/4).
+
+All comparators can wake up from Stop mode, generate interrupts and breaks for the timers
+and can be also combined into a window comparator.",0,Não apresenta os limites solicitados VDD e VDDA por periférico.,NÃO,recuperado_top5
+q_v3_s03,"What are the STM32L432xx supply voltage ranges for VDD and VDDA, distinguishing ADC/comparator use from DAC/op-amp use?",stm32l432kc,stm32l432kc_p067_c004,stm32l432kc,67,6.3.1 General operating conditions,table,"Table 21. General operating conditions
+
+|Symbol|Parameter|Conditions|Min|Max|Unit|
+|---|---|---|---|---|---|
+|fHCLK|Internal AHB clock frequency|-|0|80|MHz|
+|fPCLK1|Internal APB1 clock frequency|-|0|80|80|
+|fPCLK2|Internal APB2 clock frequency|-|0|80|80|
+|VDD|Standard operating voltage|-|1.71<br>(1)|3.6|V|
+|VDDA|Analog supply voltage|ADC or COMP used|1.62|3.6|V|
+|VDDA|Analog supply voltage|DAC or OPAMP used|1.8|1.8|1.8|
+|VDDA|Analog supply voltage|ADC, DAC, OPAMP, COMP not<br>used|0|0|0|
+|VDDUSB|USB supply voltage|USB used|3.0|3.6|V|
+|VDDUSB|USB supply voltage|USB not used|0|3.6|3.6|
+|VIN|I/O input voltage|TT_xx I/O|-0.3|VDDIOx+0.3|V|
+|VIN|I/O input voltage|All I/O except TT_xx|-0.3|Min(Min(VDD, VDDA, <br>VDDUSB)+3.6 V,<br>5.5 V)(2)(3)|Min(Min(VDD, VDDA, <br>VDDUSB)+3.6 V,<br>5.5 V)(2)(3)|
+|PD|Power dissipation at<br>TA = 125 °C for suffix 3(4)|UFQFPN32|-|128|mW|
+|PD|Power dissipation at<br>TA = 85 °C for suffix 6<br>or<br>TA = 105 °C for suffix 7(4)|UFQFPN32|-|523|mW|
+|TA|Ambient temperature for the<br>suffix 6 version|Maximum power dissipation|–40|85|°C|
+|TA|Ambient temperature for the<br>suffix 6 version|Low-power dissipation(5)|–40|105|105|
+|TA|Ambient temperature for the<br>suffix 7 version|Maximum power dissipation|–40|105|105|
+|TA|Ambient temperature for the<br>suffix 7 version|Low-power dissipation(5)|–40|125|125|
+|TA|Ambient temperature for the<br>suffix 3 version|Maximum power dissipation|–40|125|125|
+|TA|Ambient temperature for the<br>suffix 3 version|Low-power dissipation(5)|–40|130|130|
+|TJ|Junction temperature range|Suffix 6 version|–40|105|°C|
+|TJ|Junction temperature range|Suffix 7 version|–40|125|125|
+|TJ|Junction temperature range|Suffix 3 version|–40|130|130|",2,Tabela confirma VDD e VDDA para ADC/COMP; linha DAC/OPAMP tem extração desalinhada.,SIM,recuperado_top5
+q_v3_s03,"What are the STM32L432xx supply voltage ranges for VDD and VDDA, distinguishing ADC/comparator use from DAC/op-amp use?",stm32l432kc,stm32l432kc_p114_c003,stm32l432kc,114,6.3.18 Analog-to-Digital converter characteristics,table,"Table 63. ADC characteristics(1) (2)
+
+|Symbol|Parameter|Conditions|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|
+|VDDA|Analog supply voltage|-|1.62|-|3.6|V|
+|VREF+|Positive reference voltage|VDDA ≥ 2 V|2|-|VDDA|V|
+|VREF+|Positive reference voltage|VDDA < 2 V|VDDA|VDDA|VDDA|V|
+|VREF-|Negative reference<br>voltage|-|VSSA|VSSA|VSSA|V|
+|fADC|ADC clock frequency|Range 1|0.14|-|80|MHz|
+|fADC|ADC clock frequency|Range 2|0.14|-|26|26|
+|fs|Sampling rate for FAST<br>channels|Resolution = 12 bits|-|-|5.33|Msps|
+|fs|Sampling rate for FAST<br>channels|Resolution = 10 bits|-|-|6.15|6.15|
+|fs|Sampling rate for FAST<br>channels|Resolution = 8 bits|-|-|7.27|7.27|
+|fs|Sampling rate for FAST<br>channels|Resolution = 6 bits|-|-|8.88|8.88|
+|fs|Sampling rate for SLOW<br>channels|Resolution = 12 bits|-|-|4.21|4.21|
+|fs|Sampling rate for SLOW<br>channels|Resolution = 10 bits|-|-|4.71|4.71|
+|fs|Sampling rate for SLOW<br>channels|Resolution = 8 bits|-|-|5.33|5.33|
+|fs|Sampling rate for SLOW<br>channels|Resolution = 6 bits|-|-|6.15|6.15|
+|fTRIG|External trigger frequency|fADC = 80 MHz<br>Resolution = 12 bits|-|-|5.33|MHz|
+|fTRIG|External trigger frequency|Resolution = 12 bits|-|-|15|1/fADC|
+|VCMIN|Input common mode|Differential mode|(VREF++<br>VREF-)/2<br>- 0.18|(VREF++<br>VREF-)/2|(VREF++<br>VREF-)/2<br>+ 0.18|V|
+|VAIN (3)|Conversion voltage<br>range(2)|-|0|-|VREF+|V|
+|RAIN|External input impedance|-|-|-|50|kΩ|
+|CADC|Internal sample and hold<br>capacitor|-|-|5|-|pF|
+|tSTAB|Power-up time|-|1|1|1|conversion<br>cycle|
+|tCAL|Calibration time|fADC = 80 MHz|1.45|1.45|1.45|µs|
+|tCAL|Calibration time|-|116|116|116|1/fADC|",1,"Contextualiza VDDA e periféricos analógicos, sem dar todos os intervalos por função.",NÃO,recuperado_top5
+q_v3_s03,"What are the STM32L432xx supply voltage ranges for VDD and VDDA, distinguishing ADC/comparator use from DAC/op-amp use?",stm32l432kc,stm32l432kc_p123_c002,stm32l432kc,123,6.3.18 Analog-to-Digital converter characteristics,table,"Table 67. ADC accuracy - limited test conditions 3(1)(2)(3) (continued)
+
+|Sym-<br>bol|Parameter|Conditions(4)|Col4|Col5|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|---|---|
+|THD|Total<br>harmonic<br>distortion|ADC clock frequency ≤<br>80 MHz,<br>Sampling rate ≤ 5.33 Msps,<br>1.65 V ≤ VDDA = VREF+ ≤<br>3.6 V,<br>Voltage scaling Range 1|Single<br>ended|Fast channel (max speed)|-|-69|-67|dB|
+|THD|Total<br>harmonic<br>distortion|ADC clock frequency ≤<br>80 MHz,<br>Sampling rate ≤ 5.33 Msps,<br>1.65 V ≤ VDDA = VREF+ ≤<br>3.6 V,<br>Voltage scaling Range 1|Single<br>ended|Slow channel (max speed)|-|-71|-67|-67|
+|THD|Total<br>harmonic<br>distortion|ADC clock frequency ≤<br>80 MHz,<br>Sampling rate ≤ 5.33 Msps,<br>1.65 V ≤ VDDA = VREF+ ≤<br>3.6 V,<br>Voltage scaling Range 1|Differential|Fast channel (max speed)|-|-72|-71|-71|
+|THD|Total<br>harmonic<br>distortion|ADC clock frequency ≤<br>80 MHz,<br>Sampling rate ≤ 5.33 Msps,<br>1.65 V ≤ VDDA = VREF+ ≤<br>3.6 V,<br>Voltage scaling Range 1|Differential|Slow channel (max speed)|-|-72|-71|-71|",0,Não apresenta os limites solicitados VDD e VDDA por periférico.,NÃO,recuperado_top5
+q_v3_s03,"What are the STM32L432xx supply voltage ranges for VDD and VDDA, distinguishing ADC/comparator use from DAC/op-amp use?",stm32l432kc,stm32l432kc_p125_c002,stm32l432kc,125,6.3.18 Analog-to-Digital converter characteristics,table,"Table 68. ADC accuracy - limited test conditions 4(1)(2)(3) (continued)
+
+|Sym-<br>bol|Parameter|Conditions(4)|Col4|Col5|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|---|---|
+|THD|Total<br>harmonic<br>distortion<br> <br> <br> <br> <br>|ADC clock frequency ≤<br>26 MHz,<br>1.65 V ≤ VDDA = VREF+ ≤<br>3.6 V,<br>Voltage scaling Range 2|Single<br>ended|Fast channel (max speed)|-|-71|-69|dB|
+|THD|Total<br>harmonic<br>distortion<br> <br> <br> <br> <br>|ADC clock frequency ≤<br>26 MHz,<br>1.65 V ≤ VDDA = VREF+ ≤<br>3.6 V,<br>Voltage scaling Range 2|Single<br>ended|Slow channel (max speed)|-|-71|-69|-69|
+|THD|Total<br>harmonic<br>distortion<br> <br> <br> <br> <br>|ADC clock frequency ≤<br>26 MHz,<br>1.65 V ≤ VDDA = VREF+ ≤<br>3.6 V,<br>Voltage scaling Range 2|Differential|Fast channel (max speed)|-|-73|-72|-72|
+|THD|Total<br>harmonic<br>distortion<br> <br> <br> <br> <br>|ADC clock frequency ≤<br>26 MHz,<br>1.65 V ≤ VDDA = VREF+ ≤<br>3.6 V,<br>Voltage scaling Range 2|Differential|Slow channel (max speed)|-|-73|-72|-72|",0,Não apresenta os limites solicitados VDD e VDDA por periférico.,NÃO,recuperado_top5
+q_v3_s03,"What are the STM32L432xx supply voltage ranges for VDD and VDDA, distinguishing ADC/comparator use from DAC/op-amp use?",stm32l432kc,stm32l432kc_p127_c003,stm32l432kc,127,6.3.19 Digital-to-Analog converter characteristics,table,"Table 69. DAC characteristics(1)
+
+|Symbol|Parameter|Conditions|Col4|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|---|
+|VDDA|Analog supply voltage for<br>DAC ON|DAC output buffer OFF (no resistive<br>load on DAC1_OUTx pin or internal<br>connection)|DAC output buffer OFF (no resistive<br>load on DAC1_OUTx pin or internal<br>connection)|1.71|-|3.6|V|
+|VDDA|Analog supply voltage for<br>DAC ON|Other modes|Other modes|1.80|-|-|-|
+|VREF+|Positive reference voltage|DAC output buffer OFF (no resistive<br>load on DAC1_OUTx pin or internal<br>connection)|DAC output buffer OFF (no resistive<br>load on DAC1_OUTx pin or internal<br>connection)|1.71|-|VDDA|VDDA|
+|VREF+|Positive reference voltage|Other modes|Other modes|1.80|-|-|-|
+|VREF-|Negative reference<br>voltage|-|-|VSSA|VSSA|VSSA|VSSA|
+|RL|Resistive load|DAC output<br>buffer ON|connected to VSSA|5|-|-|kΩ|
+|RL|Resistive load|DAC output<br>buffer ON|connected to VDDA|25|-|-|-|
+|RO|Output Impedance|DAC output buffer OFF|DAC output buffer OFF|9.6|11.7|13.8|kΩ|
+|RBON|Output impedance sample<br>and hold mode, output<br>buffer ON|VDD = 2.7 V|VDD = 2.7 V|-|-|2|kΩ|
+|RBON|Output impedance sample<br>and hold mode, output<br>buffer ON|VDD = 2.0 V|VDD = 2.0 V|-|-|3.5|3.5|
+|RBOFF|Output impedance sample<br>and hold mode, output<br>buffer OFF|VDD = 2.7 V|VDD = 2.7 V|-|-|16.5|kΩ|
+|RBOFF|Output impedance sample<br>and hold mode, output<br>buffer OFF|VDD = 2.0 V|VDD = 2.0 V|-|-|18.0|18.0|
+|CL|Capacitive load|DAC output buffer ON|DAC output buffer ON|-|-|50|pF|
+|CSH|CSH|Sample and hold mode|Sample and hold mode|-|0.1|1|µF|
+|VDAC_OUT|Voltage on DAC1_OUTx<br>output|DAC output buffer ON|DAC output buffer ON|0.2|-|VREF+<br>– 0.2|V|
+|VDAC_OUT|Voltage on DAC1_OUTx<br>output|DAC output buffer OFF|DAC output buffer OFF|0|-|VREF+|VREF+|
+|tSETTLING|Settling time (full scale: for<br>a 12-bit code transition<br>between the lowest and<br>the highest input codes<br>when DAC1_OUTx<br>reaches final value<br>±0.5LSB, ±1 LSB, ±2 LSB,<br>±4 LSB, ±8 LSB)|Normal mode<br>DAC output<br>buffer ON<br>CL ≤ 50 pF,<br>RL ≥ 5 kΩ|±0.5 LSB|-|1.7|3|µs|
+|tSETTLING|Settling time (full scale: for<br>a 12-bit code transition<br>between the lowest and<br>the highest input codes<br>when DAC1_OUTx<br>reaches final value<br>±0.5LSB, ±1 LSB, ±2 LSB,<br>±4 LSB, ±8 LSB)|Normal mode<br>DAC output<br>buffer ON<br>CL ≤ 50 pF,<br>RL ≥ 5 kΩ|±1 LSB|-|1.6|2.9|2.9|
+|tSETTLING|Settling time (full scale: for<br>a 12-bit code transition<br>between the lowest and<br>the highest input codes<br>when DAC1_OUTx<br>reaches final value<br>±0.5LSB, ±1 LSB, ±2 LSB,<br>±4 LSB, ±8 LSB)|Normal mode<br>DAC output<br>buffer ON<br>CL ≤ 50 pF,<br>RL ≥ 5 kΩ|±2 LSB|-|1.55|2.85|2.85|
+|tSETTLING|Settling time (full scale: for<br>a 12-bit code transition<br>between the lowest and<br>the highest input codes<br>when DAC1_OUTx<br>reaches final value<br>±0.5LSB, ±1 LSB, ±2 LSB,<br>±4 LSB, ±8 LSB)|Normal mode<br>DAC output<br>buffer ON<br>CL ≤ 50 pF,<br>RL ≥ 5 kΩ|±4 LSB|-|1.48|2.8|2.8|
+|tSETTLING|Settling time (full scale: for<br>a 12-bit code transition<br>between the lowest and<br>the highest input codes<br>when DAC1_OUTx<br>reaches final value<br>±0.5LSB, ±1 LSB, ±2 LSB,<br>±4 LSB, ±8 LSB)|Normal mode<br>DAC output<br>buffer ON<br>CL ≤ 50 pF,<br>RL ≥ 5 kΩ|±8 LSB|-|1.4|2.75|2.75|
+|tSETTLING|Settling time (full scale: for<br>a 12-bit code transition<br>between the lowest and<br>the highest input codes<br>when DAC1_OUTx<br>reaches final value<br>±0.5LSB, ±1 LSB, ±2 LSB,<br>±4 LSB, ±8 LSB)|Normal mode DAC output buffer<br>OFF, ±1LSB, CL = 10 pF|Normal mode DAC output buffer<br>OFF, ±1LSB, CL = 10 pF|-|2|2.5|2.5|
+|tWAKEUP<br>(2)|Wakeup time from off state<br>(setting the ENx bit in the<br>DAC Control register) until<br>final value ±1 LSB|Normal mode DAC output buffer ON<br>CL ≤ 50 pF, RL ≥ 5 kΩ|Normal mode DAC output buffer ON<br>CL ≤ 50 pF, RL ≥ 5 kΩ|-|4.2|7.5|µs|
+|tWAKEUP<br>(2)|Wakeup time from off state<br>(setting the ENx bit in the<br>DAC Control register) until<br>final value ±1 LSB|Normal mode DAC output buffer<br>OFF, CL ≤ 10 pF|Normal mode DAC output buffer<br>OFF, CL ≤ 10 pF|-|2|5|5|
+|PSRR|VDDA supply rejection ratio|Normal mode DAC output buffer ON<br>CL ≤ 50 pF, RL = 5 kΩ, DC|Normal mode DAC output buffer ON<br>CL ≤ 50 pF, RL = 5 kΩ, DC|-|-80|-28|dB|",2,"Tabela DAC traz limite mínimo VDDA por modo (1,80 V em outros modos; 1,71 V buffer off).",SIM,recuperado_top5
+q_v3_s03,"What are the STM32L432xx supply voltage ranges for VDD and VDDA, distinguishing ADC/comparator use from DAC/op-amp use?",stm32l432kc,stm32l432kc_p132_c003,stm32l432kc,132,6.3.20 Comparator characteristics,table,"Table 71. COMP characteristics(1)
+
+|Symbol|Parameter|Conditions|Col4|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|---|
+|VDDA|Analog supply voltage|-|-|1.62|-|3.6|V|
+|VIN|Comparator input voltage<br>range|-|-|0|-|VDDA|VDDA|
+|VBG<br>(2)|Scaler input voltage|-|-|VREFINT|VREFINT|VREFINT|VREFINT|
+|VSC|Scaler offset voltage|-|-|-|±5|±10|mV|
+|IDDA(SCALER)|Scaler static consumption<br>from VDDA|BRG_EN=0 (bridge disable)|BRG_EN=0 (bridge disable)|-|200|300|nA|
+|IDDA(SCALER)|Scaler static consumption<br>from VDDA|BRG_EN=1 (bridge enable)|BRG_EN=1 (bridge enable)|-|0.8|1|µA|
+|tSTART_SCALER|Scaler startup time|-|-|-|100|200|µs|
+|tSTART|Comparator startup time to<br>reach propagation delay<br>specification|High-speed<br>mode|VDDA ≥ 2.7 V|-|-|5|µs|
+|tSTART|Comparator startup time to<br>reach propagation delay<br>specification|High-speed<br>mode|VDDA < 2.7 V|-|-|7|7|
+|tSTART|Comparator startup time to<br>reach propagation delay<br>specification|Medium mode|VDDA ≥ 2.7 V|-|-|15|15|
+|tSTART|Comparator startup time to<br>reach propagation delay<br>specification|Medium mode|VDDA < 2.7 V|-|-|25|25|
+|tSTART|Comparator startup time to<br>reach propagation delay<br>specification|Ultra-low-power mode|Ultra-low-power mode|-|-|40|40|
+|tD<br>(3)|Propagation delay with<br>100 mV overdrive|High-speed<br>mode|VDDA ≥ 2.7 V|-|55|80|ns|
+|tD<br>(3)|Propagation delay with<br>100 mV overdrive|High-speed<br>mode|VDDA < 2.7 V|-|65|100|100|
+|tD<br>(3)|Propagation delay with<br>100 mV overdrive|Medium mode|Medium mode|-|0.55|0.9|µs|
+|tD<br>(3)|Propagation delay with<br>100 mV overdrive|Ultra-low-power mode|Ultra-low-power mode|-|4|7|7|
+|Voffset|Comparator offset error|Full common<br>mode range|-|-|±5|±20|mV|
+|Vhys|Comparator hysteresis|No hysteresis|No hysteresis|-|0|-|mV|
+|Vhys|Comparator hysteresis|Low hysteresis|Low hysteresis|-|8|-|-|
+|Vhys|Comparator hysteresis|Medium hysteresis|Medium hysteresis|-|15|-|-|
+|Vhys|Comparator hysteresis|High hysteresis|High hysteresis|-|27|-|-|",1,"Contextualiza VDDA e periféricos analógicos, sem dar todos os intervalos por função.",NÃO,recuperado_top5
+q_v3_s05,"Can STM32L432xx timers trigger ADC/DAC conversions in Low-power Run and Low-power Sleep, and is that connection supported in Stop 2?",stm32l432kc,stm32l432kc_p007_c005,stm32l432kc,7,7.2.1 Reference document . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 152,text,"SRAM1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 75
+Table 28.
+Typical current consumption in Run and Low-power run modes, with different codes
+running from Flash, ART enable (Cache ON Prefetch OFF) . . . . . . . . . . . . . . . . . . . . . . . 76
+Table 29.
+Typical current consumption in Run and Low-power run modes, with different codes
+running from Flash, ART disable . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+Table 30.
+Typical current consumption in Run and Low-power run modes, with different codes
+running from SRAM1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+Table 31.
+Current consumption in Sleep and Low-power sleep modes, Flash ON . . . . . . . . . . . . . . 78
+Table 32.
+Current consumption in Low-power sleep modes, Flash in power-down . . . . . . . . . . . . . . 79
+Table 33.
+Current consumption in Stop 2 mode . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 79
+Table 34.
+Current consumption in Stop 1 mode . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .",0,Não informa a disponibilidade do trigger TIMx→ADC/DAC nos modos pedidos.,NÃO,recuperado_top5
+q_v3_s05,"Can STM32L432xx timers trigger ADC/DAC conversions in Low-power Run and Low-power Sleep, and is that connection supported in Stop 2?",stm32l432kc,stm32l432kc_p011_c002,stm32l432kc,11,7.2.1 Reference document . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 152,text,"The devices offer a fast 12-bit ADC (5 Msps), two comparators, one operational amplifier,
+two DAC channels, a low-power RTC, one general-purpose 32-bit timer, one 16-bit PWM
+timer dedicated to motor control, four general-purpose 16-bit timers, and two 16-bit low-
+power timers.
+
+In addition, up to 3 capacitive sensing channels are available.
+
+They also feature standard and advanced communication interfaces.
+
+•
+Two I2Cs
+
+•
+Two SPIs
+
+•
+Two USARTs and one Low-Power UART.
+
+•
+One SAI (Serial Audio Interfaces)
+
+•
+One CAN
+
+•
+One USB full-speed device crystal less
+
+•
+One SWPMI (Single Wire Protocol Master Interface)
+
+The STM32L432xx operates in the -40 to +85 °C (+105 °C junction), -40 to +105 °C
+(+125 °C junction) and -40 to +125 °C (+130 °C junction) temperature ranges from a 1.71 to
+3.6 V power supply. A comprehensive set of power-saving modes allows the design of low-
+power applications.
+
+Some independent power supplies are supported: analog independent supply input for
+ADC, DAC, OPAMP and comparators
+
+The STM32L432xx family offers a single 32-pin package.",0,Não informa a disponibilidade do trigger TIMx→ADC/DAC nos modos pedidos.,NÃO,recuperado_top5
+q_v3_s05,"Can STM32L432xx timers trigger ADC/DAC conversions in Low-power Run and Low-power Sleep, and is that connection supported in Stop 2?",stm32l432kc,stm32l432kc_p020_c002,stm32l432kc,20,3.9.3 Voltage regulator,text,"3.9.3
+Voltage regulator
+
+Two embedded linear voltage regulators supply most of the digital circuitries: the main
+regulator (MR) and the low-power regulator (LPR).
+
+•
+The MR is used in the Run and Sleep modes and in the Stop 0 mode.
+
+•
+The LPR is used in Low-Power Run, Low-Power Sleep, Stop 1 and Stop 2 modes. It is
+also used to supply the 16 Kbyte SRAM2 in Standby with SRAM2 retention.
+
+•
+Both regulators are in power-down in Standby and Shutdown modes: the regulator
+output is in high impedance, and the kernel circuitry is powered down thus inducing
+zero consumption.
+
+The ultralow-power STM32L432xx supports dynamic voltage scaling to optimize its power
+consumption in run mode. The voltage from the Main Regulator that supplies the logic
+(VCORE) can be adjusted according to the system’s maximum operating frequency.
+
+There are two power consumption ranges:
+
+•
+Range 1 with the CPU running at up to 80 MHz.
+
+•
+Range 2 with a maximum CPU frequency of 26 MHz. All peripheral clocks are also
+limited to 26 MHz.
+
+The VCORE can be supplied by the low-power regulator, the main regulator being switched
+off. The system is then in Low-power run mode.",1,"Contextualiza low-power modes ou interconexões, mas não a linha TIMx→ADCx/DAC1 por modo.",NÃO,recuperado_top5
+q_v3_s05,"Can STM32L432xx timers trigger ADC/DAC conversions in Low-power Run and Low-power Sleep, and is that connection supported in Stop 2?",stm32l432kc,stm32l432kc_p021_c002,stm32l432kc,21,3.9.4 Low-power modes,table,"|Mode|Regulator(1)|CPU|Flash|SRAM|Clocks|DMA & Peripherals(2)|Wakeup source|Consumption(3)|Wakeup time|
+|---|---|---|---|---|---|---|---|---|---|
+|Run|MR range 1|Yes|ON(4)|ON|Any|All|N/A|97 µA/MHz|N/A|
+|Run|MR range2|MR range2|MR range2|MR range2|MR range2|All except USB_FS, RNG|All except USB_FS, RNG|84 µA/MHz|84 µA/MHz|
+|LPRun|LPR|Yes|ON(4)|ON|Any<br>except<br>PLL|All except USB_FS, RNG|N/A|94 µA/MHz|to Range 1: 4 µs<br>to Range 2: 64 µs|
+|Sleep|MR range 1|No|ON(4)|ON(5)|Any|All|Any interrupt or<br>event|28 µA/MHz|6 cycles|
+|Sleep|MR range2|MR range2|MR range2|MR range2|MR range2|All except USB_FS, RNG|All except USB_FS, RNG|26 µA/MHz|26 µA/MHz|
+|LPSleep|LPR|No|ON(4)|ON(5)|Any<br>except<br>PLL|All except USB_FS, RNG|Any interrupt or<br>event|29 µA/MHz|6 cycles|
+|Stop 0|MR Range 1|No|OFF|ON|LSE<br>LSI|BOR, PVD, PVM<br>RTC, IWDG<br>COMPx (x=1,2)<br>DAC1<br>OPAMPx (x=1)<br>USARTx (x=1,2)(6)<br>LPUART1(6)<br>I2Cx (x=1,3)(7)<br>LPTIMx (x=1,2)<br>***<br>All other peripherals are<br>frozen.|Reset pin, all I/Os<br>BOR, PVD, PVM<br>RTC, IWDG<br>COMPx (x=1..2)<br>USARTx (x=1,2)(6)<br>LPUART1(6)<br>I2Cx (x=1,3)(7)<br>LPTIMx (x=1,2)<br>USB_FS(8)<br>SWPMI1(9)|108 µA|2.4 µs in SRAM<br>4.1 µs in Flash|
+|Stop 0|MR Range 2|MR Range 2|MR Range 2|MR Range 2|MR Range 2|MR Range 2|MR Range 2|108 µA|108 µA|",1,"Contextualiza low-power modes ou interconexões, mas não a linha TIMx→ADCx/DAC1 por modo.",NÃO,recuperado_top5
+q_v3_s05,"Can STM32L432xx timers trigger ADC/DAC conversions in Low-power Run and Low-power Sleep, and is that connection supported in Stop 2?",stm32l432kc,stm32l432kc_p024_c001,stm32l432kc,24,0.20 µA w/o RTC,text,"By default, the microcontroller is in Run mode after a system or a power Reset. It is up to the
+user to select one of the low-power modes described below:
+
+•
+Sleep mode
+
+In Sleep mode, only the CPU is stopped. All peripherals continue to operate and can
+wake up the CPU when an interrupt/event occurs.
+
+•
+Low-power run mode
+
+This mode is achieved with VCORE supplied by the low-power regulator to minimize the
+regulator's operating current. The code can be executed from SRAM or from Flash,
+and the CPU frequency is limited to 2 MHz. The peripherals with independent clock can
+be clocked by HSI16.
+
+•
+Low-power sleep mode
+
+This mode is entered from the low-power run mode. Only the CPU clock is stopped.
+When wakeup is triggered by an event or an interrupt, the system reverts to the low-
+power run mode.
+
+•
+Stop 0, Stop 1 and Stop 2 modes
+
+Stop mode achieves the lowest power consumption while retaining the content of
+SRAM and registers. All clocks in the VCORE domain are stopped, the PLL, the MSI RC
+and the HSI16 RC are disabled. The LSE or LSI is still running.
+
+The RTC can remain active (Stop mode with RTC, Stop mode without RTC).",1,"Contextualiza low-power modes ou interconexões, mas não a linha TIMx→ADCx/DAC1 por modo.",NÃO,recuperado_top5
+q_v3_s05,"Can STM32L432xx timers trigger ADC/DAC conversions in Low-power Run and Low-power Sleep, and is that connection supported in Stop 2?",stm32l432kc,stm32l432kc_p028_c005,stm32l432kc,28,3.10 Interconnect matrix,table,"Table 5. STM32L432xx peripherals interconnect matrix
+
+|Interconnect source|Interconnect<br>destination|Interconnect action|Run|Sleep|Low-power run|Low-power sleep|Stop 0 / Stop 1|Stop 2|
+|---|---|---|---|---|---|---|---|---|
+|TIMx|TIMx|Timers synchronization or chaining|Y|Y|Y|Y|-|-|
+|TIMx|ADCx<br>DAC1|Conversion triggers|Y|Y|Y|Y|-|-|
+|TIMx|DMA|Memory to memory transfer trigger|Y|Y|Y|Y|-|-|
+|TIMx|COMPx|Comparator output blanking|Y|Y|Y|Y|-|-|
+|TIM15/TIM16|IRTIM|Infrared interface output generation|Y|Y|Y|Y|-|-|",2,Matriz TIMx→ADCx/DAC1: Y em LPRun/LPSleep e '-' em Stop2.,NÃO,recuperado_top5
+q_v3_s05,"Can STM32L432xx timers trigger ADC/DAC conversions in Low-power Run and Low-power Sleep, and is that connection supported in Stop 2?",stm32l432kc,stm32l432kc_p029_c002,stm32l432kc,29,3.10 Interconnect matrix,table,"Table 5. STM32L432xx peripherals interconnect matrix (continued)
+
+|Interconnect source|Interconnect<br>destination|Interconnect action|Run|Sleep|Low-power run|Low-power sleep|Stop 0 / Stop 1|Stop 2|
+|---|---|---|---|---|---|---|---|---|
+|COMPx|TIM1<br>TIM2|Timer input channel, trigger, break from<br>analog signals comparison|Y|Y|Y|Y|-|-|
+|COMPx|LPTIMERx|Low-power timer triggered by analog<br>signals comparison|Y|Y|Y|Y|Y|Y<br>(1)|
+|ADCx|TIM1|Timer triggered by analog watchdog|Y|Y|Y|Y|-|-|
+|RTC|TIM16|Timer input channel from RTC events|Y|Y|Y|Y|-|-|
+|RTC|LPTIMERx|Low-power timer triggered by RTC alarms<br>or tampers|Y|Y|Y|Y|Y|Y<br>(1)|
+|All clocks sources (internal<br>and external)|TIM2<br>TIM15, 16|Clock source used as input channel for<br>RC measurement and trimming|Y|Y|Y|Y|-|-|
+|USB|TIM2|Timer triggered by USB SOF|Y|Y|-|-|-|-|
+|CSS<br>CPU (hard fault)<br>RAM (parity error)<br>Flash memory (ECC error)<br>COMPx<br>PVD|TIM1<br>TIM15,16|Timer break|Y|Y|Y|Y|-|-|
+|GPIO|TIMx|External trigger|Y|Y|Y|Y|-|-|
+|GPIO|LPTIMERx|External trigger|Y|Y|Y|Y|Y|Y<br>(1)|
+|GPIO|ADCx<br>DAC1|Conversion external trigger|Y|Y|Y|Y|-|-|",1,"Contextualiza low-power modes ou interconexões, mas não a linha TIMx→ADCx/DAC1 por modo.",NÃO,recuperado_top5
+q_v3_s05,"Can STM32L432xx timers trigger ADC/DAC conversions in Low-power Run and Low-power Sleep, and is that connection supported in Stop 2?",stm32l432kc,stm32l432kc_p040_c005,stm32l432kc,40,3.21.4 Low-power timer (LPTIM1 and LPTIM2),text,"3.21.4
+Low-power timer (LPTIM1 and LPTIM2)
+
+The devices embed two low-power timers. These timers have an independent clock and are
+running in Stop mode if they are clocked by LSE, LSI or an external clock. They are able to
+wakeup the system from Stop mode.
+
+LPTIM1 is active in Stop 0, Stop 1 and Stop 2 modes.
+
+LPTIM2 is active in Stop 0 and Stop 1 mode.",1,"Contextualiza low-power modes ou interconexões, mas não a linha TIMx→ADCx/DAC1 por modo.",NÃO,recuperado_top5
+q_v3_s05,"Can STM32L432xx timers trigger ADC/DAC conversions in Low-power Run and Low-power Sleep, and is that connection supported in Stop 2?",stm32l432kc,stm32l432kc_p041_c001,stm32l432kc,41,3.21.4 Low-power timer (LPTIM1 and LPTIM2),text,"STM32L432KB STM32L432KC
+Functional overview
+
+This low-power timer supports the following features:
+
+•
+16-bit up counter with 16-bit autoreload register
+
+•
+16-bit compare register
+
+•
+Configurable output: pulse, PWM
+
+•
+Continuous/ one shot mode
+
+•
+Selectable software/hardware input trigger
+
+•
+Selectable clock source
+
+–
+Internal clock sources: LSE, LSI, HSI16 or APB clock
+
+–
+External clock source over LPTIM input (working even with no internal clock
+source running, used by pulse counter application).
+
+•
+Programmable digital glitch filter
+
+•
+Encoder mode (LPTIM1 only)",0,Não informa a disponibilidade do trigger TIMx→ADC/DAC nos modos pedidos.,NÃO,recuperado_top5
+q_v3_s07,"Which STM32L432xx GPIO output drive types are supported, and how can alternate-function configuration be protected against unintended writes?",stm32l432kc,stm32l432kc_p011_c001,stm32l432kc,11,7.2.1 Reference document . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 152,text,"STM32L432KB STM32L432KC
+Description
+
+2
+Description
+
+The STM32L432xx devices are the ultra-low-power microcontrollers based on the high-
+performance Arm® Cortex®-M4 32-bit RISC core operating at a frequency of up to 80 MHz.
+The Cortex-M4 core features a Floating point unit (FPU) single precision which supports all
+Arm® single-precision data-processing instructions and data types. It also implements a full
+set of DSP instructions and a memory protection unit (MPU) which enhances application
+security.
+
+The STM32L432xx devices embed high-speed memories (Flash memory up to 256 Kbyte,
+64 Kbyte of SRAM), a Quad SPI flash memories interface and an extensive range of
+enhanced I/Os and peripherals connected to two APB buses, two AHB buses and a 32-bit
+multi-AHB bus matrix.
+
+The STM32L432xx devices embed several protection mechanisms for embedded Flash
+memory and SRAM: readout protection, write protection, proprietary code readout
+protection and Firewall.",0,Não apresenta modos de saída GPIO e mecanismo de travamento das funções alternativas.,NÃO,recuperado_top5
+q_v3_s07,"Which STM32L432xx GPIO output drive types are supported, and how can alternate-function configuration be protected against unintended writes?",stm32l432kc,stm32l432kc_p013_c001,stm32l432kc,13,7.2.1 Reference document . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 152,text,"STM32L432KB STM32L432KC
+Description
+
+Figure 1. STM32L432xx block diagram
+
+NJTRST, JTDI,
+
+D0[3:0],
+CLK0,
+CS
+
+Quad SPI memory interface
+
+JTCK/SWCLK
+
+JTAG & SW
+
+MPU
+
+JTDO/SWD, JTDO
+
+NVIC
+ETM
+
+TRACECLK
+
+D-BUS
+
+TRACED[3:0]
+
+ARM Cortex-M4
+
+80 MHz
+FPU
+
+I-BUS
+
+RNG
+
+ACCEL/
+
+CACHE
+
+Flash
+up to
+256 KB
+
+ART
+
+S-BUS
+
+AHB bus-matrix
+
+SRAM 48 KB
+
+SRAM 16 KB
+
+VDD
+Power management
+
+AHB2 80 MHz
+
+DMA2
+
+Voltage
+regulator
+3.3 to 1.2 V
+
+VDD = 1.71 to 3.6 V
+VSS
+
+DMA1
+
+@ VDD
+
+@ VDD
+
+Supply
+
+reset
+
+MSI
+
+supervision
+
+Touch sensing controller
+1 Group of
+3 channels max as AF
+RC HSI
+
+VDDA, VSSA
+
+Int
+
+BOR
+
+VDD, VSS, NRST
+
+RC LSI
+
+PA[15:0]
+
+GPIO PORT A
+
+PVD, PVM
+
+PLL 1&2
+
+AHB1 80 MHz
+
+PB[7:3],
+
+HSI48
+
+GPIO PORT B
+
+PB[1:0]
+
+@VDD
+
+GPIO PORT C
+
+PC[15:14]
+
+IWDG
+
+PH[3]
+
+GPIO PORT H
+
+Standby
+
+interface
+
+Reset & clock
+
+M AN A G T
+
+@VBAT
+
+control
+
+OSC32_IN
+
+XTAL 32 kHz
+
+OSC32_OUT
+
+RTC
+
+FCLK
+
+PCLKx
+
+RTC_TAMPx
+Backup register
+
+AWU
+
+HCLKx
+
+@ VDD
+
+TIM2
+
+32b
+4 channels, ETR as AF
+
+U S AR T 2 M B p s
+Temperature sensor
+
+CRC
+
+@ VDDUSB
+
+DP
+DM
+
+@ VDDA
+
+FIFO
+
+PHY
+
+USB FS
+
+NOE
+
+ITF
+ADC1
+
+10 external analog inputs
+
+CRS
+CRS_SYNC
+
+AHB/APB2
+
+AHB/APB1
+
+USART2
+RX, TX, CK, CTS, RTS as AF
+smcard
+
+IrDA
+
+EXT IT. WKUP
+26 AF",0,Não apresenta modos de saída GPIO e mecanismo de travamento das funções alternativas.,NÃO,recuperado_top5
+q_v3_s07,"Which STM32L432xx GPIO output drive types are supported, and how can alternate-function configuration be protected against unintended writes?",stm32l432kc,stm32l432kc_p015_c004,stm32l432kc,15,3.4 Embedded Flash memory,text,"1.
+Erased when RDP change from Level 1 to Level 0.
+
+•
+Write protection (WRP): the protected area is protected against erasing and
+programming. Two areas can be selected, with 2-Kbyte granularity.
+
+•
+Proprietary code readout protection (PCROP): a part of the flash memory can be
+protected against read and write from third parties. The protected area is execute-only:
+it can only be reached by the STM32 CPU, as an instruction code, while all other
+accesses (DMA, debug and CPU data read, write and erase) are strictly prohibited.
+The PCROP area granularity is 64-bit wide. An additional option bit (PCROP_RDP)
+allows to select if the PCROP area is erased or not when the RDP protection is
+changed from Level 1 to Level 0.
+
+50",0,Não apresenta modos de saída GPIO e mecanismo de travamento das funções alternativas.,NÃO,recuperado_top5
+q_v3_s07,"Which STM32L432xx GPIO output drive types are supported, and how can alternate-function configuration be protected against unintended writes?",stm32l432kc,stm32l432kc_p016_c003,stm32l432kc,16,3.6 Firewall,text,"3.6
+Firewall
+
+The device embeds a Firewall which protects code sensitive and secure data from any
+access performed by a code executed outside of the protected areas.
+
+Each illegal access generates a reset which kills immediately the detected intrusion.
+
+The Firewall main features are the following:
+•
+Three segments can be protected and defined thanks to the Firewall registers:
+–
+Code segment (located in Flash or SRAM1 if defined as executable protected
+area)
+–
+Non-volatile data segment (located in Flash)
+–
+Volatile data segment (located in SRAM1)
+•
+The start address and the length of each segments are configurable:
+–
+Code segment: up to 1024 Kbyte with granularity of 256 bytes
+–
+Non-volatile data segment: up to 1024 Kbyte with granularity of 256 bytes
+–
+Volatile data segment: up to 48 Kbyte with a granularity of 64 bytes
+•
+Specific mechanism implemented to open the Firewall to get access to the protected
+areas (call gate entry sequence)
+•
+Volatile data segment can be shared or not with the non-protected code
+
+•
+Volatile data segment can be executed or not depending on the Firewall configuration",0,Não apresenta modos de saída GPIO e mecanismo de travamento das funções alternativas.,NÃO,recuperado_top5
+q_v3_s07,"Which STM32L432xx GPIO output drive types are supported, and how can alternate-function configuration be protected against unintended writes?",stm32l432kc,stm32l432kc_p021_c001,stm32l432kc,21,3.9.4 Low-power modes,text,"STM32L432KB STM32L432KC
+Functional overview",0,Não apresenta modos de saída GPIO e mecanismo de travamento das funções alternativas.,NÃO,recuperado_top5
+q_v3_s07,"Which STM32L432xx GPIO output drive types are supported, and how can alternate-function configuration be protected against unintended writes?",stm32l432kc,stm32l432kc_p023_c001,stm32l432kc,23,3.9.4 Low-power modes,text,"STM32L432KB STM32L432KC
+Functional overview",0,Não apresenta modos de saída GPIO e mecanismo de travamento das funções alternativas.,NÃO,recuperado_top5
+q_v3_s07,"Which STM32L432xx GPIO output drive types are supported, and how can alternate-function configuration be protected against unintended writes?",stm32l432kc,stm32l432kc_p023_c004,stm32l432kc,23,0.20 µA w/o RTC,text,"0.20 µA w/o RTC
+
+BOR, RTC,
+
+Table 3. STM32L432xx modes overview (continued)
+
+Reset
+
+Reset
+
+6.
+U(S)ART and LPUART reception is functional in Stop mode, and generates a wakeup interrupt on Start, address match
+
+11. I/Os can be configured with internal pull-up, pull-down or floating in Shutdown mode but the configuration is lost when
+
+3.
+Typical current at VDD = 1.8 V, 25°C. Consumptions values provided running from SRAM, Flash memory Off, 80 MHz
+
+5 I/Os
+
+5 I/Os
+
+7.
+I2C address detection is functional in Stop mode, and generates a wakeup interrupt in case of address match.
+
+floating, pull-up or pull-down
+
+4.
+The Flash memory can be put in power-down and its clock can be gated off when executing from SRAM.
+
+***
+I/O configuration can be
+
+***
+I/O configuration can be
+
+***
+All other peripherals are
+
+***
+All other peripherals are
+
+floating, pull-up or pull-
+
+BOR, RTC, IWDG
+
+powered off.
+
+powered off.
+
+down(11)
+
+RTC
+
+10. The I/Os with wakeup from Standby/Shutdown capability are: PA0, PC13, PE6, PA2, PC5.
+
+8.
+USB_FS wakeup by resume from suspend and attach detection protocol event.
+
+2.
+All peripherals can be active or clock gated to save power consumption.",0,Não apresenta modos de saída GPIO e mecanismo de travamento das funções alternativas.,NÃO,recuperado_top5
+q_v3_s07,"Which STM32L432xx GPIO output drive types are supported, and how can alternate-function configuration be protected against unintended writes?",stm32l432kc,stm32l432kc_p027_c001,stm32l432kc,27,0.20 µA w/o RTC,text,"STM32L432KB STM32L432KC
+Functional overview",0,Não apresenta modos de saída GPIO e mecanismo de travamento das funções alternativas.,NÃO,recuperado_top5
+q_v3_s07,"Which STM32L432xx GPIO output drive types are supported, and how can alternate-function configuration be protected against unintended writes?",stm32l432kc,stm32l432kc_p033_c002,stm32l432kc,33,3.12 General-purpose inputs/outputs (GPIOs),text,"3.12
+General-purpose inputs/outputs (GPIOs)
+
+Each of the GPIO pins can be configured by software as output (push-pull or open-drain), as
+input (with or without pull-up or pull-down) or as peripheral alternate function. Most of the
+GPIO pins are shared with digital or analog alternate functions. Fast I/O toggling can be
+achieved thanks to their mapping on the AHB2 bus.
+
+The I/Os alternate function configuration can be locked if needed following a specific
+sequence in order to avoid spurious writing to the I/Os registers.",2,GPIO pode ser push-pull ou open-drain; alternate-function pode ser travada com sequência.,NÃO,recuperado_top5
+q_v3_s07,"Which STM32L432xx GPIO output drive types are supported, and how can alternate-function configuration be protected against unintended writes?",stm32l432kc,stm32l432kc_p048_c002,stm32l432kc,48,3.30 Universal serial bus (USB),text,"3.30
+Universal serial bus (USB)
+
+The STM32L432xx devices embed a full-speed USB device peripheral compliant with the
+USB specification version 2.0. The internal USB PHY supports USB FS signaling,
+embedded DP pull-up and also battery charging detection according to Battery Charging
+Specification Revision 1.2. The USB interface implements a full-speed (12 Mbit/s) function
+interface with added support for USB 2.0 Link Power Management. It has software-
+configurable endpoint setting with packet memory up-to 1 KB and suspend/resume support.
+It requires a precise 48 MHz clock which can be generated from the internal main PLL or by
+the internal 48 MHz oscillator in automatic trimming mode. The synchronization for this
+oscillator can be taken from the USB data stream itself (SOF signalization) which allows
+crystal less operation.",0,Não apresenta modos de saída GPIO e mecanismo de travamento das funções alternativas.,NÃO,recuperado_top5
+q_v3_s07,"Which STM32L432xx GPIO output drive types are supported, and how can alternate-function configuration be protected against unintended writes?",stm32l432kc,stm32l432kc_p054_c003,stm32l432kc,54,3.33.2 Embedded Trace Macrocell™,text,"1.
+PC14 and PC15 are supplied through the power switch. Since the switch only sinks a limited amount of
+current (3 mA), the use of GPIOs PC14 to PC15 in output mode is limited:
+- The speed should not exceed 2 MHz with a maximum load of 30 pF
+- These GPIOs must not be used as current sources (e.g. to drive an LED).
+
+2.
+After a Backup domain power-up, PC14 and PC15 operate as GPIOs. Their function then depends on the
+content of the RTC registers which are not reset by the system reset. For details on how to manage these
+GPIOs, refer to the Backup domain and RTC register descriptions in the RM0394 reference manual.
+
+3.
+After reset, these pins are configured as JTAG/SW debug alternate functions, and the internal pull-up on
+PA15, PA13, PB4 pins and the internal pull-down on PA14 pin are activated.",1,"Descreve restrições de saída GPIO em pinos específicos, sem push-pull/open-drain e locking.",NÃO,recuperado_top5
+q_v3_s07,"Which STM32L432xx GPIO output drive types are supported, and how can alternate-function configuration be protected against unintended writes?",stm32l432kc,stm32l432kc_p147_c005,stm32l432kc,147,6.3.24 Communication interfaces characteristics,text,"1.
+TA = -40 to 125 °C unless otherwise specified.
+
+2.
+The STM32L432xx USB functionality is ensured down to 2.7 V but not the full USB electrical characteristics
+which are degraded in the 2.7-to-3.0 V voltage range.
+
+3.
+Guaranteed by design.
+
+4.
+No external termination series resistors are required on USB_DP (D+) and USB_DM (D-); the matching
+impedance is already included in the embedded driver.
+
+CAN (controller area network) interface
+
+Refer to Section 6.3.14: I/O port characteristics for more details on the input/output alternate
+function characteristics (CAN_TX and CAN_RX).
+
+148",0,Não apresenta modos de saída GPIO e mecanismo de travamento das funções alternativas.,NÃO,recuperado_top5
+q_v3_s08,"Which ADC input channel digitizes the STM32L432xx internal temperature sensor, and why does it need calibration for accurate temperature measurements?",stm32l432kc,stm32l432kc_p003_c024,stm32l432kc,3,3.15.1 Temperature sensor . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35,text,"3.15.1
+Temperature sensor . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35",0,Não oferece canal ADC1_IN17 nem evidência de calibração do sensor de temperatura.,NÃO,recuperado_top5
+q_v3_s08,"Which ADC input channel digitizes the STM32L432xx internal temperature sensor, and why does it need calibration for accurate temperature measurements?",stm32l432kc,stm32l432kc_p007_c002,stm32l432kc,7,7.2.1 Reference document . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 152,text,"Table 1.
+STM32L432Kx family device features and peripheral counts. . . . . . . . . . . . . . . . . . . . . . . 11
+Table 2.
+Access status versus readout protection level and execution modes. . . . . . . . . . . . . . . . . 15
+Table 3.
+STM32L432xx modes overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Table 4.
+Functionalities depending on the working mode. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+Table 5.
+STM32L432xx peripherals interconnect matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Table 6.
+DMA implementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+Table 7.
+Temperature sensor calibration values. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+Table 8.
+Internal voltage reference calibration values . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+Table 9.
+Timer feature comparison. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Table 10.
+I2C implementation. . . . . . . . . . . . . . . . . . . . . .",0,Não oferece canal ADC1_IN17 nem evidência de calibração do sensor de temperatura.,NÃO,recuperado_top5
+q_v3_s08,"Which ADC input channel digitizes the STM32L432xx internal temperature sensor, and why does it need calibration for accurate temperature measurements?",stm32l432kc,stm32l432kc_p011_c002,stm32l432kc,11,7.2.1 Reference document . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 152,text,"The devices offer a fast 12-bit ADC (5 Msps), two comparators, one operational amplifier,
+two DAC channels, a low-power RTC, one general-purpose 32-bit timer, one 16-bit PWM
+timer dedicated to motor control, four general-purpose 16-bit timers, and two 16-bit low-
+power timers.
+
+In addition, up to 3 capacitive sensing channels are available.
+
+They also feature standard and advanced communication interfaces.
+
+•
+Two I2Cs
+
+•
+Two SPIs
+
+•
+Two USARTs and one Low-Power UART.
+
+•
+One SAI (Serial Audio Interfaces)
+
+•
+One CAN
+
+•
+One USB full-speed device crystal less
+
+•
+One SWPMI (Single Wire Protocol Master Interface)
+
+The STM32L432xx operates in the -40 to +85 °C (+105 °C junction), -40 to +105 °C
+(+125 °C junction) and -40 to +125 °C (+130 °C junction) temperature ranges from a 1.71 to
+3.6 V power supply. A comprehensive set of power-saving modes allows the design of low-
+power applications.
+
+Some independent power supplies are supported: analog independent supply input for
+ADC, DAC, OPAMP and comparators
+
+The STM32L432xx family offers a single 32-pin package.",0,Não oferece canal ADC1_IN17 nem evidência de calibração do sensor de temperatura.,NÃO,recuperado_top5
+q_v3_s08,"Which ADC input channel digitizes the STM32L432xx internal temperature sensor, and why does it need calibration for accurate temperature measurements?",stm32l432kc,stm32l432kc_p035_c002,stm32l432kc,35,3.15 Analog to digital converter (ADC),text,"3.15
+Analog to digital converter (ADC)
+
+The device embeds a successive approximation analog-to-digital converter with the
+following features:
+
+•
+12-bit native resolution, with built-in calibration
+
+•
+5.33 Msps maximum conversion rate with full resolution
+
+–
+Down to 18.75 ns sampling time
+
+–
+Increased conversion rate for lower resolution (up to 8.88 Msps for 6-bit
+resolution)
+
+•
+Up to 10 external channels.
+
+•
+4 internal channels: internal reference voltage, temperature sensor, DAC1_OUT1 and
+DAC1_OUT2.
+
+•
+Single-ended and differential mode inputs
+
+•
+Low-power design
+
+–
+Capable of low-current operation at low conversion rate (consumption decreases
+linearly with speed)
+
+–
+Dual clock domain architecture: ADC speed independent from CPU frequency
+
+•
+Highly versatile digital interface
+
+–
+Single-shot or continuous/discontinuous sequencer-based scan mode: 2 groups
+of analog signals conversions can be programmed to differentiate background and
+high-priority real-time conversions
+
+–
+ADC supports multiple trigger inputs for synchronization with on-chip timers and
+external signals
+
+–
+Results stored into data register or in RAM with DMA controller support",1,"Descreve ADC ou dados de calibração, mas não reúne canal ADC1_IN17 e motivação.",NÃO,recuperado_top5
+q_v3_s08,"Which ADC input channel digitizes the STM32L432xx internal temperature sensor, and why does it need calibration for accurate temperature measurements?",stm32l432kc,stm32l432kc_p035_c004,stm32l432kc,35,3.15.1 Temperature sensor,text,"3.15.1
+Temperature sensor
+
+The temperature sensor (TS) generates a voltage VTS that varies linearly with temperature.
+
+The temperature sensor is internally connected to the ADC1_IN17 input channel which is
+used to convert the sensor output voltage into a digital value.
+
+The sensor provides good linearity but it has to be calibrated to obtain good overall
+accuracy of the temperature measurement. As the offset of the temperature sensor varies
+from chip to chip due to process variation, the uncalibrated internal temperature sensor is
+suitable for applications that detect temperature changes only.
+
+To improve the accuracy of the temperature sensor measurement, each device is
+individually factory-calibrated by ST. The temperature sensor factory calibration data are
+stored by ST in the system memory area, accessible in read-only mode.
+
+50",2,Sensor está ligado a ADC1_IN17 e exige calibração por offset variável; dados de fábrica.,NÃO,recuperado_top5
+q_v3_s08,"Which ADC input channel digitizes the STM32L432xx internal temperature sensor, and why does it need calibration for accurate temperature measurements?",stm32l432kc,stm32l432kc_p036_c001,stm32l432kc,36,3.15.1 Temperature sensor,text,"Functional overview
+STM32L432KB STM32L432KC",0,Não oferece canal ADC1_IN17 nem evidência de calibração do sensor de temperatura.,NÃO,recuperado_top5
+q_v3_s08,"Which ADC input channel digitizes the STM32L432xx internal temperature sensor, and why does it need calibration for accurate temperature measurements?",stm32l432kc,stm32l432kc_p036_c002,stm32l432kc,36,3.15.1 Temperature sensor,table,"Table 7. Temperature sensor calibration values
+
+|Calibration value name|Description|Memory address|
+|---|---|---|
+|TS_CAL1|TS ADC raw data acquired at a<br>temperature of 30 °C (± 5 °C),<br>VDDA = VREF+ = 3.0 V (± 10 mV)|0x1FFF 75A8 - 0x1FFF 75A9|
+|TS_CAL2|TS ADC raw data acquired at a<br>temperature of 130 °C (± 5 °C),<br>VDDA = VREF+ = 3.0 V (± 10 mV)|0x1FFF 75CA - 0x1FFF 75CB|",2,Tabela informa TS_CAL1 e TS_CAL2 para calibração por dispositivo (sem citar ADC1_IN17).,NÃO,recuperado_top5
+q_v3_s08,"Which ADC input channel digitizes the STM32L432xx internal temperature sensor, and why does it need calibration for accurate temperature measurements?",stm32l432kc,stm32l432kc_p070_c003,stm32l432kc,70,6.3.4 Embedded voltage reference,table,"Table 24. Embedded internal voltage reference
+
+|Symbol|Parameter|Conditions|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|
+|VREFINT|Internal reference voltage|–40 °C < TA < +130 °C|1.182|1.212|1.232|V|
+|tS_vrefint (1)|ADC sampling time when<br>reading the internal reference<br>voltage|-|4(2)|-|-|µs|
+|tstart_vrefint|Start time of reference voltage<br>buffer when ADC is enable|-|-|8|12(2)|µs|
+|IDD(VREFINTBUF)|VREFINT buffer consumption<br>from VDD when converted by<br>ADC|-|-|12.5|20(2)|µA|
+|∆VREFINT|Internal reference voltage<br>spread over the temperature<br>range|VDD = 3 V|-|5|7.5(2)|mV|
+|TCoeff|Temperature coefficient|–40°C < TA < +130°C|-|30|50(2)|ppm/°C|
+|ACoeff|Long term stability|1000 hours, T = 25°C|-|300|1000(2)|ppm|
+|VDDCoeff|Voltage coefficient|3.0 V < VDD < 3.6 V|-|250|1200(2)|ppm/V|
+|VREFINT_DIV1|1/4 reference voltage|-|24|25|26|% <br>VREFINT|
+|VREFINT_DIV2|1/2 reference voltage|1/2 reference voltage|49|50|51|51|
+|VREFINT_DIV3|3/4 reference voltage|3/4 reference voltage|74|75|76|76|",0,Não oferece canal ADC1_IN17 nem evidência de calibração do sensor de temperatura.,NÃO,recuperado_top5
+q_v3_s08,"Which ADC input channel digitizes the STM32L432xx internal temperature sensor, and why does it need calibration for accurate temperature measurements?",stm32l432kc,stm32l432kc_p118_c002,stm32l432kc,118,6.3.18 Analog-to-Digital converter characteristics,table,"Table 65. ADC accuracy - limited test conditions 1(1)(2)(3)
+
+|Col1|Col2|Table 65. ADC accuracy - limited test conditions 1(1)(2)(3)|Col4|Col5|Col6|Col7|Col8|Col9|
+|---|---|---|---|---|---|---|---|---|
+|**Sym-**<br>**bol**|**Parameter**|**Conditions(4)**|**Conditions(4)**|**Conditions(4)**|**Min**|**Typ**|**Max **|**Unit**|
+|ET|Total<br>unadjusted<br>error|ADC clock frequency ≤<br>80 MHz,<br>Sampling rate ≤ 5.33 Msps,<br>VDDA = VREF+ = 3 V,<br>TA = 25 °C|Single<br>ended|Fast channel (max speed)|-|4|5|LSB|
+|ET|Total<br>unadjusted<br>error|ADC clock frequency ≤<br>80 MHz,<br>Sampling rate ≤ 5.33 Msps,<br>VDDA = VREF+ = 3 V,<br>TA = 25 °C|Single<br>ended|Slow channel (max speed)|-|4|5|5|
+|ET|Total<br>unadjusted<br>error|ADC clock frequency ≤<br>80 MHz,<br>Sampling rate ≤ 5.33 Msps,<br>VDDA = VREF+ = 3 V,<br>TA = 25 °C|Differential|Fast channel (max speed)|-|3.5|4.5|4.5|
+|ET|Total<br>unadjusted<br>error|ADC clock frequency ≤<br>80 MHz,<br>Sampling rate ≤ 5.33 Msps,<br>VDDA = VREF+ = 3 V,<br>TA = 25 °C|Differential|Slow channel (max speed)|-|3.5|4.5|4.5|
+|EO|Offset<br>error|Offset<br>error|Single<br>ended|Fast channel (max speed)|-|1|2.5|2.5|
+|EO|Offset<br>error|Offset<br>error|Single<br>ended|Slow channel (max speed)|-|1|2.5|2.5|
+|EO|Offset<br>error|Offset<br>error|Differential|Fast channel (max speed)|-|1.5|2.5|2.5|
+|EO|Offset<br>error|Offset<br>error|Differential|Slow channel (max speed)|-|1.5|2.5|2.5|
+|EG|Gain error|Gain error|Single<br>ended|Fast channel (max speed)|-|2.5|4.5|4.5|
+|EG|Gain error|Gain error|Single<br>ended|Slow channel (max speed)|-|2.5|4.5|4.5|
+|EG|Gain error|Gain error|Differential|Fast channel (max speed)|-|2.5|3.5|3.5|
+|EG|Gain error|Gain error|Differential|Slow channel (max speed)|-|2.5|3.5|3.5|
+|ED|Differential<br>linearity<br>error|Differential<br>linearity<br>error|Single<br>ended|Fast channel (max speed)|-|1|1.5|1.5|
+|ED|Differential<br>linearity<br>error|Differential<br>linearity<br>error|Single<br>ended|Slow channel (max speed)|-|1|1.5|1.5|
+|ED|Differential<br>linearity<br>error|Differential<br>linearity<br>error|Differential|Fast channel (max speed)|-|1|1.2|1.2|
+|ED|Differential<br>linearity<br>error|Differential<br>linearity<br>error|Differential|Slow channel (max speed)|-|1|1.2|1.2|
+|EL|Integral<br>linearity<br>error|Integral<br>linearity<br>error|Single<br>ended|Fast channel (max speed)|-|1.5|2.5|2.5|
+|EL|Integral<br>linearity<br>error|Integral<br>linearity<br>error|Single<br>ended|Slow channel (max speed)|-|1.5|2.5|2.5|
+|EL|Integral<br>linearity<br>error|Integral<br>linearity<br>error|Differential|Fast channel (max speed)|-|1|2|2|
+|EL|Integral<br>linearity<br>error|Integral<br>linearity<br>error|Differential|Slow channel (max speed)|-|1|2|2|
+|ENOB|Effective<br>number of<br>bits|Effective<br>number of<br>bits|Single<br>ended|Fast channel (max speed)|10.4|10.5|-|bits|
+|ENOB|Effective<br>number of<br>bits|Effective<br>number of<br>bits|Single<br>ended|Slow channel (max speed)|10.4|10.5|-|-|
+|ENOB|Effective<br>number of<br>bits|Effective<br>number of<br>bits|Differential|Fast channel (max speed)|10.8|10.9|-|-|
+|ENOB|Effective<br>number of<br>bits|Effective<br>number of<br>bits|Differential|Slow channel (max speed)|10.8|10.9|-|-|
+|SINAD|Signal-to-<br>noise and<br>distortion<br>ratio|Signal-to-<br>noise and<br>distortion<br>ratio|Single<br>ended|Fast channel (max speed)|64.4|65|-|dB|
+|SINAD|Signal-to-<br>noise and<br>distortion<br>ratio|Signal-to-<br>noise and<br>distortion<br>ratio|Single<br>ended|Slow channel (max speed)|64.4|65|-|-|
+|SINAD|Signal-to-<br>noise and<br>distortion<br>ratio|Signal-to-<br>noise and<br>distortion<br>ratio|Differential|Fast channel (max speed)|66.8|67.4|-|-|
+|SINAD|Signal-to-<br>noise and<br>distortion<br>ratio|Signal-to-<br>noise and<br>distortion<br>ratio|Differential|Slow channel (max speed)|66.8|67.4|-|-|
+|SNR|Signal-to-<br>noise ratio|Signal-to-<br>noise ratio|Single<br>ended|Fast channel (max speed)|65|66|-|-|
+|SNR|Signal-to-<br>noise ratio|Signal-to-<br>noise ratio|Single<br>ended|Slow channel (max speed)|65|66|-|-|
+|SNR|Signal-to-<br>noise ratio|Signal-to-<br>noise ratio|Differential|Fast channel (max speed)|67|68|-|-|
+|SNR|Signal-to-<br>noise ratio|Signal-to-<br>noise ratio|Differential|Slow channel (max speed)|67|68|-|-|",0,Não oferece canal ADC1_IN17 nem evidência de calibração do sensor de temperatura.,NÃO,recuperado_top5
+q_v3_s08,"Which ADC input channel digitizes the STM32L432xx internal temperature sensor, and why does it need calibration for accurate temperature measurements?",stm32l432kc,stm32l432kc_p119_c002,stm32l432kc,119,6.3.18 Analog-to-Digital converter characteristics,table,"Table 65. ADC accuracy - limited test conditions 1(1)(2)(3) (continued)
+
+|Sym-<br>bol|Parameter|Conditions(4)|Col4|Col5|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|---|---|
+|THD|Total<br>harmonic<br>distortion|ADC clock frequency ≤<br>80 MHz,<br>Sampling rate ≤ 5.33 Msps,<br>VDDA = VREF+ = 3 V,<br>TA = 25 °C|Single<br>ended|Fast channel (max speed)|-|-74|-73|dB|
+|THD|Total<br>harmonic<br>distortion|ADC clock frequency ≤<br>80 MHz,<br>Sampling rate ≤ 5.33 Msps,<br>VDDA = VREF+ = 3 V,<br>TA = 25 °C|Single<br>ended|Slow channel (max speed)|-|-74|-73|-73|
+|THD|Total<br>harmonic<br>distortion|ADC clock frequency ≤<br>80 MHz,<br>Sampling rate ≤ 5.33 Msps,<br>VDDA = VREF+ = 3 V,<br>TA = 25 °C|Differential|Fast channel (max speed)|-|-79|-76|-76|
+|THD|Total<br>harmonic<br>distortion|ADC clock frequency ≤<br>80 MHz,<br>Sampling rate ≤ 5.33 Msps,<br>VDDA = VREF+ = 3 V,<br>TA = 25 °C|Differential|Slow channel (max speed)|-|-79|-76|-76|",0,Não oferece canal ADC1_IN17 nem evidência de calibração do sensor de temperatura.,NÃO,recuperado_top5
+q_v3_s08,"Which ADC input channel digitizes the STM32L432xx internal temperature sensor, and why does it need calibration for accurate temperature measurements?",stm32l432kc,stm32l432kc_p136_c006,stm32l432kc,136,6.3.22 Temperature sensor characteristics,text,"1.
+Guaranteed by design.
+
+2.
+Guaranteed by characterization results.
+
+3.
+Measured at VDDA = 3.0 V ±10 mV. The V30 ADC conversion result is stored in the TS_CAL1 byte. Refer to Table 7:
+Temperature sensor calibration values.
+
+4.
+Continuous mode means Run/Sleep modes, or temperature sensor enable in Low-power run/Low-power sleep modes.",1,"Descreve ADC ou dados de calibração, mas não reúne canal ADC1_IN17 e motivação.",NÃO,recuperado_top5
+q_v3_s10,What is the typical STM32L432xx BOR1 brown-out reset threshold on a rising VDD edge?,stm32l432kc,stm32l432kc_p013_c001,stm32l432kc,13,7.2.1 Reference document . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 152,text,"STM32L432KB STM32L432KC
+Description
+
+Figure 1. STM32L432xx block diagram
+
+NJTRST, JTDI,
+
+D0[3:0],
+CLK0,
+CS
+
+Quad SPI memory interface
+
+JTCK/SWCLK
+
+JTAG & SW
+
+MPU
+
+JTDO/SWD, JTDO
+
+NVIC
+ETM
+
+TRACECLK
+
+D-BUS
+
+TRACED[3:0]
+
+ARM Cortex-M4
+
+80 MHz
+FPU
+
+I-BUS
+
+RNG
+
+ACCEL/
+
+CACHE
+
+Flash
+up to
+256 KB
+
+ART
+
+S-BUS
+
+AHB bus-matrix
+
+SRAM 48 KB
+
+SRAM 16 KB
+
+VDD
+Power management
+
+AHB2 80 MHz
+
+DMA2
+
+Voltage
+regulator
+3.3 to 1.2 V
+
+VDD = 1.71 to 3.6 V
+VSS
+
+DMA1
+
+@ VDD
+
+@ VDD
+
+Supply
+
+reset
+
+MSI
+
+supervision
+
+Touch sensing controller
+1 Group of
+3 channels max as AF
+RC HSI
+
+VDDA, VSSA
+
+Int
+
+BOR
+
+VDD, VSS, NRST
+
+RC LSI
+
+PA[15:0]
+
+GPIO PORT A
+
+PVD, PVM
+
+PLL 1&2
+
+AHB1 80 MHz
+
+PB[7:3],
+
+HSI48
+
+GPIO PORT B
+
+PB[1:0]
+
+@VDD
+
+GPIO PORT C
+
+PC[15:14]
+
+IWDG
+
+PH[3]
+
+GPIO PORT H
+
+Standby
+
+interface
+
+Reset & clock
+
+M AN A G T
+
+@VBAT
+
+control
+
+OSC32_IN
+
+XTAL 32 kHz
+
+OSC32_OUT
+
+RTC
+
+FCLK
+
+PCLKx
+
+RTC_TAMPx
+Backup register
+
+AWU
+
+HCLKx
+
+@ VDD
+
+TIM2
+
+32b
+4 channels, ETR as AF
+
+U S AR T 2 M B p s
+Temperature sensor
+
+CRC
+
+@ VDDUSB
+
+DP
+DM
+
+@ VDDA
+
+FIFO
+
+PHY
+
+USB FS
+
+NOE
+
+ITF
+ADC1
+
+10 external analog inputs
+
+CRS
+CRS_SYNC
+
+AHB/APB2
+
+AHB/APB1
+
+USART2
+RX, TX, CK, CTS, RTS as AF
+smcard
+
+IrDA
+
+EXT IT. WKUP
+26 AF",0,Não fornece valor típico BOR1 na borda de subida.,NÃO,recuperado_top5
+q_v3_s10,What is the typical STM32L432xx BOR1 brown-out reset threshold on a rising VDD edge?,stm32l432kc,stm32l432kc_p019_c004,stm32l432kc,19,3.9.2 Power supply supervisor,text,"3.9.2
+Power supply supervisor
+
+The device has an integrated ultra-low-power brown-out reset (BOR) active in all modes
+except Shutdown and ensuring proper operation after power-on and during power down.
+The device remains in reset mode when the monitored supply voltage VDD is below a
+specified threshold, without the need for an external reset circuit.
+
+The lowest BOR level is 1.71V at power on, and other higher thresholds can be selected
+through option bytes.The device features an embedded programmable voltage detector
+(PVD) that monitors the VDD power supply and compares it to the VPVD threshold. An
+interrupt can be generated when VDD drops below the VPVD threshold and/or when VDD is
+higher than the VPVD threshold. The interrupt service routine can then generate a warning
+message and/or put the MCU into a safe state. The PVD is enabled by software.
+
+In addition, the device embeds a Peripheral Voltage Monitor which compares the
+independent supply voltage VDDA with a fixed threshold in order to ensure that the
+peripheral is in its functional supply range.
+
+50",1,"Explica BOR em geral, mas não traz valor típico BOR1 em subida.",NÃO,recuperado_top5
+q_v3_s10,What is the typical STM32L432xx BOR1 brown-out reset threshold on a rising VDD edge?,stm32l432kc,stm32l432kc_p024_c003,stm32l432kc,24,0.20 µA w/o RTC,text,"After entering Standby mode, SRAM1 and register contents are lost except for registers
+in the Backup domain and Standby circuitry. Optionally, SRAM2 can be retained in
+Standby mode, supplied by the low-power Regulator (Standby with SRAM2 retention
+mode).
+
+The device exits Standby mode when an external reset (NRST pin), an IWDG reset,
+WKUP pin event (configurable rising or falling edge), or an RTC event occurs (alarm,
+periodic wakeup, timestamp, tamper) or a failure is detected on LSE (CSS on LSE).
+
+The system clock after wakeup is MSI up to 8 MHz.",0,Não fornece valor típico BOR1 na borda de subida.,NÃO,recuperado_top5
+q_v3_s10,What is the typical STM32L432xx BOR1 brown-out reset threshold on a rising VDD edge?,stm32l432kc,stm32l432kc_p064_c003,stm32l432kc,64,1.55 – 3.6 V,text,"1.55 – 3.6 V
+
+VDD
+
+VCORE
+
+n x VDD
+
+Regulator
+
+VDDIO1",0,Não fornece valor típico BOR1 na borda de subida.,NÃO,recuperado_top5
+q_v3_s10,What is the typical STM32L432xx BOR1 brown-out reset threshold on a rising VDD edge?,stm32l432kc,stm32l432kc_p068_c006,stm32l432kc,68,6.3.3 Embedded reset and power control block characteristics,table,"Table 23. Embedded reset and power control block characteristics
+
+|Symbol|Parameter|Conditions(1)|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|
+|tRSTTEMPO<br>(2)|Reset temporization after<br>BOR0 is detected|VDDrising|-|250|400|μs|
+|VBOR0<br>(2)|Brown-out reset threshold 0|Rising edge|1.62|1.66|1.7|V|
+|VBOR0<br>(2)|Brown-out reset threshold 0|Falling edge|1.6|1.64|1.69|1.69|
+|VBOR1|Brown-out reset threshold 1|Rising edge|2.06|2.1|2.14|V|
+|VBOR1|Brown-out reset threshold 1|Falling edge|1.96|2|2.04|2.04|
+|VBOR2|Brown-out reset threshold 2|Rising edge|2.26|2.31|2.35|V|
+|VBOR2|Brown-out reset threshold 2|Falling edge|2.16|2.20|2.24|2.24|
+|VBOR3|Brown-out reset threshold 3|Rising edge|2.56|2.61|2.66|V|
+|VBOR3|Brown-out reset threshold 3|Falling edge|2.47|2.52|2.57|2.57|
+|VBOR4|Brown-out reset threshold 4|Rising edge|2.85|2.90|2.95|V|
+|VBOR4|Brown-out reset threshold 4|Falling edge|2.76|2.81|2.86|2.86|
+|VPVD0|Programmable voltage<br>detector threshold 0|Rising edge|2.1|2.15|2.19|V|
+|VPVD0|Programmable voltage<br>detector threshold 0|Falling edge|2|2.05|2.1|2.1|",2,"Tabela BOR1 rising: típico 2,10 V, mínimo 2,06 e máximo 2,14 V.",NÃO,recuperado_top5
+q_v3_s10,What is the typical STM32L432xx BOR1 brown-out reset threshold on a rising VDD edge?,stm32l432kc,stm32l432kc_p069_c001,stm32l432kc,69,6.3.3 Embedded reset and power control block characteristics,text,"STM32L432KB STM32L432KC
+Electrical characteristics",0,Não fornece valor típico BOR1 na borda de subida.,NÃO,recuperado_top5
+q_v3_s10,What is the typical STM32L432xx BOR1 brown-out reset threshold on a rising VDD edge?,stm32l432kc,stm32l432kc_p069_c002,stm32l432kc,69,6.3.3 Embedded reset and power control block characteristics,table,"Table 23. Embedded reset and power control block characteristics (continued)
+
+|Symbol|Parameter|Conditions(1)|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|
+|VPVD1|PVD threshold 1|Rising edge|2.26|2.31|2.36|V|
+|VPVD1|PVD threshold 1|Falling edge|2.15|2.20|2.25|2.25|
+|VPVD2|PVD threshold 2|Rising edge|2.41|2.46|2.51|V|
+|VPVD2|PVD threshold 2|Falling edge|2.31|2.36|2.41|2.41|
+|VPVD3|PVD threshold 3|Rising edge|2.56|2.61|2.66|V|
+|VPVD3|PVD threshold 3|Falling edge|2.47|2.52|2.57|2.57|
+|VPVD4|PVD threshold 4|Rising edge|2.69|2.74|2.79|V|
+|VPVD4|PVD threshold 4|Falling edge|2.59|2.64|2.69|2.69|
+|VPVD5|PVD threshold 5|Rising edge|2.85|2.91|2.96|V|
+|VPVD5|PVD threshold 5|Falling edge|2.75|2.81|2.86|2.86|
+|VPVD6|PVD threshold 6|Rising edge|2.92|2.98|3.04|V|
+|VPVD6|PVD threshold 6|Falling edge|2.84|2.90|2.96|2.96|
+|Vhyst_BORH0|Hysteresis voltage of BORH0|Hysteresis in<br>continuous<br>mode|-|20|-|mV|
+|Vhyst_BORH0|Hysteresis voltage of BORH0|Hysteresis in<br>other mode|-|30|-|-|
+|Vhyst_BOR_PVD|Hysteresis voltage of BORH<br>(except BORH0) and PVD|-|-|100|-|mV|
+|IDD<br>(BOR_PVD)(2)|BOR(3) (except BOR0) and<br>PVD consumption from VDD|-|-|1.1|1.6|µA|
+|VPVM1|VDDUSB peripheral voltage<br>monitoring|-|1.18|1.22|1.26|V|
+|VPVM3|VDDA peripheral voltage<br>monitoring|Rising edge|1.61|1.65|1.69|V|
+|VPVM3|VDDA peripheral voltage<br>monitoring|Falling edge|1.6|1.64|1.68|1.68|
+|VPVM4|VDDA peripheral voltage<br>monitoring|Rising edge|1.78|1.82|1.86|V|
+|VPVM4|VDDA peripheral voltage<br>monitoring|Falling edge|1.77|1.81|1.85|1.85|
+|Vhyst_PVM3|PVM3 hysteresis|-|-|10|-|mV|
+|Vhyst_PVM4|PVM4 hysteresis|-|-|10|-|mV|
+|IDD (PVM1)<br>(2)|PVM1 consumption from VDD|-|-|0.2|-|µA|
+|IDD<br>(PVM3/PVM4)<br>(2)|PVM3 and PVM4<br>consumption from VDD|-|-|2|-|µA|",0,Não fornece valor típico BOR1 na borda de subida.,NÃO,recuperado_top5
+q_v3_s10,What is the typical STM32L432xx BOR1 brown-out reset threshold on a rising VDD edge?,stm32l432kc,stm32l432kc_p143_c002,stm32l432kc,143,6.3.24 Communication interfaces characteristics,table,"Table 80. QUADSPI characteristics in DDR mode(1)
+
+|Symbol|Parameter|Conditions|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|
+|FCK<br>1/t(CK)|Quad SPI clock<br>frequency|1.71 < VDD < 3.6 V, CLOAD = 20 pF<br>Voltage Range 1|-|-|40|MHz|
+|FCK<br>1/t(CK)|Quad SPI clock<br>frequency|2 < VDD < 3.6 V, CLOAD = 20 pF<br>Voltage Range 1|-|-|48|48|
+|FCK<br>1/t(CK)|Quad SPI clock<br>frequency|1.71 < VDD < 3.6 V, CLOAD = 15 pF<br>Voltage Range 1|-|-|48|48|
+|FCK<br>1/t(CK)|Quad SPI clock<br>frequency|1.71 < VDD < 3.6 V CLOAD = 20 pF<br>Voltage Range 2|-|-|26|26|
+|tw(CKH)|Quad SPI clock high<br>and   low time|fAHBCLK= 48 MHz, presc=0|t(CK)/2-2|-|t(CK)/2|ns|
+|tw(CKL)|tw(CKL)|tw(CKL)|t(CK)/2|-|t(CK)/2+2|t(CK)/2+2|
+|tsr(IN)|Data input setup time<br>on rising edge|Voltage Range 1|1|-|-|-|
+|tsr(IN)|Data input setup time<br>on rising edge|Voltage Range 2|3.5|3.5|3.5|3.5|
+|tsf(IN)|Data input setup time<br>on falling edge|Voltage Range 1|1|-|-|-|
+|tsf(IN)|Data input setup time<br>on falling edge|Voltage Range 2|1.5|1.5|1.5|1.5|
+|thr(IN)|Data input hold time<br>on rising edge|Voltage Range 1|6|-|-|-|
+|thr(IN)|Data input hold time<br>on rising edge|Voltage Range 2|6.5|6.5|6.5|6.5|
+|thf(IN)|Data input hold time<br>on falling edge|Voltage Range 1|5.5|-|-|-|
+|thf(IN)|Data input hold time<br>on falling edge|Voltage Range 2|5.5|5.5|5.5|5.5|
+|tvr(OUT)|Data output valid time<br>on rising edge|Voltage Range 1|-|5|5.5|5.5|
+|tvr(OUT)|Data output valid time<br>on rising edge|Voltage Range 2|Voltage Range 2|9.5|14|14|
+|tvf(OUT)|Data output valid time<br>on falling edge|Voltage Range 1|-|5|8.5|8.5|
+|tvf(OUT)|Data output valid time<br>on falling edge|Voltage Range 2|Voltage Range 2|15|19|19|
+|thr(OUT)|Data output hold time<br>on rising edge|Voltage Range 1|3.5|-|-|-|
+|thr(OUT)|Data output hold time<br>on rising edge|Voltage Range 2|8|-|-|-|
+|thf(OUT)|Data output hold time<br>on falling edge|Voltage Range 1|3.5|-|-|-|
+|thf(OUT)|Data output hold time<br>on falling edge|Voltage Range 2|13|-|-|-|",0,Não fornece valor típico BOR1 na borda de subida.,NÃO,recuperado_top5
+q_v3_s12,"At VDD=3.0 V and TA=30°C, what is the nominal HSI48 clock frequency specified for the STM32L432xx?",stm32l432kc,stm32l432kc_p067_c004,stm32l432kc,67,6.3.1 General operating conditions,table,"Table 21. General operating conditions
+
+|Symbol|Parameter|Conditions|Min|Max|Unit|
+|---|---|---|---|---|---|
+|fHCLK|Internal AHB clock frequency|-|0|80|MHz|
+|fPCLK1|Internal APB1 clock frequency|-|0|80|80|
+|fPCLK2|Internal APB2 clock frequency|-|0|80|80|
+|VDD|Standard operating voltage|-|1.71<br>(1)|3.6|V|
+|VDDA|Analog supply voltage|ADC or COMP used|1.62|3.6|V|
+|VDDA|Analog supply voltage|DAC or OPAMP used|1.8|1.8|1.8|
+|VDDA|Analog supply voltage|ADC, DAC, OPAMP, COMP not<br>used|0|0|0|
+|VDDUSB|USB supply voltage|USB used|3.0|3.6|V|
+|VDDUSB|USB supply voltage|USB not used|0|3.6|3.6|
+|VIN|I/O input voltage|TT_xx I/O|-0.3|VDDIOx+0.3|V|
+|VIN|I/O input voltage|All I/O except TT_xx|-0.3|Min(Min(VDD, VDDA, <br>VDDUSB)+3.6 V,<br>5.5 V)(2)(3)|Min(Min(VDD, VDDA, <br>VDDUSB)+3.6 V,<br>5.5 V)(2)(3)|
+|PD|Power dissipation at<br>TA = 125 °C for suffix 3(4)|UFQFPN32|-|128|mW|
+|PD|Power dissipation at<br>TA = 85 °C for suffix 6<br>or<br>TA = 105 °C for suffix 7(4)|UFQFPN32|-|523|mW|
+|TA|Ambient temperature for the<br>suffix 6 version|Maximum power dissipation|–40|85|°C|
+|TA|Ambient temperature for the<br>suffix 6 version|Low-power dissipation(5)|–40|105|105|
+|TA|Ambient temperature for the<br>suffix 7 version|Maximum power dissipation|–40|105|105|
+|TA|Ambient temperature for the<br>suffix 7 version|Low-power dissipation(5)|–40|125|125|
+|TA|Ambient temperature for the<br>suffix 3 version|Maximum power dissipation|–40|125|125|
+|TA|Ambient temperature for the<br>suffix 3 version|Low-power dissipation(5)|–40|130|130|
+|TJ|Junction temperature range|Suffix 6 version|–40|105|°C|
+|TJ|Junction temperature range|Suffix 7 version|–40|125|125|
+|TJ|Junction temperature range|Suffix 3 version|–40|130|130|",0,"Não informa frequência HSI48 na condição VDD=3,0 V, TA=30 °C.",NÃO,recuperado_top5
+q_v3_s12,"At VDD=3.0 V and TA=30°C, what is the nominal HSI48 clock frequency specified for the STM32L432xx?",stm32l432kc,stm32l432kc_p084_c003,stm32l432kc,84,1.8 V,text,"Unit
+
+-
+VDD
+25 °C
+55 °C
+85 °C
+105 °C 125 °C
+25 °C
+55 °C
+85 °C
+105 °C 125 °C
+
+Symbol
+Parameter
+Conditions
+TYP
+MAX(1)
+
+3.
+Based on characterization done with a 32.768 kHz crystal (MC306-G-06Q-32.768, two 6.8 pF loading capacitors.
+
+5.
+Wakeup with code execution from Flash. Average value given for a typical 39: Low-power mode wakeup
+
+-
+VDD
+25
+125 °C
+25 °C
+55 °C
+
+3 V
+4 419
+277
+594
+
+1.8 V
+4 542
+249
+527",0,"Não informa frequência HSI48 na condição VDD=3,0 V, TA=30 °C.",NÃO,recuperado_top5
+q_v3_s12,"At VDD=3.0 V and TA=30°C, what is the nominal HSI48 clock frequency specified for the STM32L432xx?",stm32l432kc,stm32l432kc_p095_c003,stm32l432kc,95,6.3.8 Internal clock source characteristics,table,"Table 45. HSI16 oscillator characteristics(1)
+
+|Symbol|Parameter|Conditions|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|
+|fHSI16|HSI16 Frequency|VDD=3.0 V, TA=30 °C|15.88|-|16.08|MHz|
+|TRIM|HSI16 user trimming step|Trimming code is not a<br>multiple of 64|0.2|0.3|0.4|%|
+|TRIM|HSI16 user trimming step|Trimming code is a<br>multiple of 64|-4|-6|-8|-8|
+|DuCy(HSI16)(2)|Duty Cycle|-|45|-|55|%|
+|∆Temp(HSI16)|HSI16 oscillator frequency<br>drift over temperature|TA= 0 to 85 °C|-1|-|1|%|
+|∆Temp(HSI16)|HSI16 oscillator frequency<br>drift over temperature|TA= -40 to 125 °C|-2|-|1.5|%|
+|∆VDD(HSI16)|HSI16 oscillator frequency<br>drift over VDD|VDD=1.62 V to 3.6 V|-0.1|-|0.05|%|
+|tsu(HSI16)(2)|HSI16 oscillator start-up<br>time|-|-|0.8|1.2|μs|
+|tstab(HSI16)(2)|HSI16 oscillator<br>stabilization time|-|-|3|5|μs|
+|IDD(HSI16)(2)|HSI16 oscillator power<br>consumption|-|-|155|190|μA|",0,"Não informa frequência HSI48 na condição VDD=3,0 V, TA=30 °C.",NÃO,recuperado_top5
+q_v3_s12,"At VDD=3.0 V and TA=30°C, what is the nominal HSI48 clock frequency specified for the STM32L432xx?",stm32l432kc,stm32l432kc_p097_c002,stm32l432kc,97,16.4 MHz,table,"Table 46. MSI oscillator characteristics(1)
+
+|Symbol|Parameter|Conditions|Col4|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|---|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|MSI mode|Range 0|98.7|100|101.3|kHz|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|MSI mode|Range 1|197.4|200|202.6|202.6|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|MSI mode|Range 2|394.8|400|405.2|405.2|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|MSI mode|Range 3|789.6|800|810.4|810.4|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|MSI mode|Range 4|0.987|1|1.013|MHz|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|MSI mode|Range 5|1.974|2|2.026|2.026|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|MSI mode|Range 6|3.948|4|4.052|4.052|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|MSI mode|Range 7|7.896|8|8.104|8.104|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|MSI mode|Range 8|15.79|16|16.21|16.21|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|MSI mode|Range 9|23.69|24|24.31|24.31|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|MSI mode|Range 10|31.58|32|32.42|32.42|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|MSI mode|Range 11|47.38|48|48.62|48.62|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|PLL mode<br>XTAL=<br>32.768 kHz|Range 0|-|98.304|-|kHz|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|PLL mode<br>XTAL=<br>32.768 kHz|Range 1|-|196.608|-|-|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|PLL mode<br>XTAL=<br>32.768 kHz|Range 2|-|393.216|-|-|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|PLL mode<br>XTAL=<br>32.768 kHz|Range 3|-|786.432|-|-|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|PLL mode<br>XTAL=<br>32.768 kHz|Range 4|-|1.016|-|MHz|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|PLL mode<br>XTAL=<br>32.768 kHz|Range 5|-|1.999|-|-|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|PLL mode<br>XTAL=<br>32.768 kHz|Range 6|-|3.998|-|-|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|PLL mode<br>XTAL=<br>32.768 kHz|Range 7|-|7.995|-|-|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|PLL mode<br>XTAL=<br>32.768 kHz|Range 8|-|15.991|-|-|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|PLL mode<br>XTAL=<br>32.768 kHz|Range 9|-|23.986|-|-|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|PLL mode<br>XTAL=<br>32.768 kHz|Range 10|-|32.014|-|-|
+|fMSI|MSI frequency<br>after factory<br>calibration, done<br>at VDD=3 V and<br>TA=30 °C|PLL mode<br>XTAL=<br>32.768 kHz|Range 11|-|48.005|-|-|
+|∆TEMP(MSI)(2)|MSI oscillator<br>frequency drift<br>over temperature|MSI mode|TA= -0 to 85 °C|-3.5|-|3|%|
+|∆TEMP(MSI)(2)|MSI oscillator<br>frequency drift<br>over temperature|MSI mode|TA= -40 to 125 °C|-8|-|6|6|",0,"Não informa frequência HSI48 na condição VDD=3,0 V, TA=30 °C.",NÃO,recuperado_top5
+q_v3_s12,"At VDD=3.0 V and TA=30°C, what is the nominal HSI48 clock frequency specified for the STM32L432xx?",stm32l432kc,stm32l432kc_p100_c002,stm32l432kc,100,16.4 MHz,table,"Table 47. HSI48 oscillator characteristics(1)
+
+|Symbol|Parameter|Conditions|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|
+|fHSI48|HSI48 Frequency|VDD=3.0V, TA=30°C|-|48|-|MHz|
+|TRIM|HSI48 user trimming step|-|-|0.11(2)|0.18(2)|%|
+|USER TRIM<br>COVERAGE|HSI48 user trimming coverage|±32 steps|±3(3)|±3.5(3)|-|%|
+|DuCy(HSI48)|Duty Cycle|-|45(2)|-|55(2)|%|
+|ACCHSI48_REL|Accuracy of the HSI48 oscillator<br>over temperature (factory<br>calibrated)|VDD = 3.0 V to 3.6 V,<br>TA = –15 to 85 °C|-|-|±3(3)|%|
+|ACCHSI48_REL|Accuracy of the HSI48 oscillator<br>over temperature (factory<br>calibrated)|VDD= 1.65 V to 3.6 V,<br>TA = –40 to 125 °C|-|-|±4.5(3)|±4.5(3)|
+|DVDD(HSI48)|HSI48 oscillator frequency drift<br>with VDD|VDD = 3 V to 3.6 V|-|0.025(3)|0.05(3)|%|
+|DVDD(HSI48)|HSI48 oscillator frequency drift<br>with VDD|VDD = 1.65 V to 3.6 V|-|0.05(3)|0.1(3)|0.1(3)|
+|tsu(HSI48)|HSI48 oscillator start-up time|-|-|2.5(2)|6(2)|μs|
+|IDD(HSI48)|HSI48 oscillator power<br>consumption|-|-|340(2)|380(2)|μA|",2,"Tabela HSI48: 48 MHz em VDD=3,0 V e TA=30 °C.",NÃO,recuperado_top5
+q_v3_s12,"At VDD=3.0 V and TA=30°C, what is the nominal HSI48 clock frequency specified for the STM32L432xx?",stm32l432kc,stm32l432kc_p101_c003,stm32l432kc,101,16.4 MHz,text,"1.
+VDD = 3 V, TA = –40 to 125°C unless otherwise specified.
+
+2.
+Guaranteed by design.
+
+3. Guaranteed by characterization results.
+
+4. Jitter measurement are performed without clock source activated in parallel.
+
+Figure 17. HSI48 frequency versus temperature
+
+%
+
+6
+
+4
+
+2
+
+0
+
+-2
+
+-4
+
+-6
+
+-50
+-30
+-10
+10
+30
+50
+70
+90
+110
+130
+
+°C
+
+Avg
+min
+max
+
+MSv40989V1
+
+Low-speed internal (LSI) RC oscillator",1,"Notas da seção de osciladores HSI48, mas não especificam os 48 MHz.",NÃO,recuperado_top5
+q_v3_s12,"At VDD=3.0 V and TA=30°C, what is the nominal HSI48 clock frequency specified for the STM32L432xx?",stm32l432kc,stm32l432kc_p101_c004,stm32l432kc,101,16.4 MHz,table,"Table 48. LSI oscillator characteristics(1)
+
+|Symbol|Parameter|Conditions|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|
+|fLSI|LSI Frequency|VDD = 3.0 V, TA = 30 °C|31.04|-|32.96|kHz|
+|fLSI|LSI Frequency|VDD = 1.62 to 3.6 V, TA = -40 to 125 °C|29.5|-|34|34|
+|tSU(LSI)(2)|LSI oscillator start-<br>up time|-|-|80|130|μs|
+|tSTAB(LSI)(2)|LSI oscillator<br>stabilization time|5% of final frequency|-|125|180|μs|
+|IDD(LSI)(2)|LSI oscillator power<br>consumption|-|-|110|180|nA|",0,"Não informa frequência HSI48 na condição VDD=3,0 V, TA=30 °C.",NÃO,recuperado_top5
+q_v3_s13,"What sequence of ESD pulses is described in the STM32L432xx electrical sensitivity test, and which standards family does the procedure cite?",stm32l432kc,stm32l432kc_p005_c018,stm32l432kc,5,6.3.12 Electrical sensitivity characteristics . . . . . . . . . . . . . . . . . . . . . . . . . . . 105,text,"6.3.12
+Electrical sensitivity characteristics . . . . . . . . . . . . . . . . . . . . . . . . . . . 105",0,Não informa sequência positiva/negativa ESD e norma ANSI/JEDEC.,NÃO,recuperado_top5
+q_v3_s13,"What sequence of ESD pulses is described in the STM32L432xx electrical sensitivity test, and which standards family does the procedure cite?",stm32l432kc,stm32l432kc_p014_c002,stm32l432kc,14,3.1 Arm® Cortex®-M4 core with FPU,text,"3.1
+Arm® Cortex®-M4 core with FPU
+
+The Arm® Cortex®-M4 with FPU processor is the latest generation of Arm® processors for
+embedded systems. It was developed to provide a low-cost platform that meets the needs of
+MCU implementation, with a reduced pin count and low-power consumption, while
+delivering outstanding computational performance and an advanced response to interrupts.
+
+The Arm® Cortex®-M4 with FPU 32-bit RISC processor features exceptional code-
+efficiency, delivering the high-performance expected from an Arm® core in the memory size
+usually associated with 8- and 16-bit devices.
+
+The processor supports a set of DSP instructions which allow efficient signal processing and
+complex algorithm execution.
+
+Its single precision FPU speeds up software development by using metalanguage
+development tools, while avoiding saturation.
+
+With its embedded Arm® core, the STM32L432xx family is compatible with all Arm® tools
+and software.
+
+Figure 1 shows the general block diagram of the STM32L432xx family devices.",0,Não informa sequência positiva/negativa ESD e norma ANSI/JEDEC.,NÃO,recuperado_top5
+q_v3_s13,"What sequence of ESD pulses is described in the STM32L432xx electrical sensitivity test, and which standards family does the procedure cite?",stm32l432kc,stm32l432kc_p072_c001,stm32l432kc,72,6.3.4 Embedded voltage reference,text,"Electrical characteristics
+STM32L432KB STM32L432KC",0,Não informa sequência positiva/negativa ESD e norma ANSI/JEDEC.,NÃO,recuperado_top5
+q_v3_s13,"What sequence of ESD pulses is described in the STM32L432xx electrical sensitivity test, and which standards family does the procedure cite?",stm32l432kc,stm32l432kc_p098_c001,stm32l432kc,98,16.4 MHz,text,"Electrical characteristics
+STM32L432KB STM32L432KC",0,Não informa sequência positiva/negativa ESD e norma ANSI/JEDEC.,NÃO,recuperado_top5
+q_v3_s13,"What sequence of ESD pulses is described in the STM32L432xx electrical sensitivity test, and which standards family does the procedure cite?",stm32l432kc,stm32l432kc_p104_c002,stm32l432kc,104,6.3.11 EMC characteristics,text,"6.3.11
+EMC characteristics
+
+Susceptibility tests are performed on a sample basis during device characterization.
+
+Functional EMS (electromagnetic susceptibility)
+
+While a simple application is executed on the device (toggling 2 LEDs through I/O ports).
+the device is stressed by two electromagnetic events until a failure occurs. The failure is
+indicated by the LEDs:
+
+•
+Electrostatic discharge (ESD) (positive and negative) is applied to all device pins until
+a functional disturbance occurs. This test is compliant with the IEC 61000-4-2 standard.
+
+•
+FTB: A Burst of Fast Transient voltage (positive and negative) is applied to VDD and
+VSS through a 100 pF capacitor, until a functional disturbance occurs. This test is
+compliant with the IEC 61000-4-4 standard.
+
+A device reset allows normal operations to be resumed.
+
+The test results are given in Table 52. They are based on the EMS levels and classes
+defined in application note AN1709.",1,"Contextualiza ensaios elétricos/ESD, sem os dois pulsos espaçados e a norma.",NÃO,recuperado_top5
+q_v3_s13,"What sequence of ESD pulses is described in the STM32L432xx electrical sensitivity test, and which standards family does the procedure cite?",stm32l432kc,stm32l432kc_p105_c001,stm32l432kc,105,6.3.11 EMC characteristics,text,"STM32L432KB STM32L432KC
+Electrical characteristics
+
+Prequalification trials
+
+Most of the common failures (unexpected reset and program counter corruption) can be
+reproduced by manually forcing a low state on the NRST pin or the Oscillator pins for 1
+second.
+
+To complete these trials, ESD stress can be applied directly on the device, over the range of
+specification values. When unexpected behavior is detected, the software can be hardened
+to prevent unrecoverable errors occurring (see application note AN1015).
+
+Electromagnetic Interference (EMI)
+
+The electromagnetic field emitted by the device are monitored while a simple application is
+executed (toggling 2 LEDs through the I/O ports). This emission test is compliant with
+IEC 61967-2 standard which specifies the test board and the pin loading.",1,"Contextualiza ensaios elétricos/ESD, sem os dois pulsos espaçados e a norma.",NÃO,recuperado_top5
+q_v3_s13,"What sequence of ESD pulses is described in the STM32L432xx electrical sensitivity test, and which standards family does the procedure cite?",stm32l432kc,stm32l432kc_p105_c003,stm32l432kc,105,6.3.12 Electrical sensitivity characteristics,text,"6.3.12
+Electrical sensitivity characteristics
+
+Based on three different tests (ESD, LU) using specific measurement methods, the device is
+stressed in order to determine its performance in terms of electrical sensitivity.
+
+Electrostatic discharge (ESD)
+
+Electrostatic discharges (a positive then a negative pulse separated by 1 second) are
+applied to the pins of each sample according to each pin combination. The sample size
+depends on the number of supply pins in the device (3 parts × (n+1) supply pins). This test
+conforms to the ANSI/JEDEC standard.",2,"Pulso ESD positivo seguido de negativo, separados por 1 s; norma ANSI/JEDEC.",NÃO,recuperado_top5
+q_v3_s13,"What sequence of ESD pulses is described in the STM32L432xx electrical sensitivity test, and which standards family does the procedure cite?",stm32l432kc,stm32l432kc_p105_c004,stm32l432kc,105,6.3.12 Electrical sensitivity characteristics,table,"Table 54. ESD absolute maximum ratings
+
+|Symbol|Ratings|Conditions|Class|Maximum<br>value(1)|Unit|
+|---|---|---|---|---|---|
+|VESD(HBM)|Electrostatic discharge<br>voltage (human body model)|TA = +25 °C, conforming<br>to ANSI/ESDA/JEDEC<br>JS-001|2|2000|V|
+|VESD(CDM)|Electrostatic discharge<br>voltage (charge device<br>model)|TA = +25 °C,<br>conforming to ANSI/ESD<br>STM5.3.1|C3|250|250|",1,"Contextualiza ensaios elétricos/ESD, sem os dois pulsos espaçados e a norma.",NÃO,recuperado_top5
+q_v3_s13,"What sequence of ESD pulses is described in the STM32L432xx electrical sensitivity test, and which standards family does the procedure cite?",stm32l432kc,stm32l432kc_p106_c001,stm32l432kc,106,6.3.12 Electrical sensitivity characteristics,text,"Electrical characteristics
+STM32L432KB STM32L432KC
+
+Static latch-up
+
+Two complementary static tests are required on six parts to assess the latch-up
+performance:
+
+•
+A supply overvoltage is applied to each power supply pin.
+
+•
+A current injection is applied to each input, output and configurable I/O pin.
+
+These tests are compliant with EIA/JESD 78A IC latch-up standard.",0,Não informa sequência positiva/negativa ESD e norma ANSI/JEDEC.,NÃO,recuperado_top5
+q_v3_s14,"For the STM32L432xx ADC, how is the positive reference VREF+ constrained when VDDA is below 2 V?",stm32l432kc,stm32l432kc_p064_c007,stm32l432kc,64,1.55 – 3.6 V,text,"VREF
+
+ADCs/
+DACs/
+OPAMPs/
+COMPs
+
+10 nF
++1 μF
+
+VREF+
+
+VREF-
+
+100 nF +1 μF
+
+VSSA
+
+MSv40915V2
+
+Caution:
+Each power supply pair (VDD/VSS, VDDA/VSSA etc.) must be decoupled with filtering ceramic
+capacitors as shown above. These capacitors must be placed as close as possible to, or
+below, the appropriate pins on the underside of the PCB to ensure the good functionality of
+the device.",1,"Descreve conexão ou circuito VREF+, sem impor VREF+=VDDA para VDDA <2 V.",NÃO,recuperado_top5
+q_v3_s14,"For the STM32L432xx ADC, how is the positive reference VREF+ constrained when VDDA is below 2 V?",stm32l432kc,stm32l432kc_p114_c003,stm32l432kc,114,6.3.18 Analog-to-Digital converter characteristics,table,"Table 63. ADC characteristics(1) (2)
+
+|Symbol|Parameter|Conditions|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|
+|VDDA|Analog supply voltage|-|1.62|-|3.6|V|
+|VREF+|Positive reference voltage|VDDA ≥ 2 V|2|-|VDDA|V|
+|VREF+|Positive reference voltage|VDDA < 2 V|VDDA|VDDA|VDDA|V|
+|VREF-|Negative reference<br>voltage|-|VSSA|VSSA|VSSA|V|
+|fADC|ADC clock frequency|Range 1|0.14|-|80|MHz|
+|fADC|ADC clock frequency|Range 2|0.14|-|26|26|
+|fs|Sampling rate for FAST<br>channels|Resolution = 12 bits|-|-|5.33|Msps|
+|fs|Sampling rate for FAST<br>channels|Resolution = 10 bits|-|-|6.15|6.15|
+|fs|Sampling rate for FAST<br>channels|Resolution = 8 bits|-|-|7.27|7.27|
+|fs|Sampling rate for FAST<br>channels|Resolution = 6 bits|-|-|8.88|8.88|
+|fs|Sampling rate for SLOW<br>channels|Resolution = 12 bits|-|-|4.21|4.21|
+|fs|Sampling rate for SLOW<br>channels|Resolution = 10 bits|-|-|4.71|4.71|
+|fs|Sampling rate for SLOW<br>channels|Resolution = 8 bits|-|-|5.33|5.33|
+|fs|Sampling rate for SLOW<br>channels|Resolution = 6 bits|-|-|6.15|6.15|
+|fTRIG|External trigger frequency|fADC = 80 MHz<br>Resolution = 12 bits|-|-|5.33|MHz|
+|fTRIG|External trigger frequency|Resolution = 12 bits|-|-|15|1/fADC|
+|VCMIN|Input common mode|Differential mode|(VREF++<br>VREF-)/2<br>- 0.18|(VREF++<br>VREF-)/2|(VREF++<br>VREF-)/2<br>+ 0.18|V|
+|VAIN (3)|Conversion voltage<br>range(2)|-|0|-|VREF+|V|
+|RAIN|External input impedance|-|-|-|50|kΩ|
+|CADC|Internal sample and hold<br>capacitor|-|-|5|-|pF|
+|tSTAB|Power-up time|-|1|1|1|conversion<br>cycle|
+|tCAL|Calibration time|fADC = 80 MHz|1.45|1.45|1.45|µs|
+|tCAL|Calibration time|-|116|116|116|1/fADC|",2,Tabela explicita VREF+ = VDDA quando VDDA < 2 V.,NÃO,recuperado_top5
+q_v3_s14,"For the STM32L432xx ADC, how is the positive reference VREF+ constrained when VDDA is below 2 V?",stm32l432kc,stm32l432kc_p115_c003,stm32l432kc,115,6.3.18 Analog-to-Digital converter characteristics,text,"1.
+Guaranteed by design
+
+2.
+The I/O analog switch voltage booster is enable when VDDA < 2.4 V (BOOSTEN = 1 in the SYSCFG_CFGR1 when
+VDDA < 2.4V). It is disable when VDDA ≥ 2.4 V.
+
+3.
+VREF+ can be internally connected to VDDA and VREF- can be internally connected to VSSA, depending on the package.
+Refer to Section 4: Pinouts and pin description for further details.
+
+The maximum value of RAIN can be found in Table 64: Maximum ADC RAIN.
+
+148",1,"Descreve conexão ou circuito VREF+, sem impor VREF+=VDDA para VDDA <2 V.",NÃO,recuperado_top5
+q_v3_s14,"For the STM32L432xx ADC, how is the positive reference VREF+ constrained when VDDA is below 2 V?",stm32l432kc,stm32l432kc_p117_c001,stm32l432kc,117,6.3.18 Analog-to-Digital converter characteristics,text,"STM32L432KB STM32L432KC
+Electrical characteristics
+
+2.
+The I/O analog switch voltage booster is enable when VDDA < 2.4 V (BOOSTEN = 1 in the SYSCFG_CFGR1 when
+VDDA < 2.4V). It is disable when VDDA ≥ 2.4 V.
+
+3.
+Fast channels are: PC0, PC1, PC2, PC3, PA0, PA1.
+
+4.
+Slow channels are: all ADC inputs except the fast channels.
+
+148",0,Não explica a restrição da referência ADC para VDDA inferior a 2 V.,NÃO,recuperado_top5
+q_v3_s14,"For the STM32L432xx ADC, how is the positive reference VREF+ constrained when VDDA is below 2 V?",stm32l432kc,stm32l432kc_p123_c002,stm32l432kc,123,6.3.18 Analog-to-Digital converter characteristics,table,"Table 67. ADC accuracy - limited test conditions 3(1)(2)(3) (continued)
+
+|Sym-<br>bol|Parameter|Conditions(4)|Col4|Col5|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|---|---|
+|THD|Total<br>harmonic<br>distortion|ADC clock frequency ≤<br>80 MHz,<br>Sampling rate ≤ 5.33 Msps,<br>1.65 V ≤ VDDA = VREF+ ≤<br>3.6 V,<br>Voltage scaling Range 1|Single<br>ended|Fast channel (max speed)|-|-69|-67|dB|
+|THD|Total<br>harmonic<br>distortion|ADC clock frequency ≤<br>80 MHz,<br>Sampling rate ≤ 5.33 Msps,<br>1.65 V ≤ VDDA = VREF+ ≤<br>3.6 V,<br>Voltage scaling Range 1|Single<br>ended|Slow channel (max speed)|-|-71|-67|-67|
+|THD|Total<br>harmonic<br>distortion|ADC clock frequency ≤<br>80 MHz,<br>Sampling rate ≤ 5.33 Msps,<br>1.65 V ≤ VDDA = VREF+ ≤<br>3.6 V,<br>Voltage scaling Range 1|Differential|Fast channel (max speed)|-|-72|-71|-71|
+|THD|Total<br>harmonic<br>distortion|ADC clock frequency ≤<br>80 MHz,<br>Sampling rate ≤ 5.33 Msps,<br>1.65 V ≤ VDDA = VREF+ ≤<br>3.6 V,<br>Voltage scaling Range 1|Differential|Slow channel (max speed)|-|-72|-71|-71|",0,Não explica a restrição da referência ADC para VDDA inferior a 2 V.,NÃO,recuperado_top5
+q_v3_s14,"For the STM32L432xx ADC, how is the positive reference VREF+ constrained when VDDA is below 2 V?",stm32l432kc,stm32l432kc_p125_c002,stm32l432kc,125,6.3.18 Analog-to-Digital converter characteristics,table,"Table 68. ADC accuracy - limited test conditions 4(1)(2)(3) (continued)
+
+|Sym-<br>bol|Parameter|Conditions(4)|Col4|Col5|Min|Typ|Max|Unit|
+|---|---|---|---|---|---|---|---|---|
+|THD|Total<br>harmonic<br>distortion<br> <br> <br> <br> <br>|ADC clock frequency ≤<br>26 MHz,<br>1.65 V ≤ VDDA = VREF+ ≤<br>3.6 V,<br>Voltage scaling Range 2|Single<br>ended|Fast channel (max speed)|-|-71|-69|dB|
+|THD|Total<br>harmonic<br>distortion<br> <br> <br> <br> <br>|ADC clock frequency ≤<br>26 MHz,<br>1.65 V ≤ VDDA = VREF+ ≤<br>3.6 V,<br>Voltage scaling Range 2|Single<br>ended|Slow channel (max speed)|-|-71|-69|-69|
+|THD|Total<br>harmonic<br>distortion<br> <br> <br> <br> <br>|ADC clock frequency ≤<br>26 MHz,<br>1.65 V ≤ VDDA = VREF+ ≤<br>3.6 V,<br>Voltage scaling Range 2|Differential|Fast channel (max speed)|-|-73|-72|-72|
+|THD|Total<br>harmonic<br>distortion<br> <br> <br> <br> <br>|ADC clock frequency ≤<br>26 MHz,<br>1.65 V ≤ VDDA = VREF+ ≤<br>3.6 V,<br>Voltage scaling Range 2|Differential|Slow channel (max speed)|-|-73|-72|-72|",0,Não explica a restrição da referência ADC para VDDA inferior a 2 V.,NÃO,recuperado_top5
+q_v3_s14,"For the STM32L432xx ADC, how is the positive reference VREF+ constrained when VDDA is below 2 V?",stm32l432kc,stm32l432kc_p125_c003,stm32l432kc,125,6.3.18 Analog-to-Digital converter characteristics,text,"1.
+Guaranteed by design.
+
+2.
+ADC DC accuracy values are measured after internal calibration.
+
+3.
+ADC accuracy vs. negative Injection Current: Injecting negative current on any analog input pins should be avoided as this
+significantly reduces the accuracy of the conversion being performed on another analog input. It is recommended to add a
+Schottky diode (pin to ground) to analog pins which may potentially inject negative current.
+
+4.
+The I/O analog switch voltage booster is enable when VDDA < 2.4 V (BOOSTEN = 1 in the SYSCFG_CFGR1 when
+VDDA < 2.4 V). It is disable when VDDA ≥ 2.4 V. No oversampling.
+
+Figure 21. ADC accuracy characteristics",0,Não explica a restrição da referência ADC para VDDA inferior a 2 V.,NÃO,recuperado_top5
+q_v3_a03,"For the ATtiny25/45/85, which two peripherals should be considered for disabling to save power during sleep, and why?",attiny85,attiny85_p036_c006,attiny85,36,7.4.3 Brown-out Detector,text,"7.4.3
+Brown-out Detector
+If the Brown-out Detector is not needed in the application, this module should be turned off. If the Brown-out Detec-
+tor is enabled by the BODLEVEL Fuses, it will be enabled in all sleep modes, and hence, always consume power.
+In the deeper sleep modes, this will contribute significantly to the total current consumption. See “Brown-out Detec-
+tion” on page 41 and “Software BOD Disable” on page 35 for details on how to configure the Brown-out Detector.",2,"BOD habilitado consome energia em todos os sleeps, especialmente os profundos; segundo componente pedido. Não foi recuperado no top-5 de nenhum dos três métodos.",NÃO,ancora_gold_nao_recuperada
