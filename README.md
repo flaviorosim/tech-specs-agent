@@ -1,246 +1,177 @@
-# Tech Specs Agent
+# Tech-Specs Agent
 
-**A technical-document assistant built around Retrieval-Augmented Generation (RAG) and agentic workflows.**
+**A local, evidence-grounded RAG assistant for microcontroller datasheets.**
 
-Tech Specs Agent is a Python project for querying hardware documentation, including microcontroller datasheets, reference manuals, and register descriptions. The goal is to produce answers grounded in manufacturer documentation, with traceable page references, while studying how document parsing and retrieval choices affect answer quality.
+Tech-Specs Agent lets you ask technical questions about hardware documentation and inspect the PDF passages used to answer them. It combines keyword and semantic retrieval, a LangGraph workflow, a local language model, and explicit citation checks. A Streamlit interface supports the original benchmark documents and additional user-imported datasheets.
 
-> **Project status — in development:** PDF collection and initial structured extraction are implemented. Chunking, search, LLM-based answers, agent workflows, and quantitative evaluation are planned; they are **not yet implemented**.
+The application runs locally with **Ollama**.
 
-## Why this project?
+## Features
 
-Technical PDFs are challenging knowledge sources. They contain dense tables, register maps, part numbers, multi-column layouts, footers, and figures that do not always parse correctly as text. A useful RAG application must preserve relationships such as **register → address → function**, not just extract words from a page.
-
-This project explores that problem using real microcontroller documentation. It aims to compare keyword search, semantic search, hybrid retrieval, and agent-assisted query refinement using measurable evaluation criteria.
-
-## Current capabilities
-
-- **Reproducible PDF collection:** download manufacturer datasheets, validate that they open as PDFs, and record file size, page count, SHA-256 hash, source URL, and (for new downloads) a download timestamp in a manifest.
-- **PDF inspection:** extract raw text, position-sorted text, text blocks with bounding boxes, and a sample of typography metadata using PyMuPDF.
-- **Table extraction:** detect conventional tables, serialize them as Markdown, and filter known footer-like false positives.
-- **Structured page elements:** represent text and detected tables with a document ID, page number, content type, bounding box, and element ID.
-- **Initial deduplication:** avoid re-indexing words that fall inside the bounding boxes of accepted multi-row tables. Potentially incomplete one-row tables retain surrounding text for review.
-
-The current pipeline is a **parsing prototype**, not yet a working RAG assistant.
-
-## Documents used
-
-| Document | Manufacturer | Why it is useful |
-| --- | --- | --- |
-| [STM32L432KC datasheet](https://www.st.com/resource/en/datasheet/stm32l432kc.pdf) | STMicroelectronics | Conventional tables for timers, peripherals, pinout, and electrical specifications |
-| [ATtiny25/45/85 datasheet](https://ww1.microchip.com/downloads/en/DeviceDoc/atmel-2586-avr-8-bit-microcontroller-attiny25-attiny45-attiny85_datasheet.pdf) | Microchip | Register maps and diagrams with less conventional layouts |
-
-The PDFs are downloaded from the manufacturers rather than committed to this repository.
+- **Multiple retrieval strategies:** BM25, dense vector search (FastEmbed + Qdrant Local), and hybrid retrieval using Reciprocal Rank Fusion (RRF).
+- **Agent workflow:** document selection, query planning, evidence retrieval, answer generation, citation validation, and bounded review/repair using LangGraph.
+- **Traceable answers:** chunk IDs, PDF page numbers, retrieved passages, and downloadable JSON diagnostics. Unsupported answers may be withheld; uncertain coverage is labeled rather than silently accepted.
+- **Source-table verification:** for recognized tables in the original ATtiny/STM32 corpus, selected answers can be reconstructed from extracted cells and checked without LLM rewriting.
+- **Additional datasheets:** import text-based PDF files through the web UI. New documents are isolated from the original benchmark; BM25 is available after import, with vector/hybrid search after indexing.
+- **Local-first:** PDFs, indexes, and model inference stay on the user's computer.
 
 ## Architecture
 
-### Implemented: collection and parsing
-
 ```mermaid
 flowchart TD
-    A[Official manufacturer PDFs] --> B[Download and validate]
-    B --> C[PDF files + manifest]
-    C --> D[PyMuPDF extraction]
-    D --> E[Raw text, blocks, tables, typography]
-    E --> F[Structured page elements]
-    F --> G[Inspection JSON and text files]
+    PDF[Manufacturer PDF / uploaded datasheet] --> ING[Text and table extraction]
+    ING --> CH[Page-aware chunks]
+    CH --> B[BM25]
+    CH --> V[FastEmbed + Qdrant Local]
+    Q[Question] --> P[LangGraph: document scope and query plan]
+    P --> R[BM25 / Vector / Hybrid RRF]
+    B --> R
+    V --> R
+    R --> E[Retrieved evidence]
+    E --> T{Recognized source table?}
+    T -->|Yes, original corpus| C[Cell-based answer and validation]
+    T -->|Otherwise| L[Ollama: grounded answer]
+    L --> J[Citation and evidence checks]
+    J --> D[Optional bounded revision]
+    D --> O[Answer / review warning / abstention]
+    C --> O
+    O --> UI[Streamlit: answer, sources, diagnostics]
 ```
 
-### Planned: retrieval and agentic answering
-
-```mermaid
-flowchart TD
-    A[Structured elements] --> B[Section-aware chunking]
-    B --> C[Indexed corpus]
-    C --> D[BM25 retrieval]
-    C --> E[Dense vector retrieval]
-    D --> F[Rank fusion]
-    E --> F
-    Q[User question] --> H[Query analysis]
-    H --> F
-    F --> I[Evidence assessment]
-    I -->|Sufficient| J[Grounded answer with citations]
-    I -->|Insufficient, retry budget available| K[Query reformulation]
-    K --> F
-    I -->|Insufficient, no retries left| L[Abstain or explain missing evidence]
-```
-
-The planned agent will use **LangGraph** for explicit state transitions and bounded retries. The retrieval layer is expected to use **BM25 + embeddings + reciprocal rank fusion**, with **Qdrant** as the leading vector-database option. These are design intentions, not current dependencies.
-
-## Repository structure
-
-```text
-tech-specs-agent/
-├── data/
-│   ├── raw/                       # Downloaded PDFs (gitignored)
-│   ├── processed/                 # Inspection outputs (gitignored)
-│   └── manifest.json             # Document metadata and hashes
-├── scripts/
-│   ├── download_docs.py          # Download and validate PDFs
-│   └── inspect_pdf.py            # Inspect extracted page content
-├── src/
-│   └── tech_specs/
-│       ├── __init__.py
-│       ├── ingestion.py          # Read PDF pages and detect tables
-│       └── structure.py          # Build structured page elements
-├── .gitignore
-├── pyproject.toml
-└── README.md
-```
-
-Some directories and files in the **planned** roadmap (such as `chunking.py`, `retrieval.py`, `agent.py`, and `tests/`) will be added as those features are implemented.
+**Main stack:** Python, PyMuPDF, rank-bm25, FastEmbed, Qdrant Local, LangGraph, Ollama (Qwen3 4B by default), Streamlit, and pytest.
 
 ## Getting started
 
 ### Requirements
 
-- Python **3.11+** (Python 3.12 recommended)
-- Git
-- Internet connection for the initial PDF download
+- Python **3.12** recommended
+- Git and an internet connection for the initial installation, model download, and official PDFs
+- [Ollama](https://ollama.com/download) installed and running locally
+- Enough RAM/disk space to run a quantized local model and store the vector indexes; GPU acceleration is optional
 
-### 1. Clone the repository
+The commands below use **Windows PowerShell** and assume you are in the repository root.
 
-```powershell
-git clone <YOUR_REPOSITORY_URL>
-cd tech-specs-agent
-```
-
-Replace `<YOUR_REPOSITORY_URL>` with the actual repository URL once the project is published. If working in an existing local directory, skip this step.
-
-### 2. Create and activate a virtual environment
-
-**Windows / PowerShell:**
+### 1. Install dependencies
 
 ```powershell
 py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -e ".[dev,retrieval,vectors,agent]"
+python -m pip install streamlit
 ```
 
-**Linux / macOS:**
+The optional dependency groups above are the groups used during development. If you change `pyproject.toml`, update this command accordingly.
 
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
+### 2. Start the local model
+
+```powershell
+ollama pull qwen3:4b
+ollama list
 ```
 
-### 3. Install the project
+Keep the Ollama application running. The app uses its local server (normally `127.0.0.1:11434`); it does not require an OpenAI or Anthropic API key.
 
-```bash
-python -m pip install -e .
-```
+### 3. Prepare the original datasheets
 
-This installs the Python package in editable mode, using the dependencies defined in `pyproject.toml`.
+The original evaluation corpus covers:
 
-### 4. Download the datasheets
+- [STM32L432KC — STMicroelectronics](https://www.st.com/resource/en/datasheet/stm32l432kc.pdf)
+- [ATtiny25/45/85 — Microchip](https://ww1.microchip.com/downloads/en/DeviceDoc/atmel-2586-avr-8-bit-microcontroller-attiny25-attiny45-attiny85_datasheet.pdf)
 
-```bash
+Download the PDFs and build the search corpus:
+
+```powershell
 python scripts/download_docs.py
+python scripts/build_corpus.py
+python scripts/index_vectors.py
 ```
 
-The script saves the original PDFs under `data/raw/` and records their metadata in `data/manifest.json`. Valid existing PDF files are skipped. If a manufacturer server times out, rerunning the script is a valid workaround; automatic retries are not yet implemented.
+The last command creates the original Qdrant Local index. **BM25 only needs the corpus**, so you may skip vector indexing if you intend to use BM25 exclusively. The initial embedding download can take some time. Close any other process using the same Qdrant Local directory before rebuilding its index.
 
-### 5. Inspect a PDF page
+If the corpus and vector index already exist on your computer, you can skip this step.
 
-```bash
-python scripts/inspect_pdf.py stm32l432kc --page 38
-python scripts/inspect_pdf.py attiny85 --page 9
-python scripts/inspect_pdf.py attiny85 --page 10
+### 4. Launch the web application
+
+```powershell
+python -m streamlit run scripts/web_app.py --server.address 127.0.0.1
 ```
 
-`--page` uses the **1-based PDF page index**. The inspection script writes files to `data/processed/inspections/`:
+Open **http://127.0.0.1:8501** (or the port shown by Streamlit).
 
-- `<document>_p<page>.json` — extraction data and structured elements
-- `<document>_p<page>_raw.txt` — raw text extraction
-- `<document>_p<page>_sorted.txt` — position-sorted text extraction
+## Using the application
 
+1. Select **Auto-detect** for the two original documents, or explicitly select a datasheet in the sidebar.
+2. Choose **BM25**, **Vector**, or **Hybrid (RRF)**. Vector and Hybrid require a built index.
+3. Ask a question in English and review the response alongside **Sources and PDF pages**.
+4. Open **Agent diagnostics** to inspect the query plan, checks, and any revision attempts. Download the JSON report when investigating a result.
 
-## Testing
+Example questions:
 
-The project uses `pytest` for unit and regression testing.
-
-Install development dependencies:
-
-```bash
-python -m pip install -e ".[dev]"
+```text
+What is TIM2 counter resolution on STM32L432KC?
+How does programming the WDTON fuse affect the watchdog on ATtiny25/45/85?
+Can STM32L432xx timers trigger ADC/DAC conversions in Stop 2?
 ```
 
-Run all tests:
+### Import a new datasheet
 
-```bash
-python -m pytest -v
+In the sidebar, choose **Add a PDF datasheet → Import PDF**, then select the imported document. BM25 can query it immediately. To enable semantic or hybrid search, click **Build vector index** for that document.
+
+The PDF, extracted chunks, and optional Qdrant index are stored independently under `data/user_docs/<document_id>/`. These files are local and excluded from Git. 
+
+**Current scope:** imported documents use a generic *single-document* retrieval plan. The specialized source-table extraction rules used for the original corpus are not applied to arbitrary new PDFs. Automatic comparison across multiple imported PDFs is not implemented.
+
+## Evaluation
+
+The project includes a **30-question benchmark** created for the original two datasheets: **18 development questions** and **12 held-out questions**. Development experiments compared BM25, vector, and hybrid retrieval, as well as answer generation and local evidence checks.
+
+Relevant measurements include **Hit@K, Recall@K, MRR, nDCG@K**, citation validity, answer completeness, and the number of answers withheld for review. The project also records local agent decisions to enable manual inspection.
+
+The latest development runs evaluated both BM25 and Hybrid on all 18 development questions. They demonstrate that citation checks and deterministic table extraction can work, but also expose false coverage warnings, incomplete multi-evidence answers, and occasional unsupported model claims. **A locally checked answer is not a guarantee of technical correctness.** The reserved questions should not be used for prompt or retrieval tuning.
+
+Reproduce the test suite with:
+
+```powershell
+python -m pytest -q
 ```
 
-Run only unit tests:
+To run the guarded agent's *development* evaluation (requires the original corpus, indexes where applicable, and Ollama):
 
-```bash
-python -m pytest -m "not pdf"
+```powershell
+python scripts/evaluate_verified_dev.py --method bm25
+python scripts/evaluate_verified_dev.py --method hybrid
 ```
 
-Run PDF regression tests:
+These commands save run reports locally under `data/processed/`; they do not constitute an independent accuracy audit.
 
-```bash
-python -m pytest -m pdf -v
+## Repository layout
+
+```text
+tech-specs-agent/
+├── src/tech_specs/          # Parsing, retrieval, LangGraph, verification, PDF import
+├── scripts/
+│   ├── web_app.py           # Streamlit application
+│   ├── download_docs.py     # Original manufacturer PDFs
+│   ├── build_corpus.py      # Original searchable corpus
+│   ├── index_vectors.py     # Original vector index
+│   └── ...                  # Evaluation, inspection, and CLI utilities
+├── tests/                   # Automated tests
+├── evaluation/              # Benchmark questions and reference judgments
+├── data/                    # PDFs, chunks, indexes, run outputs (mostly gitignored)
+├── pyproject.toml
+├── .gitignore
+└── README.md
 ```
 
-PDF regression tests use official datasheets stored in
-`data/raw/`. These files are not included in the repository
-and can be downloaded using:
+## Limitations
 
-```bash
-python scripts/download_docs.py
-```
+- Complex PDF layouts, figures, and borderless tables may not be reconstructed accurately. Imported PDFs must contain extractable text; OCR is not implemented.
+- The verifier checks citation IDs and can judge local evidence, but an LLM judge can be wrong. Some correct answers are flagged for review, and some generated answers are withheld.
+- The original source-table rules cover recognized patterns, **not all tables or devices**.
+- Imported documents are searched one at a time; the app is not designed for public deployment or concurrent users without additional security and infrastructure.
+- Inference latency depends on the local hardware and model size.
 
-The current regression tests cover:
+## Data and attribution
 
-- STM32L432KC: timer table extraction and deduplication.
-- ATtiny85: SREG data preservation.
-- ATtiny85: general-purpose register address mappings.
-
-The tests focus on preventing known regressions. They do not
-yet provide a comprehensive evaluation of parsing accuracy.
-
-
-## Known limitations
-
-- **Table extraction is not universally reliable.** Borderless tables, register maps, and diagrams may be incomplete or incorrectly structured.
-- **Deduplication is heuristic.** It relies on word centers and table bounding boxes; it needs automated regression tests before being treated as robust.
-- **Reading order is approximate.** Spatial sorting alone can fail for multi-column layouts.
-- **Headers, footers, and section titles require further refinement.** Current filters are tailored to observed documents.
-- **Images and figures are not interpreted semantically.** Their embedded text may be extracted, but graphical relationships are not reconstructed.
-- **There is no retrieval or LLM inference yet.** Answers, citations, hybrid ranking, and agent decisions cannot currently be demonstrated.
-
-## Roadmap
-
-- [x] Initialize Python package and repository structure
-- [x] Download and validate official PDF documents
-- [x] Extract text, typography samples, and conventional tables
-- [x] Create an initial structured element representation
-- [ ] Add automated regression tests for known PDF pages
-- [ ] Improve section identification, ordering, and table/text deduplication
-- [ ] Implement section-aware chunking and export `chunks.jsonl`
-- [ ] Implement BM25, semantic retrieval, and hybrid rank fusion
-- [ ] Add LLM-grounded answering with document/page citations
-- [ ] Implement bounded query refinement with LangGraph
-- [ ] Create an evaluation dataset and compare retrieval strategies
-- [ ] Add a Streamlit interface and reproducible deployment
-
-## Evaluation plan
-
-A small, manually checked benchmark of technical questions will be used to evaluate retrieval and answers. Planned metrics include:
-
-- **Recall@K:** whether relevant evidence appears among the top K retrieved results
-- **MRR:** ranking of the first relevant result
-- **Answer accuracy:** correctness against a verified reference answer
-- **Citation accuracy:** whether cited evidence supports the answer
-- **Latency:** response time of each retrieval/agent configuration
-
-No performance or accuracy improvements are claimed until these measurements have been run.
-
-## Tech stack
-
-**Currently used:** Python, PyMuPDF, Requests, JSON, SHA-256, Git.
-
-**Planned / under consideration:** Qdrant, BM25, sentence-transformer embeddings, LangGraph, an LLM provider or local model, pytest, Streamlit, Docker.
-
-## License
-
-A project license has not yet been selected. Manufacturer datasheets remain subject to their respective publishers' terms.
+Datasheets belong to their respective manufacturers and are **not distributed in this repository**. Use the official links above to obtain the source PDFs. Local runs may download third-party model weights and embedding models under their own licenses.
