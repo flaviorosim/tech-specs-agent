@@ -41,7 +41,15 @@ def test_runtime_rejects_bad_request_without_loading_model(tmp_path):
     try:
         resources.ask("   ")
     except ValueError as exc:
-        assert "pergunta" in str(exc)
+        assert "question" in str(exc)
     else:
         assert False
     assert resources._graphs == {}
+
+
+def test_status_labels_are_english():
+    for status in ("source_table_checked", "review_required", "coverage_review_recommended"):
+        label, detail, _ = status_details(status)
+        assert isinstance(label, str) and isinstance(detail, str)
+        assert label and detail
+    assert status_details("review_required")[0] == "Answer withheld"
