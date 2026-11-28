@@ -21,6 +21,12 @@ Return a JSON object with exactly these fields:
 - missing_information: string describing anything the evidence cannot establish, or "".
 For EVERY claim, select at least one source_ids value copied EXACTLY from an EVIDENCE chunk_id.
 Never invent facts, IDs, register values, units or page numbers.
+Distinguish nominal hardware resolution (converter bit depth) from ENOB/effective resolution,
+noise, accuracy or measured performance. Unless explicitly asked about ENOB, answer
+ADC resolution using nominal bit depth ONLY when that value appears in the evidence.
+For CPU architecture / ISA questions, cite evidence explicitly identifying the CPU
+core, architecture or instruction set. Memory mapping, flash, AES and peripheral
+details alone do not establish a processor architecture.
 If evidence cannot establish a claim, OMIT that claim; do not cite an unrelated source.
 If nothing can be answered, return claims=[] and explain the gap in missing_information.
 Do not include citation markers inside claim text. Do not output reasoning or Markdown.

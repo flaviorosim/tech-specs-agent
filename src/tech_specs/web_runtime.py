@@ -79,6 +79,7 @@ class AgentResources:
         self._custom_bm25: dict[str, Any] = {}
         self._custom_vector: dict[str, Any] = {}
         self._custom_hybrid: dict[str, Any] = {}
+        self._focused_retrievers: dict[tuple[str, str], Any] = {}
         self._custom_clients: dict[str, Any] = {}
         self._graphs: dict[tuple[Any, ...], tuple[Any, Any]] = {}
 
@@ -141,7 +142,7 @@ class AgentResources:
             self._vector = vector
         return self._vector
 
-    def _retriever(self, method: str, doc_id: str | None = None):
+    def _base_retriever(self, method: str, doc_id: str | None = None):
         if method == "bm25":
             return self._get_bm25(doc_id)
         if method == "vector":
@@ -157,6 +158,24 @@ class AgentResources:
                 self._hybrid = HybridRetriever(self._get_bm25(), self._get_vector())
             return self._hybrid
         raise ValueError(f"Unsupported retrieval method: {method}")
+
+    def _retriever(self, method: str, doc_id: str | None = None):
+        """Reuse existing BM25/Vector/Hybrid and focus retrieval for imported PDFs.
+
+        The original STM32/ATtiny benchmark routes remain unchanged. Both
+        Streamlit and MCP use this one accessor, so their search is consistent.
+        """
+        base = self._base_retriever(method, doc_id)
+        if doc_id is None:
+            return base
+        key = (doc_id, method)
+        if key not in self._focused_retrievers:
+            from tech_specs.custom_docs import library_dir
+            from tech_specs.evidence_search import EvidenceFocusedRetriever
+            from tech_specs.retrieval import load_chunks
+            corpus = library_dir(self.root) / doc_id / "chunks.jsonl"
+            self._focused_retrievers[key] = EvidenceFocusedRetriever(base, load_chunks(corpus))
+        return self._focused_retrievers[key]
 
     def ask(self, question: str, *, method: str = "bm25", document: str | None = None,
             model: str = "qwen3:4b", top_k: int = 6, candidates_per_facet: int = 10,
@@ -218,6 +237,10 @@ class AgentResources:
                 else "repair_failed_or_abstained" if result.get("repairs", 0)
                 else generator.last_strategy
             )
+            if custom:
+                focused = self._focused_retrievers.get((document, method))
+                if focused is not None:
+                    result["retrieval_improvement"] = dict(focused.last_diagnostics)
             if generator.last_extraction is not None:
                 extraction = generator.last_extraction
                 result["table_extraction"] = {
@@ -237,6 +260,7 @@ class AgentResources:
             self._custom_clients.clear()
             self._custom_vector.clear()
             self._custom_hybrid.clear()
+            self._focused_retrievers.clear()
             self._graphs.clear()
             self._vector = None
             self._hybrid = None
